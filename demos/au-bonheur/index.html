@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Démo : la page ne doit pas être indexée par les moteurs de recherche. -->
+  <meta name="robots" content="noindex, nofollow">
+  <title>Au Bonheur : 4 propositions</title>
+  <meta name="description" content="Quatre directions visuelles pour le site d'Au Bonheur, 11 rue Cadet, Paris 9e. Proposition de Reda Lakhledj.">
+  <meta property="og:title" content="Au Bonheur : 4 propositions">
+  <meta property="og:description" content="Quatre directions visuelles pour le site d'Au Bonheur, 11 rue Cadet, Paris 9e.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <link rel="stylesheet" href="commun/commun.css">
+  <style>
+    /* Styles propres à cette page d'accueil de la démo (une seule page, donc ici). */
+    :root {
+      --anthracite: #26292E;
+      --pierre: #EFE7D8;
+      --hauteur-barre-demo: 0rem;   /* pas de barre démo sur cette page */
+      --focus: #26292E;
+    }
+    body {
+      background: var(--pierre);
+      color: var(--anthracite);
+      font-family: "Atkinson Hyperlegible", "Verdana", sans-serif;
+      padding: 2.5rem max(1rem, calc((100% - 66rem) / 2)) 3rem;
+    }
+    h1 {
+      font-family: "Jost", sans-serif;
+      font-weight: 500;
+      font-size: clamp(1.75rem, 7vw, 3rem);
+      line-height: 1.1;
+    }
+    .intro {
+      max-width: 40ch;
+      margin-top: 0.75rem;
+      font-size: 1.125rem;
+    }
+    .propositions {
+      display: grid;
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    @media (min-width: 700px) {
+      .propositions { grid-template-columns: repeat(2, 1fr); }
+    }
+    /* Toute la carte est cliquable (le lien couvre la carte). */
+    .proposition {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border: 2px solid var(--anthracite);
+      border-radius: 6px;
+      background: #FFFFFF;
+      overflow: hidden;
+    }
+    .proposition:focus-within {
+      outline: 3px solid var(--anthracite);
+      outline-offset: 3px;
+    }
+    .apercu {
+      display: flex;
+      align-items: center;
+      min-height: 8.5rem;
+      padding: 1.25rem;
+    }
+    .apercu-nom {
+      font-size: clamp(2rem, 9vw, 2.6rem);
+      line-height: 1;
+    }
+    .apercu-a { background: #26292E; color: #FFFFFF; border-bottom: 6px solid #D9A86C; }
+    .apercu-a .apercu-nom { font-family: "Jost", sans-serif; font-weight: 500; text-transform: uppercase; letter-spacing: 0.22em; font-size: clamp(1.4rem, 6vw, 1.7rem); }
+    .apercu-b { background: #26292E; color: #E9A23B; }
+    .apercu-b .apercu-nom { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: -0.03em; font-size: clamp(2.4rem, 12vw, 3.1rem); line-height: 0.85; }
+    .apercu-c { background: #EFE7D8; color: #26292E; position: relative; overflow: hidden; border-bottom: 1px solid rgba(38,41,46,.15); }
+    .apercu-c::after { content: ""; position: absolute; right: -2.5rem; top: -1.5rem; width: 9rem; height: 9rem; border-radius: 50%; background: #D9A86C; }
+    .apercu-c .apercu-nom { position: relative; z-index: 1; font-family: "Fraunces", serif; font-variation-settings: "SOFT" 100; font-weight: 480; }
+    /* Aperçu D : une rangée de mini-tuiles inclinées derrière une plaque. */
+    .apercu-d { position: relative; overflow: hidden; background: #0E4A3B; justify-content: center; }
+    .apercu-d .mini-tuiles { position: absolute; inset: -2rem -1rem; display: flex; gap: 0.5rem; align-items: center; transform: rotate(-12deg); }
+    .apercu-d .mini-tuiles span { flex: 1; aspect-ratio: 4 / 5; border-radius: 4px; }
+    .apercu-d .mini-tuiles span { border-right: 3px solid rgba(0,0,0,0.18); border-bottom: 4px solid rgba(0,0,0,0.18); }
+    .apercu-d .apercu-nom { position: relative; z-index: 1; padding: 0.55rem 0.9rem; background: #EAF2EC; border-bottom: 5px solid #B02E17; border-radius: 10px; color: #0E4A3B; font-family: "Archivo", sans-serif; font-stretch: 125%; font-weight: 850; text-transform: uppercase; letter-spacing: -0.02em; font-size: clamp(1.3rem, 6vw, 1.8rem); }
+    .corps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding: 1.25rem;
+      flex: 1;
+    }
+    .corps h2 {
+      font-size: 1.25rem;
+    }
+    .corps h2 a {
+      text-decoration: none;
+    }
+    .corps h2 a::after {            /* étend la zone cliquable à toute la carte */
+      content: "";
+      position: absolute;
+      inset: 0;
+    }
+    .corps h2 a:focus-visible { outline: none; }
+    .pastilles {
+      display: flex;
+      gap: 0.375rem;
+      margin-top: auto;
+      padding-top: 0.5rem;
+    }
+    .pastilles span {
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 50%;
+      border: 1px solid rgba(38, 41, 46, 0.35);
+    }
+    .ouvrir {
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+    .signature {
+      margin-top: 2.5rem;
+    }
+    .signature a {
+      display: inline-block;
+      padding: 0.6rem 0;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Au Bonheur : 4 propositions</h1>
+    <p class="intro">Quatre directions pour le site du 11 rue Cadet. Même contenu, même carte, quatre façons de la montrer. Laquelle vous ressemble le plus ?</p>
+
+    <ul class="propositions" role="list">
+      <li class="proposition">
+        <div class="apercu apercu-a" aria-hidden="true"><span class="apercu-nom">Au Bonheur</span></div>
+        <div class="corps">
+          <h2><a href="a/index.html">A : Sous le store</a></h2>
+          <p>Fidèle à la façade : le store anthracite et son lettrage blanc, puis le bois blond et la lumière ambrée de la salle.</p>
+          <div class="pastilles" aria-hidden="true"><span style="background:#26292E"></span><span style="background:#FFFFFF"></span><span style="background:#D9A86C"></span><span style="background:#EFE7D8"></span><span style="background:#E9A23B"></span></div>
+          <p class="ouvrir" aria-hidden="true">Voir la proposition A</p>
+        </div>
+      </li>
+      <li class="proposition">
+        <div class="apercu apercu-b" aria-hidden="true"><span class="apercu-nom">Au<br>Bonheur</span></div>
+        <div class="corps">
+          <h2><a href="b/index.html">B : Le ticket du rush</a></h2>
+          <p>L'énergie du service du midi : lettres géantes, panneau ambre pour appeler, et la carte en ticket de cuisine.</p>
+          <div class="pastilles" aria-hidden="true"><span style="background:#26292E"></span><span style="background:#E9A23B"></span><span style="background:#FFFFFF"></span><span style="background:#D9A86C"></span></div>
+          <p class="ouvrir" aria-hidden="true">Voir la proposition B</p>
+        </div>
+      </li>
+      <li class="proposition">
+        <div class="apercu apercu-c" aria-hidden="true"><span class="apercu-nom">Au Bonheur</span></div>
+        <div class="corps">
+          <h2><a href="c/index.html">C : Lumière de rotin</a></h2>
+          <p>La salle elle-même : bois clair, lumière ronde des suspensions, vert de la porte cochère. Plus moderne et aéré.</p>
+          <div class="pastilles" aria-hidden="true"><span style="background:#EFE7D8"></span><span style="background:#D9A86C"></span><span style="background:#5F716B"></span><span style="background:#26292E"></span><span style="background:#E9A23B"></span></div>
+          <p class="ouvrir" aria-hidden="true">Voir la proposition C</p>
+        </div>
+      </li>
+      <li class="proposition">
+        <div class="apercu apercu-d" aria-hidden="true"><span class="mini-tuiles"><span style="background:#D7E6DA"></span><span style="background:#B02E17"></span><span style="background:#F4B400"></span><span style="background:#0A3A2E"></span><span style="background:#EAF2EC"></span><span style="background:#B02E17"></span></span><span class="apercu-nom">Au Bonheur</span></div>
+        <div class="corps">
+          <h2><a href="d/index.html">D : Céladon</a></h2>
+          <p>Une nouvelle identité : jade du bol céladon, rouge piment, jaune d'œuf. Un plateau de cartes de menu qui défile, et un bouton d'appel toujours sous le pouce.</p>
+          <div class="pastilles" aria-hidden="true"><span style="background:#0E4A3B"></span><span style="background:#D7E6DA"></span><span style="background:#B02E17"></span><span style="background:#F4B400"></span><span style="background:#EAF2EC"></span></div>
+          <p class="ouvrir" aria-hidden="true">Voir la proposition D</p>
+        </div>
+      </li>
+    </ul>
+
+    <p class="signature">Proposition de Reda Lakhledj, <a href="tel:+33763456080">07 63 45 60 80</a></p>
+  </main>
+</body>
+</html>

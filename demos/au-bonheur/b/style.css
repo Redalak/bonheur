@@ -1,0 +1,670 @@
+/* =====================================================================
+   DIRECTION B : « Le ticket du rush »
+   L'énergie du service du midi : typographies énormes, prix énormes,
+   une carte en forme de ticket de cuisine, le bol en très grand.
+   Polices : Bricolage Grotesque (titres) + IBM Plex Mono (prix, horaires, ticket).
+   ===================================================================== */
+
+:root {
+  --anthracite: #26292E;  /* fond dominant */
+  --ambre: #E9A23B;       /* couleur forte : gros titres, aplats */
+  --blanc: #FFFFFF;       /* texte sur sombre, papier du ticket */
+  --bois: #D9A86C;        /* section « le lieu » */
+  --fente: #3A3F45;       /* gris de la devanture : la fente de l'imprimante */
+
+  --police-titre: "Bricolage Grotesque", "Arial Black", sans-serif;
+  --police-mono: "IBM Plex Mono", "Menlo", "Consolas", monospace;
+
+  --marge: max(1rem, calc((100% - 72rem) / 2));
+  --hauteur-header: 6.5rem;
+  --focus: var(--ambre);
+}
+
+body {
+  background: var(--anthracite);
+  color: var(--blanc);
+  font-family: var(--police-titre);
+  font-weight: 700;
+}
+
+
+/* ---------- Boutons ---------- */
+
+.boutons,
+.argument-boutons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 3.5rem;
+  padding: 0 1.5rem;
+  border: 3px solid transparent;
+  border-radius: 0;
+  font-family: var(--police-titre);
+  font-weight: 800;
+  font-size: 1.125rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.bouton-ambre {
+  background: var(--ambre);
+  color: var(--anthracite);          /* 6,7 */
+}
+
+.bouton-contour {
+  border-color: var(--blanc);
+  color: var(--blanc);
+}
+
+.bouton-noir {
+  background: var(--anthracite);
+  color: var(--blanc);
+}
+
+.bouton-contour-noir {
+  border-color: var(--anthracite);
+  color: var(--anthracite);
+  font-family: var(--police-mono);
+  font-weight: 600;
+  text-transform: none;
+}
+
+.bouton:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 0.2em;
+}
+
+
+/* ---------- 1. Header ---------- */
+
+.entete {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--anthracite);
+  border-bottom: 3px solid var(--ambre);
+}
+
+.entete-ligne {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-height: 3.5rem;
+  padding: 0.25rem var(--marge);
+}
+
+.entete-nom {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  color: var(--ambre);
+}
+
+.entete-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.bouton-langue {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  background: transparent;
+  border: 2px solid var(--blanc);
+  font-family: var(--police-mono);
+  font-weight: 600;
+}
+
+.bouton-appel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  padding: 0 0.9rem;
+  background: var(--ambre);
+  color: var(--anthracite);
+  font-weight: 800;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.entete-nav ul {
+  display: flex;
+  margin: 0;
+  padding: 0 var(--marge);
+  list-style: none;
+}
+
+.entete-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0 0.875rem 0 0;
+  margin-right: 0.5rem;
+  font-family: var(--police-mono);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+}
+
+.entete-nav a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+
+/* ---------- 2. Hero sombre : le nom sur toute la largeur ---------- */
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100svh - var(--hauteur-header) - var(--hauteur-barre-demo));
+  padding: 1.5rem var(--marge) 0;
+  overflow: hidden;                  /* le grand bol peut déborder sans créer de scroll */
+}
+
+.hero-nom {
+  color: var(--ambre);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.035em;
+  line-height: 0.82;
+  /* « BONHEUR » occupe toute la largeur disponible (le mot fait environ 4,6 fois
+     la taille de la police : 19vw tient dans l'écran, 15rem dans le contenu sur grand écran).
+     26vh : sur un écran d'ordinateur peu haut, le badge et « Appeler » restent visibles. */
+  font-size: clamp(3.5rem, min(19vw, 26vh), 15rem);
+}
+
+.hero-ligne {
+  display: block;
+}
+
+.hero-bas {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-top: 1.5rem;
+}
+
+.hero-sous-titre {
+  max-width: 18ch;
+  font-size: clamp(1.5rem, 6vw, 2.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+
+.hero-texte {
+  max-width: 34ch;
+  margin-top: 0.75rem;
+  font-family: var(--police-mono);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.hero .badge {
+  margin-top: 1rem;
+  padding: 0 0.875rem;
+  border: 2px solid var(--blanc);
+  font-family: var(--police-mono);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.hero .badge.est-ouvert {
+  border-color: var(--ambre);
+  color: var(--ambre);
+}
+
+.hero .boutons {
+  margin-top: 1.25rem;
+}
+
+.hero .boutons .bouton {
+  flex: 1 1 9rem;
+}
+
+/* Le bol en très grand, qui déborde à droite et en bas. */
+.hero-bol {
+  align-self: flex-end;
+  width: min(78vw, 30rem);
+  height: auto;
+  margin: 1.5rem -12vw -14vw 0;
+  color: var(--ambre);
+  stroke-width: 1.4;
+}
+
+
+/* ---------- 3. Argument clé : le panneau ambre ---------- */
+
+.argument {
+  padding: 3rem var(--marge) 3.25rem;
+  background: var(--ambre);
+  color: var(--anthracite);
+  --focus: var(--anthracite);
+}
+
+.argument h2 {
+  max-width: 12ch;
+  font-weight: 800;
+  font-size: clamp(2.75rem, 13vw, 7.5rem);
+  line-height: 0.96;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+
+.argument-texte {
+  max-width: 34ch;
+  margin-top: 1.25rem;
+  font-family: var(--police-mono);
+  font-weight: 400;
+  font-size: 1.0625rem;
+}
+
+.argument-boutons {
+  margin-top: 1.5rem;
+}
+
+.argument-boutons .bouton {
+  flex: 1 1 16rem;
+  max-width: 26rem;
+  min-height: 4rem;
+  justify-content: flex-start;
+  font-size: 1.25rem;
+}
+
+.argument-numero a {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 0;
+  font-family: var(--police-mono);
+  font-weight: 600;
+  font-size: clamp(1.75rem, 8vw, 3.5rem);
+  letter-spacing: -0.02em;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 0.15em;
+  white-space: nowrap;
+}
+
+
+/* ---------- Titres ---------- */
+
+.titre-geant {
+  color: var(--ambre);
+  font-weight: 800;
+  font-size: clamp(3rem, 15vw, 8rem);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.titre-section {
+  font-weight: 800;
+  font-size: clamp(2rem, 9vw, 3.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+
+/* ---------- 4. La carte : le ticket ---------- */
+
+.section-carte {
+  padding: 3.5rem var(--marge) 4rem;
+}
+
+.carte-note {
+  max-width: 30ch;
+  margin-top: 1rem;
+  font-family: var(--police-mono);
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.ticket {
+  max-width: 30rem;
+  margin-top: 2rem;
+}
+
+/* La fente de l'imprimante, d'où sort le ticket. */
+.ticket-fente {
+  position: relative;
+  z-index: 2;
+  height: 0.875rem;
+  margin: 0 -0.75rem;
+  background: var(--fente);
+  border-radius: 0.5rem;
+}
+
+/* L'unique animation : le ticket glisse vers le bas en sortant de la fente. */
+.ticket-papier {
+  position: relative;
+  margin-top: -0.375rem;
+  padding: 1.75rem 1.25rem 1.5rem;
+  background: var(--blanc);
+  color: var(--anthracite);
+  font-family: var(--police-mono);
+  font-weight: 400;
+  --focus: var(--anthracite);
+  animation: ticket-imprime 600ms cubic-bezier(0.3, 0.7, 0.3, 1) both;
+}
+
+@keyframes ticket-imprime {
+  from {
+    transform: translateY(-3rem);
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    transform: translateY(0);
+    clip-path: inset(0 0 -1rem 0);  /* -1rem : on laisse visibles les crans du bas */
+  }
+}
+
+/* Bord cranté en bas du ticket : un polygone en zigzag, sans image ni dégradé. */
+.ticket-papier::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.75rem;
+  height: 0.75rem;
+  background: var(--blanc);
+  transform: scaleY(-1);
+  clip-path: polygon(0% 100%, 1.786% 0%, 3.571% 100%, 5.357% 0%, 7.143% 100%, 8.929% 0%, 10.714% 100%, 12.500% 0%, 14.286% 100%, 16.071% 0%, 17.857% 100%, 19.643% 0%, 21.429% 100%, 23.214% 0%, 25.000% 100%, 26.786% 0%, 28.571% 100%, 30.357% 0%, 32.143% 100%, 33.929% 0%, 35.714% 100%, 37.500% 0%, 39.286% 100%, 41.071% 0%, 42.857% 100%, 44.643% 0%, 46.429% 100%, 48.214% 0%, 50.000% 100%, 51.786% 0%, 53.571% 100%, 55.357% 0%, 57.143% 100%, 58.929% 0%, 60.714% 100%, 62.500% 0%, 64.286% 100%, 66.071% 0%, 67.857% 100%, 69.643% 0%, 71.429% 100%, 73.214% 0%, 75.000% 100%, 76.786% 0%, 78.571% 100%, 80.357% 0%, 82.143% 100%, 83.929% 0%, 85.714% 100%, 87.500% 0%, 89.286% 100%, 91.071% 0%, 92.857% 100%, 94.643% 0%, 96.429% 100%, 98.214% 0%, 100.000% 100%);
+}
+
+.ticket-entete {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  padding-bottom: 0.875rem;
+  border-bottom: 2px dashed var(--anthracite);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.ticket-exemple {
+  padding: 0 0.375rem;
+  border: 1.5px solid var(--anthracite);
+}
+
+.carte-categorie {
+  padding: 1.25rem 0 1rem;
+  border-bottom: 2px dashed var(--anthracite);
+}
+
+.carte-titre {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--police-titre);
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+/* Numéro de service (1 = entrées, 2 = plats...), comme sur un bon de cuisine. */
+.carte-numero {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  background: var(--anthracite);
+  color: var(--blanc);
+  font-family: var(--police-mono);
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+.carte-liste {
+  margin-top: 0.5rem;
+}
+
+.carte-plat {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.375rem 0;
+  font-size: 1rem;
+}
+
+.carte-points {
+  display: none;
+}
+
+.carte-prix {
+  font-weight: 600;
+  font-size: 1.375rem;               /* les prix sont énormes */
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.carte-alcool {
+  padding-top: 1rem;
+  font-size: 1rem;
+}
+
+.ticket-pied {
+  padding-top: 1rem;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.ticket-pied a {
+  display: inline-block;
+  padding: 0.6rem 0;
+  font-weight: 600;
+  text-underline-offset: 0.2em;
+}
+
+
+/* ---------- 5. Le lieu : aplat bois blond ---------- */
+
+.lieu {
+  padding: 3rem var(--marge) 3.5rem;
+  background: var(--bois);
+  color: var(--anthracite);          /* 6,8 */
+  --focus: var(--anthracite);
+}
+
+.lieu-texte {
+  max-width: 22ch;
+  margin-top: 1rem;
+  font-size: clamp(1.5rem, 6.5vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+
+/* ---------- 6. Horaires : grille mono ---------- */
+
+.horaires {
+  padding: 3.5rem var(--marge);
+}
+
+.horaires-table {
+  width: 100%;
+  max-width: 40rem;
+  margin-top: 1.5rem;
+  border-collapse: collapse;
+  font-family: var(--police-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.horaires-table th,
+.horaires-table td {
+  padding: 0.75rem 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  text-align: left;
+  vertical-align: top;
+}
+
+.horaires-table th {
+  font-weight: 600;
+  width: 40%;
+}
+
+.horaires-table td {
+  font-weight: 400;
+  text-align: right;
+}
+
+/* Jour actuel : ligne ambre, texte anthracite. */
+.horaires-table .est-aujourdhui th,
+.horaires-table .est-aujourdhui td {
+  background: var(--ambre);
+  color: var(--anthracite);
+  font-weight: 600;
+}
+
+.horaires-marque {
+  display: block;
+  font-weight: 400;
+  font-size: 0.875rem;
+}
+
+
+/* ---------- 7. Infos pratiques et accès : fond blanc ---------- */
+
+.pratique {
+  display: grid;
+  gap: 3rem;
+  padding: 3.5rem var(--marge);
+  background: var(--blanc);
+  color: var(--anthracite);
+  --focus: var(--anthracite);
+}
+
+.infos-liste {
+  margin-top: 1.25rem;
+  font-family: var(--police-mono);
+  font-weight: 400;
+}
+
+.infos-liste li {
+  padding: 0.625rem 0;
+  border-top: 2px solid var(--anthracite);
+}
+
+.acces-adresse {
+  margin-top: 1.25rem;
+  font-style: normal;
+  font-size: 1.375rem;
+  line-height: 1.2;
+}
+
+.acces .boutons {
+  margin-top: 1.25rem;
+}
+
+
+/* ---------- 8. Footer ---------- */
+
+.pied {
+  display: grid;
+  gap: 0.5rem;
+  padding: 3rem var(--marge);
+  font-family: var(--police-mono);
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.pied-nom {
+  font-family: var(--police-titre);
+  font-weight: 800;
+  font-size: 2rem;
+  text-transform: uppercase;
+  color: var(--ambre);
+}
+
+.pied-adresse {
+  font-style: normal;
+}
+
+.pied-adresse a {
+  display: inline-block;
+  padding: 0.7rem 0;
+}
+
+
+/* ---------- Tablette et ordinateur ---------- */
+
+@media (min-width: 768px) {
+  :root {
+    --hauteur-header: 4.5rem;
+  }
+
+  .entete {
+    display: flex;
+    align-items: center;
+    padding: 0 var(--marge);
+  }
+  .entete-ligne {
+    display: contents;
+  }
+  .entete-nom {
+    order: 1;
+    min-height: 4.25rem;
+  }
+  .entete-nav {
+    order: 2;
+    margin-left: auto;
+    margin-right: 1rem;
+  }
+  .entete-nav ul {
+    padding: 0;
+  }
+  .entete-actions {
+    order: 3;
+  }
+
+  .hero-bas {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-bottom: 3rem;
+  }
+  .hero-bol {
+    width: min(42vw, 34rem);
+    margin: 0 -4vw -6rem 0;
+  }
+
+  .section-carte {
+    display: grid;
+    grid-template-columns: 1fr minmax(0, 30rem);
+    gap: 3rem;
+    align-items: start;
+  }
+  .carte-intro {
+    position: sticky;
+    top: calc(var(--hauteur-header) + 2rem);
+  }
+  .ticket {
+    margin-top: 0;
+  }
+
+  .pratique {
+    grid-template-columns: 1fr 1fr;
+  }
+}

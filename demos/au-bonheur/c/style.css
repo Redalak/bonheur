@@ -1,0 +1,636 @@
+/* =====================================================================
+   DIRECTION C : « Lumière de rotin »
+   La salle elle-même : bois clair, lumière ronde des suspensions en rotin,
+   vert de la porte cochère. Mise en page éditoriale, aérée, posée.
+   Polices : Fraunces (titres, axe « soft ») + Manrope (texte).
+   ===================================================================== */
+
+:root {
+  --pierre: #EFE7D8;       /* fond */
+  --bois: #D9A86C;         /* le cercle de lumière, le jour actuel */
+  --vert: #5F716B;         /* aplat du bloc argument clé (texte blanc : 5,2) */
+  --vert-fonce: #4A5A55;   /* liens et petits textes sur pierre (5,9) */
+  --anthracite: #26292E;   /* texte */
+  --ambre: #E9A23B;        /* très petite touche : l'ampoule au centre du cercle */
+  --blanc: #FFFFFF;
+
+  --police-titre: "Fraunces", "Georgia", serif;
+  --police-texte: "Manrope", "Helvetica Neue", sans-serif;
+
+  --marge: max(1.25rem, calc((100% - 68rem) / 2));
+  --hauteur-header: 6.75rem;
+  --focus: var(--anthracite);
+}
+
+body {
+  background: var(--pierre);
+  color: var(--anthracite);
+  font-family: var(--police-texte);
+}
+
+/* Fraunces : on pousse l'axe SOFT au maximum pour des formes douces et rondes. */
+.entete-nom,
+.hero-nom,
+.hero-sous-titre,
+.argument h2,
+.titre-section,
+.carte-titre,
+.lieu-texte,
+.pied-nom {
+  font-family: var(--police-titre);
+  font-variation-settings: "SOFT" 100;
+}
+
+
+/* ---------- Boutons ---------- */
+
+.boutons,
+.argument-boutons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3rem;
+  padding: 0 1.5rem;
+  border: 1.5px solid var(--anthracite);
+  border-radius: 999px;              /* forme ronde, comme les suspensions */
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.bouton-plein {
+  background: var(--anthracite);
+  color: var(--pierre);
+}
+
+.bouton-contour {
+  background: transparent;
+  color: var(--anthracite);
+}
+
+.bouton:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+
+/* ---------- 1. Header ---------- */
+
+.entete {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--pierre);
+  border-bottom: 1px solid rgba(38, 41, 46, 0.14);
+}
+
+.entete-ligne {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-height: 3.75rem;
+  padding: 0.25rem var(--marge);
+}
+
+.entete-nom {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-weight: 560;
+  font-size: 1.375rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.entete-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.bouton-langue {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  background: transparent;
+  border: 1.5px solid var(--vert-fonce);
+  border-radius: 999px;
+  color: var(--vert-fonce);
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.bouton-appel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  padding: 0 1rem;
+  background: var(--vert-fonce);
+  color: var(--blanc);               /* 7,3 */
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.entete-nav ul {
+  display: flex;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0 var(--marge);
+  list-style: none;
+}
+
+.entete-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  color: var(--vert-fonce);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+}
+
+.entete-nav a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+
+/* ---------- 2. Hero asymétrique et cercle de lumière ---------- */
+
+.hero {
+  position: relative;
+  overflow: hidden;                  /* le cercle peut sortir du cadre sans scroll horizontal */
+  padding: 3rem var(--marge) 3.5rem;
+}
+
+/* Le grand cercle bois blond (la suspension en rotin vue d'en dessous). */
+.lumiere {
+  position: absolute;
+  top: -3rem;
+  right: -38vw;
+  width: 92vw;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--bois);
+  /* L'unique animation : fondu léger + mise à l'échelle 0,96 → 1. */
+  animation: lumiere-allume 700ms ease-out both;
+}
+
+@keyframes lumiere-allume {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Anneaux concentriques fins, un sur deux en pointillé : le tressage du rotin. */
+.lumiere-anneau {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid rgba(239, 231, 216, 0.85);
+}
+.lumiere-anneau:nth-child(1) { inset: 7%; }
+.lumiere-anneau:nth-child(2) { inset: 15%; border-style: dashed; }
+.lumiere-anneau:nth-child(3) { inset: 23%; }
+.lumiere-anneau:nth-child(4) { inset: 31%; border-style: dashed; }
+.lumiere-anneau:nth-child(5) { inset: 39%; }
+
+/* L'ampoule au centre : la seule touche d'ambre de la page (avec le badge). */
+.lumiere-ampoule {
+  position: absolute;
+  inset: 45%;
+  border-radius: 50%;
+  background: var(--ambre);
+}
+
+.hero-contenu {
+  position: relative;                /* passe au-dessus du cercle */
+  z-index: 1;
+}
+
+.hero-nom {
+  font-weight: 480;
+  font-size: clamp(3.75rem, 19vw, 9.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+}
+
+.hero-ligne {
+  display: block;
+}
+
+/* « Bonheur » décalé vers la droite : la composition asymétrique. */
+.hero-ligne-decalee {
+  padding-left: 0.6em;
+}
+
+.hero-sous-titre {
+  max-width: 17ch;
+  margin-top: 2.5rem;
+  font-weight: 420;
+  font-size: clamp(1.5rem, 5.5vw, 2.25rem);
+  line-height: 1.2;
+}
+
+.hero-texte {
+  max-width: 32ch;
+  margin-top: 0.75rem;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+.hero .badge {
+  margin-top: 1.25rem;
+  font-weight: 600;
+}
+
+.hero .badge-point {
+  border-color: var(--vert-fonce);
+}
+
+.hero .badge.est-ouvert .badge-point {
+  background: var(--ambre);          /* l'ampoule allumée */
+  border-color: var(--anthracite);
+}
+
+.hero .boutons {
+  margin-top: 1rem;
+}
+
+
+/* ---------- 3. Argument clé : aplat gris-vert ---------- */
+
+.argument {
+  padding: 3rem var(--marge) 3.25rem;
+  background: var(--vert);
+  color: var(--blanc);               /* 5,2 */
+  --focus: var(--blanc);
+}
+
+.argument h2 {
+  max-width: 14ch;
+  font-weight: 450;
+  font-size: clamp(2.25rem, 9vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+
+.argument-texte {
+  max-width: 34ch;
+  margin-top: 1rem;
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+.argument-actions {
+  margin-top: 1.75rem;
+}
+
+.argument-boutons .bouton {
+  flex: 1 1 15rem;
+  max-width: 22rem;
+  min-height: 3.5rem;
+  font-size: 1.0625rem;
+}
+
+.bouton-clair {
+  background: var(--pierre);
+  border-color: var(--pierre);
+  color: var(--anthracite);          /* 11,9 */
+}
+
+.bouton-contour-clair {
+  border-color: var(--blanc);
+  color: var(--blanc);
+}
+
+.argument-numero a {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.6rem 0;
+  font-weight: 600;
+  font-size: 1.25rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  text-underline-offset: 0.25em;
+}
+
+
+/* ---------- Sections claires ---------- */
+
+.section {
+  padding: 3.5rem var(--marge);
+}
+
+.titre-section {
+  font-weight: 450;
+  font-size: clamp(2rem, 7vw, 3rem);
+  line-height: 1.05;
+}
+
+.titre-petit {
+  color: var(--vert-fonce);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.section-entete {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.25rem;
+}
+
+.mention-exemple {
+  color: var(--vert-fonce);          /* 5,9 */
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+
+/* ---------- 4. La carte ---------- */
+
+.carte {
+  margin-top: 2rem;
+}
+
+.carte-categorie + .carte-categorie {
+  margin-top: 2.25rem;
+}
+
+.carte-titre {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+
+/* Petit disque bois blond devant chaque catégorie : écho du cercle de lumière. */
+.carte-titre::before {
+  content: "";
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: var(--bois);
+  flex-shrink: 0;
+}
+
+.carte-numero {
+  display: none;
+}
+
+.carte-liste {
+  margin-top: 0.75rem;
+}
+
+.carte-plat {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid rgba(38, 41, 46, 0.16);
+}
+
+.carte-points {
+  display: none;
+}
+
+.carte-prix {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.carte-note,
+.carte-alcool {
+  max-width: 44ch;
+  margin-top: 1.75rem;
+  font-size: 1rem;
+  color: var(--anthracite);
+}
+
+
+/* ---------- 5. Le lieu ---------- */
+
+.lieu {
+  padding-top: 2rem;
+}
+
+.lieu-texte {
+  max-width: 22ch;
+  margin-top: 0.75rem;
+  font-weight: 380;
+  font-size: clamp(1.75rem, 6.5vw, 3rem);
+  line-height: 1.18;
+}
+
+
+/* ---------- 6 et 7. Horaires, infos, accès ---------- */
+
+.pratique {
+  border-top: 1px solid rgba(38, 41, 46, 0.14);
+}
+
+.horaires-table {
+  width: 100%;
+  max-width: 30rem;
+  margin-top: 1.5rem;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.horaires-table th,
+.horaires-table td {
+  padding: 0.7rem 0.75rem;
+  border-bottom: 1px solid rgba(38, 41, 46, 0.16);
+  text-align: left;
+  vertical-align: top;
+}
+
+.horaires-table th {
+  font-weight: 400;
+  padding-left: 0;
+}
+
+.horaires-table td {
+  text-align: right;
+  padding-right: 0;
+}
+
+/* Jour actuel : pastille bois blond arrondie, texte en gras. */
+.horaires-table .est-aujourdhui th,
+.horaires-table .est-aujourdhui td {
+  background: var(--bois);           /* anthracite sur bois : 6,8 */
+  font-weight: 600;
+}
+.horaires-table .est-aujourdhui th {
+  padding-left: 0.75rem;
+  border-radius: 999px 0 0 999px;
+}
+.horaires-table .est-aujourdhui td {
+  padding-right: 0.75rem;
+  border-radius: 0 999px 999px 0;
+}
+
+.horaires-marque {
+  font-weight: 400;
+  font-size: 0.875rem;
+}
+
+.infos-liste {
+  margin-top: 1.25rem;
+}
+
+.infos-liste li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.45rem 0;
+}
+
+.infos-liste li::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  border: 1.5px solid var(--vert-fonce);
+  flex-shrink: 0;
+  transform: translateY(-0.05em);
+}
+
+.acces {
+  padding-top: 0;
+}
+
+.acces-adresse {
+  margin-top: 1.25rem;
+  font-style: normal;
+  font-size: 1.125rem;
+}
+
+.acces .boutons {
+  margin-top: 1.25rem;
+}
+
+
+/* ---------- 8. Footer ---------- */
+
+.pied {
+  display: grid;
+  gap: 0.5rem;
+  padding: 3rem var(--marge);
+  background: var(--anthracite);
+  color: var(--pierre);              /* 11,9 */
+  --focus: var(--bois);
+}
+
+.pied-nom {
+  font-weight: 500;
+  font-size: 1.75rem;
+}
+
+.pied-adresse {
+  font-style: normal;
+}
+
+.pied-adresse a {
+  display: inline-block;
+  padding: 0.6rem 0;
+}
+
+.pied-copyright {
+  margin-top: 0.5rem;
+}
+
+
+/* ---------- Tablette (768 px et plus) ---------- */
+
+@media (min-width: 768px) {
+  :root {
+    --hauteur-header: 4.75rem;
+  }
+
+  .entete {
+    display: flex;
+    align-items: center;
+    padding: 0 var(--marge);
+  }
+  .entete-ligne {
+    display: contents;
+  }
+  .entete-nom {
+    order: 1;
+    min-height: 4.5rem;
+  }
+  .entete-nav {
+    order: 2;
+    margin-left: auto;
+    margin-right: 1.5rem;
+  }
+  .entete-nav ul {
+    padding: 0;
+    gap: 1.75rem;
+  }
+  .entete-actions {
+    order: 3;
+  }
+
+  .hero {
+    min-height: 34rem;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+  .lumiere {
+    top: 50%;
+    right: -9rem;
+    width: min(64vw, 44rem);
+    margin-top: calc(min(64vw, 44rem) / -2);
+  }
+
+  /* La carte en deux colonnes. */
+  .carte {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem 4rem;
+  }
+  .carte-categorie + .carte-categorie {
+    margin-top: 0;
+  }
+
+  .argument {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 2.5rem;
+    align-items: end;
+  }
+  .argument-actions {
+    margin-top: 0;
+  }
+  .argument-boutons .bouton {
+    flex-basis: 100%;
+  }
+
+  .lieu-texte {
+    margin-left: 18%;
+  }
+
+  .pratique {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    padding: 0 var(--marge);
+  }
+  .pratique .section {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

@@ -1,0 +1,582 @@
+/* =====================================================================
+   DIRECTION A : « Sous le store »
+   Le site prolonge la façade : le store anthracite et son lettrage blanc
+   espacé, puis la chaleur du bois blond et de la lumière ambrée.
+   Polices : Jost (titres, capitales espacées) + Atkinson Hyperlegible (texte, prix).
+   ===================================================================== */
+
+:root {
+  /* Palette relevée sur la façade */
+  --anthracite: #26292E;  /* la toile du store */
+  --blanc: #FFFFFF;       /* le lettrage */
+  --bois: #D9A86C;        /* le bois blond de la salle */
+  --pierre: #EFE7D8;      /* la pierre de la façade */
+  --ambre: #E9A23B;       /* la lumière des suspensions (en touches, sur fond sombre seulement) */
+
+  --police-titre: "Jost", "Futura", "Century Gothic", sans-serif;
+  --police-texte: "Atkinson Hyperlegible", "Verdana", sans-serif;
+
+  /* Marge latérale : 1 rem sur mobile, puis on centre un contenu de 64 rem max. */
+  --marge: max(1rem, calc((100% - 64rem) / 2));
+  --hauteur-header: 6.5rem;
+  --focus: var(--anthracite);
+}
+
+body {
+  background: var(--pierre);
+  color: var(--anthracite);
+  font-family: var(--police-texte);
+}
+
+
+/* ---------- Boutons ---------- */
+
+.boutons,
+.argument-boutons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3rem;                  /* 48 px, au-dessus des 44 px demandés */
+  padding: 0 1.25rem;
+  border: 2px solid var(--anthracite);
+  border-radius: 2px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.bouton-plein {
+  background: var(--anthracite);
+  color: var(--blanc);
+}
+
+.bouton-contour {
+  background: transparent;
+  color: var(--anthracite);
+}
+
+.bouton:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+
+/* ---------- 1. Header : la barre haute du store ---------- */
+
+.entete {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--anthracite);
+  color: var(--blanc);
+  --focus: var(--ambre);              /* focus ambre sur fond sombre (contraste 6,7) */
+}
+
+.entete-ligne {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-height: 3.5rem;
+  padding: 0.25rem var(--marge);
+}
+
+.entete-nom {
+  font-family: var(--police-titre);
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  min-height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.entete-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bouton-langue {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0 0.5rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 2px;
+  font-family: var(--police-titre);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--blanc);
+}
+
+.bouton-appel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  padding: 0 0.9rem;
+  background: var(--bois);
+  color: var(--anthracite);          /* contraste 6,8 */
+  border-radius: 2px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.entete-nav ul {
+  display: flex;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0 var(--marge);
+  list-style: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.entete-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0 0.75rem;
+  font-family: var(--police-titre);
+  font-size: 0.9375rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.entete-nav li:first-child a {
+  padding-left: 0;
+}
+
+.entete-nav a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+
+/* ---------- 2. Hero : le store, puis la vitrine ---------- */
+
+.store {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 2.75rem var(--marge) 3rem;
+  background: var(--anthracite);
+  color: var(--blanc);
+  /* Fine ligne bois blond : le bas de la toile, la lumière de la salle juste dessous. */
+  border-bottom: 6px solid var(--bois);
+  /* L'unique animation : le store se déroule de haut en bas. */
+  transform-origin: top center;
+  animation: store-deroule 500ms cubic-bezier(0.22, 0.8, 0.3, 1) both;
+}
+
+@keyframes store-deroule {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+
+.store-nom {
+  font-family: var(--police-titre);
+  font-weight: 500;
+  /* Le nom doit tenir sur une ligne, comme sur le vrai store, de 320 px à 1440 px. */
+  font-size: clamp(1.5rem, 7.2vw, 5.25rem);
+  line-height: 1;
+  letter-spacing: 0.26em;
+  margin-right: -0.26em;             /* compense l'espace après la dernière lettre */
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.store-bol {
+  width: clamp(2.5rem, 10vw, 7rem);
+  height: auto;
+}
+
+.vitrine {
+  padding: 2.25rem var(--marge) 2.75rem;
+}
+
+.hero-sous-titre {
+  max-width: 20ch;
+  font-family: var(--police-titre);
+  font-weight: 400;
+  font-size: clamp(1.75rem, 6.5vw, 3rem);
+  line-height: 1.12;
+}
+
+.hero-texte {
+  max-width: 34ch;
+  margin-top: 0.875rem;
+  font-size: 1.125rem;
+}
+
+.vitrine .badge {
+  margin-top: 1.25rem;
+  font-weight: 700;
+}
+
+.vitrine .boutons {
+  margin-top: 1rem;
+}
+
+
+/* ---------- 3. Argument clé : le comptoir en bois blond ---------- */
+
+.argument {
+  padding: 2.75rem var(--marge) 3rem;
+  background: var(--bois);
+  color: var(--anthracite);
+}
+
+.argument h2 {
+  max-width: 16ch;
+  font-family: var(--police-titre);
+  font-weight: 500;
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  line-height: 1.05;
+}
+
+.argument-texte {
+  max-width: 36ch;
+  margin-top: 1rem;
+  font-size: 1.125rem;
+}
+
+.argument-boutons {
+  margin-top: 1.5rem;
+}
+
+.argument-boutons .bouton {
+  flex: 1 1 15rem;                   /* pleine largeur sur mobile, côte à côte ensuite */
+  max-width: 22rem;
+  min-height: 3.5rem;
+  font-size: 1.125rem;
+}
+
+.argument-numero {
+  margin-top: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.argument-numero a {
+  display: inline-block;
+  padding: 0.6rem 0;
+  font-family: var(--police-titre);
+  font-size: 1.375rem;
+  letter-spacing: 0.08em;
+  text-underline-offset: 0.2em;
+}
+
+
+/* ---------- Sections claires (pierre) ---------- */
+
+.section {
+  padding: 3rem var(--marge);
+}
+
+.titre-section {
+  font-family: var(--police-titre);
+  font-weight: 500;
+  font-size: 1.375rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.section-entete {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  max-width: 46rem;
+}
+
+.mention-exemple {
+  padding: 0.125rem 0.5rem;
+  border: 1px solid var(--anthracite);
+  border-radius: 2px;
+  font-size: 1rem;
+}
+
+
+/* ---------- 4. La carte : l'ardoise du comptoir ---------- */
+
+.carte {
+  max-width: 46rem;
+  margin-top: 1.25rem;
+  padding: 1.75rem 1.25rem 0.75rem;
+  background: var(--anthracite);
+  color: var(--blanc);
+  border-radius: 3px;
+  --focus: var(--ambre);
+}
+
+.carte-categorie {
+  margin-bottom: 1.75rem;
+}
+
+.carte-titre {
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+  font-family: var(--police-titre);
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ambre);               /* ambre sur anthracite : contraste 6,7 */
+}
+
+.carte-numero {
+  display: none;                     /* les numéros servent à la version B */
+}
+
+.carte-liste {
+  margin-top: 0.25rem;
+}
+
+.carte-plat {
+  display: flex;
+  align-items: baseline;
+  padding: 0.5rem 0;
+  font-size: 1.0625rem;
+}
+
+.carte-nom {
+  min-width: 0;
+}
+
+/* Points de conduite entre le nom et le prix */
+.carte-points {
+  flex: 1 1 1rem;
+  min-width: 1rem;
+  margin: 0 0.5rem;
+  border-bottom: 2px dotted rgba(217, 168, 108, 0.75);
+  transform: translateY(-0.3em);
+}
+
+.carte-prix {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.carte-note,
+.carte-alcool {
+  max-width: 46rem;
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+
+/* ---------- 5. Le lieu ---------- */
+
+.lieu {
+  border-top: 1px solid rgba(38, 41, 46, 0.18);
+}
+
+.lieu-texte {
+  max-width: 28ch;
+  margin-top: 1rem;
+  padding-left: 1rem;
+  border-left: 6px solid var(--bois);
+  font-family: var(--police-titre);
+  font-size: clamp(1.375rem, 4.5vw, 2rem);
+  line-height: 1.25;
+}
+
+
+/* ---------- 6 et 7. Horaires, infos, accès ---------- */
+
+.pratique {
+  border-top: 1px solid rgba(38, 41, 46, 0.18);
+}
+
+.horaires-table {
+  width: 100%;
+  max-width: 30rem;
+  margin-top: 1rem;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.horaires-table th,
+.horaires-table td {
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid rgba(38, 41, 46, 0.2);
+  text-align: left;
+  vertical-align: top;
+}
+
+.horaires-table th {
+  font-weight: 400;
+}
+
+.horaires-table td {
+  text-align: right;
+}
+
+/* Le jour actuel : fond bois blond et texte en gras. */
+.horaires-table .est-aujourdhui th,
+.horaires-table .est-aujourdhui td {
+  background: var(--bois);
+  font-weight: 700;
+}
+
+.horaires-marque {
+  font-weight: 400;
+  font-size: 0.875rem;
+}
+
+.infos-liste {
+  margin-top: 1rem;
+}
+
+.infos-liste li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+}
+
+.infos-liste li::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  flex-shrink: 0;
+  background: var(--anthracite);
+  transform: translateY(-0.1em);
+}
+
+.acces-adresse {
+  margin-top: 1rem;
+  font-style: normal;
+  font-size: 1.125rem;
+}
+
+.acces .boutons {
+  margin-top: 1.25rem;
+}
+
+
+/* ---------- 8. Footer ---------- */
+
+.pied {
+  display: grid;
+  gap: 0.5rem;
+  padding: 2.5rem var(--marge);
+  background: var(--anthracite);
+  color: var(--pierre);              /* contraste 11,9 */
+  --focus: var(--ambre);
+}
+
+.pied-nom {
+  font-family: var(--police-titre);
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--blanc);
+}
+
+.pied-adresse {
+  font-style: normal;
+}
+
+.pied-adresse a {
+  display: inline-block;
+  padding: 0.6rem 0;
+}
+
+.pied-copyright {
+  margin-top: 0.5rem;
+}
+
+
+/* ---------- Tablette et ordinateur ---------- */
+
+@media (min-width: 768px) {
+  :root {
+    --hauteur-header: 4.5rem;
+  }
+
+  /* Header sur une seule ligne : nom, ancres, actions. */
+  .entete {
+    display: flex;
+    align-items: center;
+    padding: 0 var(--marge);
+  }
+  .entete-ligne {
+    display: contents;
+  }
+  .entete-nav {
+    order: 2;
+    margin-left: auto;
+    margin-right: 1rem;
+  }
+  .entete-nav ul {
+    padding: 0;
+    border-top: 0;
+  }
+  .entete-nom {
+    order: 1;
+    min-height: 4rem;
+  }
+  .entete-actions {
+    order: 3;
+  }
+
+  .store {
+    padding-top: 4rem;
+    padding-bottom: 4.5rem;
+  }
+
+  .vitrine {
+    padding-top: 3rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .carte {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2.5rem;
+    padding: 2.25rem 2rem 1rem;
+  }
+
+  .pratique {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 2rem;
+    padding: 0 var(--marge);
+  }
+  .pratique .section {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .horaires {
+    grid-row: span 2;
+  }
+  .acces {
+    padding-top: 0;
+  }
+}
+
+@media (min-width: 1100px) {
+  .pratique {
+    grid-template-columns: 1.2fr 1fr 1fr;
+  }
+  .horaires {
+    grid-row: auto;
+  }
+  .acces {
+    padding-top: 3rem;
+  }
+}

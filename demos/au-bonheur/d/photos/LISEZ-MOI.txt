@@ -1,0 +1,3 @@
+Déposer ici les photos du hero de la version D (jpg ou webp, environ 800 px de large),
+puis les déclarer dans CONFIG.photosHero (commun/script.js).
+Uniquement des photos fournies par le patron ou prises par nous avec son accord.
