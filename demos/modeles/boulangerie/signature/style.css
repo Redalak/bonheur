@@ -1,0 +1,29 @@
+/* =====================================================================
+   MAISON FARINE : VARIANTE SIGNATURE (haut de gamme, plus réaliste)
+   Ambiance : Lumière du matin à travers la vitrine, farine et blé.
+   Tout le système (ambiance photographique, typographie, animations) est dans
+   commun/signature.css ; ici, seulement les couleurs et les polices.
+   ===================================================================== */
+
+:root {
+  --fond: #F6EFE4;
+  --fond-2: #EDE2D0;
+  --texte: #2B1E14;
+  --texte-doux: #5C4A3A;       /* texte secondaire (contraste AA vérifié par axe-core) */
+  --accent: #8A4F1C;
+  --sur-accent: #FFFFFF;      /* texte posé sur l'accent */
+
+  /* Les 4 couleurs des halos de lumière du hero */
+  --lumiere-1: #F8D9A0;
+  --lumiere-2: #E8C77A;
+  --lumiere-3: #FFFFFF;
+  --lumiere-4: #D9A066;
+
+  --police-titre: "Cormorant Garamond", "Georgia", serif;
+  --police-texte: "Cabin", "Helvetica Neue", sans-serif;
+  --poids-titre: 500;
+  --italique: italic;
+}
+
+/* Variante claire : les halos « teintent » le fond comme une lumière chaude (mode multiplier). */
+.ambiance .lumiere { mix-blend-mode: multiply; opacity: 0.75; }

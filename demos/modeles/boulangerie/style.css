@@ -1,0 +1,120 @@
+/* =====================================================================
+   MODÈLE BOULANGERIE : « Maison Farine »
+   Palette « Bakery/Cafe » du skill UI/UX : brun chaud et crème,
+   plus le blé et la croûte. Le hero est sombre comme le fournil.
+   Signature : la farine flotte dans la lumière, les grignes de la
+   baguette se tracent une à une.
+   Polices : Amatic SC (titres, écrit à la main) + Cabin (texte).
+   ===================================================================== */
+
+:root {
+  --fournil: #3B2210;      /* le fournil (hero, pied) */
+  --brun: #92400E;         /* brun du skill (blanc dessus : 7,1) */
+  --creme: #FEF3C7;        /* crème du skill */
+  --ble: #E8C77A;          /* blé (sur fournil : 8,4) */
+  --croute: #C98236;       /* croûte dorée (décor) */
+  --encre: #2A1A0E;        /* texte */
+
+  --police-titre: "Amatic SC", "Marker Felt", cursive;
+  --police-texte: "Cabin", "Helvetica Neue", sans-serif;
+  --focus: var(--encre);
+}
+
+body { background: var(--creme); color: var(--encre); font-family: var(--police-texte); }
+
+/* ---------- Header ---------- */
+.entete { background: var(--creme); border-bottom: 2px solid var(--brun); }
+.entete-nom { font-family: var(--police-titre); font-weight: 700; font-size: 2rem; color: var(--brun); }
+.bouton-langue { border: 2px solid var(--brun); color: var(--brun); border-radius: 999px; font-weight: 600; }
+.bouton-appel { background: var(--brun); color: #FFFFFF; border-radius: 999px; }
+
+/* ---------- Boutons ---------- */
+.bouton { border-radius: 999px; }
+.bouton-principal { background: var(--brun); border-color: var(--brun); color: #FFFFFF; }
+.bouton-contour { color: var(--encre); }
+
+/* ---------- Hero : le fournil ---------- */
+.hero { background: var(--fournil); color: var(--creme); padding-bottom: 3.5rem; --focus: var(--ble); }
+.hero .bouton-principal { background: var(--ble); border-color: var(--ble); color: var(--encre); }
+.hero .bouton-contour { color: var(--creme); }
+.hero .badge { color: var(--ble); }
+
+.hero-type { color: var(--ble); font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; font-size: 1rem; }
+.hero-nom {
+  margin-top: 0.25rem;
+  font-family: var(--police-titre);
+  font-weight: 700;
+  font-size: clamp(4.5rem, 24vw, 11rem);
+  line-height: 0.85;
+  color: var(--creme);
+}
+.hero-sous-titre { font-family: var(--police-titre); font-weight: 700; font-size: clamp(2rem, 8vw, 3rem); line-height: 1; color: var(--ble); }
+
+/* La farine : de petits grains clairs qui montent et disparaissent. */
+.farine { position: absolute; inset: 0; pointer-events: none; }
+.grain {
+  position: absolute;
+  left: var(--x);
+  bottom: -1rem;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 248, 230, 0.85);
+  opacity: 0;
+}
+.grain:nth-child(3n) { width: 3px; height: 3px; }
+.grain:nth-child(4n) { width: 7px; height: 7px; opacity: 0; }
+.anims-actives .grain { animation: farine-monte var(--t) linear infinite; animation-delay: calc(var(--n) * -0.7s); }
+@keyframes farine-monte {
+  0%   { opacity: 0; transform: translate(0, 0); }
+  15%  { opacity: 0.8; }
+  100% { opacity: 0; transform: translate(2.5rem, -34rem); }
+}
+
+/* La baguette dorée et ses grignes */
+.baguette { display: block; width: min(100%, 30rem); height: auto; margin: 0.5rem 0 1.25rem; }
+.baguette-corps { fill: var(--croute); }
+.grigne { stroke: #F8E2B0; stroke-width: 9; stroke-linecap: round; }
+.anims-actives .grigne {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: grigne 600ms ease-out forwards;
+}
+.anims-actives .grigne:nth-of-type(2) { animation-delay: 400ms; }
+.anims-actives .grigne:nth-of-type(3) { animation-delay: 650ms; }
+.anims-actives .grigne:nth-of-type(4) { animation-delay: 900ms; }
+.anims-actives .grigne:nth-of-type(5) { animation-delay: 1150ms; }
+@keyframes grigne { to { stroke-dashoffset: 0; } }
+
+/* ---------- Argument ---------- */
+.argument { background: var(--brun); color: #FFFFFF; --focus: #FFFFFF; }
+.argument h2 { font-family: var(--police-titre); font-weight: 700; font-size: clamp(2.75rem, 11vw, 5rem); line-height: 0.95; }
+.argument .bouton-principal { background: var(--creme); border-color: var(--creme); color: var(--brun); }
+.argument .bouton-contour { color: #FFFFFF; }
+.argument-numero a { font-family: var(--police-titre); font-weight: 700; font-size: clamp(2.25rem, 9vw, 3.25rem); }
+
+/* ---------- Titres et carte ---------- */
+.titre-section { font-family: var(--police-titre); font-weight: 700; font-size: clamp(3rem, 12vw, 4.5rem); line-height: 0.95; color: var(--brun); }
+.mention-exemple { padding: 0.1rem 0.7rem; border: 1.5px solid var(--brun); border-radius: 999px; color: var(--brun); }
+.carte-titre { font-family: var(--police-titre); font-weight: 700; font-size: 2.5rem; line-height: 1; color: var(--brun); }
+.carte-sous-titre { font-family: var(--police-texte); font-weight: 600; }
+.carte-plat { align-items: flex-end; }
+.carte-points { display: block; flex: 1 1 1rem; min-width: 1rem; margin-bottom: 0.4em; border-bottom: 2px dotted rgba(146, 64, 14, 0.4); }
+.carte-prix { font-weight: 600; color: var(--brun); }
+
+/* ---------- Le lieu ---------- */
+.lieu { background: var(--ble); }
+.lieu .titre-section { color: var(--encre); }
+.lieu-texte { font-size: clamp(1.375rem, 5vw, 2rem); line-height: 1.35; }
+
+/* ---------- Pratique et pied ---------- */
+.horaires-table th, .horaires-table td { border-bottom: 1px dashed rgba(146, 64, 14, 0.35); }
+.horaires-table .est-aujourdhui th, .horaires-table .est-aujourdhui td { background: var(--ble); }
+.infos-liste li::before { border-radius: 50%; background: var(--brun); }
+.pied { background: var(--fournil); color: var(--creme); --focus: var(--ble); }
+.pied-nom { font-family: var(--police-titre); font-weight: 700; font-size: 3rem; color: var(--ble); line-height: 1; }
+
+@media (min-width: 1000px) {
+  .hero { min-height: 36rem; display: grid; align-content: center; }
+  .baguette { position: absolute; right: 4%; top: 50%; width: 34rem; margin: 0; transform: translateY(-50%) rotate(-12deg); }
+}

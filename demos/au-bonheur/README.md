@@ -11,7 +11,7 @@
 Ce dossier est une **démo de prospection**. Elle n'est pas destinée à être mise en ligne telle quelle.
 
 - Présentée par Reda Lakhledj (07 63 45 60 80), visite prévue le **lundi 12 octobre 2026**.
-- But : montrer **4 directions visuelles** sur un téléphone et laisser le patron choisir.
+- But : montrer **7 directions visuelles** sur un téléphone et laisser le patron choisir.
 - Toutes les pages ont `noindex, nofollow`. Les prix sont des **prix d'exemple**, et les intitulés de la carte sont **génériques**.
 - Il n'y a ni photo, ni avis, ni mentions légales : ce n'est pas encore le site final.
 
@@ -21,6 +21,9 @@ Ce dossier est une **démo de prospection**. Elle n'est pas destinée à être m
 | B | Le ticket du rush | Le service du midi : nom géant, panneau ambre pour appeler, carte en ticket de cuisine. |
 | C | Lumière de rotin | La salle : grand cercle de lumière en rotin, mise en page éditoriale et aérée. |
 | D | Céladon | Nouvelle identité (jade, piment, jaune d'œuf) : plateau de cartes de menu qui défile, bouton d'appel flottant. |
+| E | Plateau tournant | Enseigne bilingue avec 福 et plateau tournant de table chinoise qu'on fait tourner du doigt (inspirée de Mister Jiu's et BAO). |
+| F | Bonheur Gang | Esprit BAO Family : noir, blanc, aplats francs, logo géant « AU 幸福 BONHEUR », bandeau rouge qui défile en chinois et en français. |
+| G | Le service | La version tout animée : bol qui se dessine, rush du midi épinglé (l'horloge avance, la salle se remplit), carte en cascade. Bouton « Couper les animations ». |
 
 La direction de design détaillée (polices, palettes, contrastes) se trouve dans [DESIGN.md](DESIGN.md).
 
@@ -35,7 +38,7 @@ Pour la présentation sur un « téléphone » dans Chrome, voir [CHECKLIST-VISI
 
 ```
 demos/au-bonheur/
-├── index.html          page qui présente les 4 directions
+├── index.html          page qui présente les 7 directions
 ├── README.md           ce fichier
 ├── CHECKLIST-VISITE.md préparation de la visite
 ├── DESIGN.md           direction de design
@@ -43,17 +46,20 @@ demos/au-bonheur/
 ├── commun/
 │   ├── commun.css      polices, reset, badge, barre démo
 │   ├── script.js       CONFIG + tout le JavaScript
-│   └── fonts/          12 fichiers .woff2 + 7 licences OFL-*.txt
+│   └── fonts/          17 fichiers .woff2 + 12 licences OFL-*.txt
 ├── a/  index.html + style.css
 ├── b/  index.html + style.css
 ├── c/  index.html + style.css
-└── d/  index.html + style.css + photos/ (vide, prêt pour les photos du patron)
+├── d/  index.html + style.css + photos/ (vide, prêt pour les photos du patron)
+├── e/  index.html + style.css
+├── f/  index.html + style.css
+└── g/  index.html + style.css
 ```
 
 ## Modifier le contenu : tout se passe dans `commun/script.js`
 
 L'objet `CONFIG`, en haut du fichier, contient **toutes** les données, commentées ligne par ligne.
-Une modification vaut pour les 4 versions à la fois.
+Une modification vaut pour les 7 versions à la fois.
 
 | Je veux changer… | Où, dans `CONFIG` |
 |---|---|
@@ -89,6 +95,7 @@ Bon à savoir :
 9. **Allergènes** : « Avez-vous un document sur les allergènes à remettre sur demande ? »
 10. **Photos** : « Avez-vous des photos de vos plats et de la salle dont vous êtes propriétaire, ou peut-on venir en faire ? » (elles iront dans la grille de la version D, `photosHero`)
 11. **Logo** : « Avez-vous le fichier de votre logo (store et logo rond lumineux) ? » (la démo ne le reproduit pas)
+    Et : « Le restaurant a-t-il un nom chinois ? » (E affiche 福 et F affiche 幸福, simples traductions de « bonheur »)
 12. **Mentions légales** (pour la mise en ligne) : raison sociale, SIRET, nom du responsable de publication, hébergeur.
 
 ## Checklist de conformité
@@ -96,7 +103,7 @@ Bon à savoir :
 Vérifiée le 9 octobre 2026 (A, B, C) et le 12 octobre 2026 (D) avec Playwright (Chromium), en `file://`, avec toutes les requêtes réseau bloquées.
 
 ### Fonctionnement
-- [x] Fonctionne par double-clic en `file://`, sans serveur ni internet (0 requête externe, 0 erreur console sur les 5 pages).
+- [x] Fonctionne par double-clic en `file://`, sans serveur ni internet (0 requête externe, 0 erreur console sur les 8 pages).
 - [x] Aucun CDN, Google Fonts en ligne, iframe, `fetch()`, module ES, JS inline ni `onclick`.
 - [x] Polices auto-hébergées (woff2, sous-ensemble latin, 2 graisses par police) avec leurs licences OFL.
 - [x] Sans JavaScript, la carte (16 plats) et les horaires (7 jours) restent lisibles en français.
@@ -117,7 +124,7 @@ Vérifiée le 9 octobre 2026 (A, B, C) et le 12 octobre 2026 (D) avec Playwright
 ### Liens
 - [x] Tous les liens d'appel du restaurant pointent vers `tel:+33147705022` (8 à 9 par version).
 - [x] « Itinéraire » : lien Google Maps simple, `target="_blank" rel="noopener noreferrer"`, sans iframe.
-- [x] Barre démo : A, B, C, D, « Les 4 » (la version en cours est mise en évidence) et `tel:+33763456080`.
+- [x] Barre démo : A à G et « Les 7 » (sur deux lignes sous 480 px, hauteur réservée) (la version en cours est mise en évidence) et `tel:+33763456080`.
 
 ### Mobile et accessibilité
 - [x] Aucun scroll horizontal à 375, 768 et 1440 px (FR et EN).

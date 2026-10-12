@@ -1,0 +1,29 @@
+/* =====================================================================
+   LE COUPE-CHOU : VARIANTE SIGNATURE (haut de gamme, plus réaliste)
+   Ambiance : Clair-obscur d'un salon ancien : lampe chaude, cuir, acier.
+   Tout le système (ambiance photographique, typographie, animations) est dans
+   commun/signature.css ; ici, seulement les couleurs et les polices.
+   ===================================================================== */
+
+:root {
+  --fond: #101418;
+  --fond-2: #171D23;
+  --texte: #EEE6D8;
+  --texte-doux: #B5AEA2;       /* texte secondaire (contraste AA vérifié par axe-core) */
+  --accent: #C29A5E;
+  --sur-accent: #101418;      /* texte posé sur l'accent */
+
+  /* Les 4 couleurs des halos de lumière du hero */
+  --lumiere-1: #D9A25F;
+  --lumiere-2: #6E1B1B;
+  --lumiere-3: #3B4B5E;
+  --lumiere-4: #F0D6A8;
+
+  --police-titre: "Cinzel", "Georgia", serif;
+  --police-texte: "Jost", "Helvetica Neue", sans-serif;
+  --poids-titre: 400;
+  --italique: normal;
+}
+
+/* Cinzel est une capitale romaine très large : « LE COUPE-CHOU » doit tenir sur mobile. */
+.hero-nom { font-size: clamp(2.25rem, 10.5vw, 7rem); }

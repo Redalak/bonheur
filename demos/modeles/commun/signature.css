@@ -1,0 +1,244 @@
+/* =====================================================================
+   COLLECTION SIGNATURE : le système commun des 12 variantes haut de gamme
+   ---------------------------------------------------------------------
+   Plus réaliste, moins illustré : l'esprit des sites de restaurants étoilés.
+   - une ambiance « photographique » plein écran : des halos de lumière
+     flous qui dérivent lentement (bougies, lampes hors mise au point),
+     un grain de film et un vignettage ;
+   - une typographie de luxe : sérifs fines, petites capitales espacées,
+     filets d'un pixel, beaucoup d'espace ;
+   - des animations lentes et feutrées.
+   Chaque variante ne définit que ses couleurs et ses polices (son style.css),
+   avec ces variables :
+     --fond, --fond-2, --texte, --texte-doux, --accent, --sur-accent,
+     --lumiere-1 … --lumiere-4, --police-titre, --police-texte,
+     --poids-titre (graisse disponible de la police de titre),
+     --italique (italic si la police a une vraie italique, sinon normal)
+   Chargé après commun.css (qui fournit le squelette de mise en page).
+   ===================================================================== */
+
+body {
+  background: var(--fond);
+  color: var(--texte);
+  font-family: var(--police-texte);
+  font-weight: 400;
+  --focus: var(--accent);
+}
+
+/* ---------- Petites capitales espacées (sur-titres, navigation, catégories) ---------- */
+.petites-capitales,
+.surtitre,
+.entete-nav a,
+.bouton,
+.carte-titre,
+.horaires-jour {
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* ---------- Header ---------- */
+.entete { background: var(--fond); border-bottom: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); }
+.entete-nom { font-family: var(--police-titre); font-weight: var(--poids-titre, 400); font-size: 1.5rem; letter-spacing: 0.02em; }
+.entete-nav a { font-size: 0.875rem; }
+.bouton-langue { border: 1px solid color-mix(in srgb, var(--texte) 50%, transparent); font-size: 0.875rem; letter-spacing: 0.1em; }
+.bouton-appel { background: var(--accent); color: var(--sur-accent); font-size: 0.9375rem; }
+
+/* ---------- Boutons : fins, élégants ---------- */
+.bouton { border: 1px solid var(--accent); border-radius: 0; font-size: 0.875rem; font-weight: 500; min-height: 3.25rem; padding: 0 1.75rem; }
+.bouton-principal { background: var(--accent); color: var(--sur-accent); }
+.bouton-contour { background: transparent; color: var(--texte); }
+
+/* ---------- Hero : l'ambiance photographique ---------- */
+.hero-signature {
+  display: grid;
+  place-items: center;
+  min-height: max(36rem, calc(100svh - var(--hauteur-header) - var(--hauteur-barre-demo)));
+  padding-top: 4rem;
+  padding-bottom: 5rem;
+  text-align: center;
+  isolation: isolate;
+}
+
+.ambiance { position: absolute; inset: 0; z-index: -1; overflow: hidden; background: var(--fond); }
+
+/* Les halos : de grands disques flous, comme des lumières hors mise au point. */
+.lumiere {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.55;
+  background: radial-gradient(circle at center, var(--couleur) 0%, transparent 68%);
+}
+.lumiere:nth-child(1) { --couleur: var(--lumiere-1); width: 60vmax; height: 60vmax; left: -18vmax; top: -12vmax; }
+.lumiere:nth-child(2) { --couleur: var(--lumiere-2); width: 46vmax; height: 46vmax; right: -14vmax; top: 18%; opacity: 0.45; }
+.lumiere:nth-child(3) { --couleur: var(--lumiere-3); width: 30vmax; height: 30vmax; left: 30%; bottom: -10vmax; opacity: 0.5; }
+.lumiere:nth-child(4) { --couleur: var(--lumiere-4); width: 14vmax; height: 14vmax; left: 12%; bottom: 18%; opacity: 0.7; }
+.lumiere:nth-child(5) { --couleur: var(--lumiere-1); width: 9vmax;  height: 9vmax;  right: 18%; top: 14%; opacity: 0.8; }
+.lumiere:nth-child(6) { --couleur: var(--lumiere-3); width: 6vmax;  height: 6vmax;  right: 30%; bottom: 22%; opacity: 0.85; }
+
+/* Elles dérivent très lentement, chacune à son rythme : la lumière « respire ». */
+.anims-actives .lumiere { animation: derive 26s ease-in-out infinite alternate; }
+.anims-actives .lumiere:nth-child(2) { animation-duration: 32s; animation-delay: -6s; }
+.anims-actives .lumiere:nth-child(3) { animation-duration: 22s; animation-delay: -12s; }
+.anims-actives .lumiere:nth-child(4) { animation-duration: 18s; animation-delay: -3s; }
+.anims-actives .lumiere:nth-child(5) { animation-duration: 14s; animation-delay: -8s; }
+.anims-actives .lumiere:nth-child(6) { animation-duration: 16s; animation-delay: -10s; }
+@keyframes derive {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(3vmax, -2vmax) scale(1.08); }
+  100% { transform: translate(-2vmax, 2vmax) scale(0.96); }
+}
+
+/* Le grain de film (bruit SVG, fixe) et le vignettage : ce qui rend l'image « photo ». */
+.grain { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.16; mix-blend-mode: overlay; }
+.vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 35%, var(--fond) 100%); }
+
+/* Un voile pour garantir la lisibilité du texte au centre. */
+.hero-signature .hero-contenu {
+  max-width: 44rem;
+  padding: 2rem 1rem;
+  background: color-mix(in srgb, var(--fond) 55%, transparent);
+  border-radius: 50%/40%;
+  box-shadow: 0 0 6rem 3rem color-mix(in srgb, var(--fond) 55%, transparent);
+}
+
+.surtitre { font-size: 0.9375rem; color: var(--accent); }
+.filet-or { display: block; width: 5rem; height: 1px; margin: 1.25rem auto 1.5rem; background: var(--accent); transform-origin: center; }
+.hero-nom {
+  font-family: var(--police-titre);
+  font-weight: var(--poids-titre, 400);
+  font-size: clamp(3.25rem, 15vw, 8.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+}
+.hero-signature .hero-sous-titre {
+  margin-top: 1.25rem;
+  font-family: var(--police-titre);
+  font-style: var(--italique, italic);
+  font-size: clamp(1.375rem, 5vw, 2rem);
+  line-height: 1.2;
+  color: var(--texte);
+}
+.hero-signature .hero-texte { margin: 0.75rem auto 0; color: var(--texte-doux); }
+.hero-signature .badge { color: var(--texte-doux); font-weight: 400; letter-spacing: 0.04em; }
+.hero-signature .badge.est-ouvert .badge-point { color: var(--accent); }
+.hero-signature .boutons { justify-content: center; margin-top: 1.5rem; }
+.hero-signature .bouton-anims { color: var(--texte-doux); }
+
+/* « Découvrir la carte » et son trait qui descend */
+.decouvrir {
+  position: absolute;
+  left: 50%;
+  bottom: 1rem;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  transform: translateX(-50%);
+  font-size: 0.8125rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--texte-doux);
+}
+.decouvrir::after { content: ""; width: 1px; height: 2.25rem; background: var(--accent); transform-origin: top; }
+.anims-actives .decouvrir::after { animation: descend 2.4s ease-in-out infinite; }
+@keyframes descend { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+
+/* La chorégraphie d'entrée, lente : chaque lettre sort du flou. */
+.anims-actives .hero-signature [data-lettres] .lettre {
+  opacity: 0;
+  filter: blur(12px);
+  transform: translateY(0.12em);
+  animation: lettre-luxe 1600ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  animation-delay: calc(500ms + var(--n) * 55ms);
+}
+@keyframes lettre-luxe { to { opacity: 1; filter: blur(0); transform: none; } }
+.anims-actives .filet-or { transform: scaleX(0); animation: filet 1400ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards 200ms; }
+@keyframes filet { to { transform: scaleX(1); } }
+.anims-actives .hero-signature .hero-contenu > :not(.hero-nom):not(.filet-or) {
+  opacity: 0;
+  animation: monte-doux 1400ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  animation-delay: 1500ms;
+}
+.anims-actives .hero-signature .surtitre { animation-delay: 300ms; }
+@keyframes monte-doux { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.anims-actives .decouvrir { opacity: 0; animation: monte-doux 1400ms ease forwards 2400ms; }
+.anims-actives .ambiance { animation: ambiance-allume 2200ms ease-out both; }
+@keyframes ambiance-allume { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---------- Argument ---------- */
+.argument { background: var(--fond-2); text-align: center; border-top: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); }
+.argument h2 { margin: 0 auto; max-width: 20ch; font-family: var(--police-titre); font-weight: var(--poids-titre, 400); font-style: var(--italique, italic); font-size: clamp(2rem, 7vw, 3.5rem); line-height: 1.1; }
+.argument-texte { margin-left: auto; margin-right: auto; color: var(--texte-doux); }
+.argument-boutons { justify-content: center; }
+.argument-numero a { font-family: var(--police-titre); font-size: clamp(1.5rem, 5vw, 2rem); letter-spacing: 0.08em; color: var(--accent); text-decoration-thickness: 1px; }
+
+/* ---------- Titres de section : centrés, avec un ornement ---------- */
+.titre-section {
+  font-family: var(--police-titre);
+  font-weight: var(--poids-titre, 400);
+  font-size: clamp(2.25rem, 8vw, 3.5rem);
+  line-height: 1.05;
+}
+.section-carte .section-entete { flex-direction: column; align-items: center; text-align: center; }
+.section-carte .titre-section::after { content: ""; display: block; width: 3rem; height: 1px; margin: 1rem auto 0; background: var(--accent); }
+.mention-exemple { font-size: 0.875rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--texte-doux); }
+
+/* ---------- La carte : menu de restaurant étoilé ---------- */
+.section-carte .carte { max-width: 56rem; margin-left: auto; margin-right: auto; }
+.carte-titre {
+  justify-content: center;
+  gap: 1rem;
+  font-family: var(--police-texte);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--accent);
+  text-align: center;
+}
+.carte-titre::before, .carte-titre::after { content: ""; flex: 1; max-width: 3rem; height: 1px; background: color-mix(in srgb, var(--accent) 60%, transparent); align-self: center; }
+.carte-sous-titre { flex-basis: 100%; order: 3; font-family: var(--police-titre); font-style: var(--italique, italic); text-transform: none; letter-spacing: 0; font-size: 1.0625rem; color: var(--texte-doux); }
+.carte-plat { padding: 0.9rem 0; border-bottom: 1px solid color-mix(in srgb, var(--texte) 10%, transparent); }
+.carte-nom { font-family: var(--police-titre); font-weight: var(--poids-titre, 400); font-size: 1.3125rem; line-height: 1.25; }
+.carte-detail { font-family: var(--police-texte); font-size: 0.9375rem; opacity: 1; color: var(--texte-doux); }
+.carte-prix { font-family: var(--police-titre); font-size: 1.1875rem; color: var(--accent); }
+.carte-note, .carte-alcool { margin-left: auto; margin-right: auto; text-align: center; color: var(--texte-doux); }
+@media (min-width: 768px) {
+  .section-carte .carte { column-gap: 5rem; }
+}
+
+/* ---------- Le lieu : la phrase, et trois « photos » d'ambiance ---------- */
+.lieu { text-align: center; }
+.lieu .titre-section { font-size: 1rem; font-family: var(--police-texte); letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); }
+.lieu-texte { margin: 1rem auto 0; max-width: 26ch; font-family: var(--police-titre); font-style: var(--italique, italic); font-size: clamp(1.75rem, 6vw, 3rem); line-height: 1.2; }
+.galerie { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; max-width: 56rem; margin: 2.5rem auto 0; }
+/* Un cadre = une photo à venir : même ambiance floue que le hero, en petit.
+   Pour mettre une vraie photo : remplacer le contenu du cadre par <img src="…" alt="…">. */
+.cadre { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--fond-2); }
+.cadre:nth-child(2) { transform: translateY(1.5rem); }
+.cadre .lumiere { opacity: 0.8; height: auto; aspect-ratio: 1; }   /* toujours des disques ronds */
+.cadre .lumiere:nth-child(1) { width: 130%; left: -55%; top: -25%; }
+.cadre .lumiere:nth-child(2) { width: 85%; right: -35%; top: 35%; }
+.cadre .lumiere:nth-child(3) { width: 45%; left: 25%; bottom: -5%; }
+/* Chaque « photo » a sa propre lumière : couleurs et cadrages différents. */
+.cadre:nth-child(2) .lumiere:nth-child(1) { --couleur: var(--lumiere-2); left: 10%; top: -40%; }
+.cadre:nth-child(2) .lumiere:nth-child(2) { --couleur: var(--lumiere-4); right: 30%; top: 55%; width: 35%; }
+.cadre:nth-child(2) .lumiere:nth-child(3) { --couleur: var(--lumiere-1); left: -20%; bottom: -25%; width: 80%; }
+.cadre:nth-child(3) .lumiere:nth-child(1) { --couleur: var(--lumiere-3); left: -10%; top: 20%; width: 110%; }
+.cadre:nth-child(3) .lumiere:nth-child(2) { --couleur: var(--lumiere-1); right: -10%; top: -15%; width: 60%; }
+.cadre:nth-child(3) .lumiere:nth-child(3) { --couleur: var(--lumiere-2); left: 55%; bottom: 10%; width: 25%; }
+.cadre img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ---------- Horaires, infos, accès ---------- */
+.pratique { border-top: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); }
+.pratique .titre-section { font-size: clamp(1.75rem, 6vw, 2.25rem); }
+.horaires-table th, .horaires-table td { border-bottom: 1px solid color-mix(in srgb, var(--texte) 12%, transparent); }
+.horaires-jour { font-size: 0.875rem; }
+.horaires-table .est-aujourdhui th, .horaires-table .est-aujourdhui td { color: var(--accent); }
+.horaires-marque { text-transform: none; letter-spacing: 0; }
+.infos-liste li::before { width: 1.25rem; height: 1px; background: var(--accent); align-self: center; }
+.acces-adresse { color: var(--texte-doux); }
+
+/* ---------- Pied de page ---------- */
+.pied { text-align: center; justify-items: center; background: var(--fond-2); color: var(--texte-doux); border-top: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); }
+.pied-nom { font-family: var(--police-titre); font-weight: var(--poids-titre, 400); font-size: 2.25rem; color: var(--texte); }

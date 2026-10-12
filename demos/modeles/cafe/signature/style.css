@@ -1,0 +1,26 @@
+/* =====================================================================
+   GRAIN NOIR : VARIANTE SIGNATURE (haut de gamme, plus réaliste)
+   Ambiance : Torréfaction : crema, acier bleuté et lampe d'atelier.
+   Tout le système (ambiance photographique, typographie, animations) est dans
+   commun/signature.css ; ici, seulement les couleurs et les polices.
+   ===================================================================== */
+
+:root {
+  --fond: #17110D;
+  --fond-2: #201812;
+  --texte: #EFE6DA;
+  --texte-doux: #B8AC9C;       /* texte secondaire (contraste AA vérifié par axe-core) */
+  --accent: #C8925A;
+  --sur-accent: #17110D;      /* texte posé sur l'accent */
+
+  /* Les 4 couleurs des halos de lumière du hero */
+  --lumiere-1: #C8925A;
+  --lumiere-2: #3A5A7A;
+  --lumiere-3: #F1D3A8;
+  --lumiere-4: #7A4A2A;
+
+  --police-titre: "Newsreader", "Georgia", serif;
+  --police-texte: "Figtree", "Helvetica Neue", sans-serif;
+  --poids-titre: 600;
+  --italique: italic;
+}

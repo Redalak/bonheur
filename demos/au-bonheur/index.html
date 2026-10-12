@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Démo : la page ne doit pas être indexée par les moteurs de recherche. -->
   <meta name="robots" content="noindex, nofollow">
-  <title>Au Bonheur : 4 propositions</title>
-  <meta name="description" content="Quatre directions visuelles pour le site d'Au Bonheur, 11 rue Cadet, Paris 9e. Proposition de Reda Lakhledj.">
-  <meta property="og:title" content="Au Bonheur : 4 propositions">
-  <meta property="og:description" content="Quatre directions visuelles pour le site d'Au Bonheur, 11 rue Cadet, Paris 9e.">
+  <title>Au Bonheur : 7 propositions</title>
+  <meta name="description" content="Sept directions visuelles pour le site d'Au Bonheur, 11 rue Cadet, Paris 9e. Proposition de Reda Lakhledj.">
+  <meta property="og:title" content="Au Bonheur : 7 propositions">
+  <meta property="og:description" content="Sept directions visuelles pour le site d'Au Bonheur, 11 rue Cadet, Paris 9e.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="fr_FR">
   <link rel="stylesheet" href="commun/commun.css">
@@ -82,6 +82,19 @@
     .apercu-d .mini-tuiles span { flex: 1; aspect-ratio: 4 / 5; border-radius: 4px; }
     .apercu-d .mini-tuiles span { border-right: 3px solid rgba(0,0,0,0.18); border-bottom: 4px solid rgba(0,0,0,0.18); }
     .apercu-d .apercu-nom { position: relative; z-index: 1; padding: 0.55rem 0.9rem; background: #EAF2EC; border-bottom: 5px solid #B02E17; border-radius: 10px; color: #0E4A3B; font-family: "Archivo", sans-serif; font-stretch: 125%; font-weight: 850; text-transform: uppercase; letter-spacing: -0.02em; font-size: clamp(1.3rem, 6vw, 1.8rem); }
+    /* Aperçu E : l'enseigne 福 + nom, sur fond sauce soja. */
+    .apercu-e { background: #2A1B13; color: #F7F2E8; gap: 0.6rem; }
+    .apercu-e svg { height: 3.6rem; width: auto; color: #F0B43C; }
+    .apercu-e .apercu-nom { font-family: "Young Serif", serif; line-height: 0.95; }
+    /* Aperçu F : logo bilingue noir/rouge et bandeau rouge, façon BAO Family. */
+    .apercu-f { flex-direction: column; align-items: flex-start; justify-content: center; gap: 0.4rem; background: #000000; color: #FFFFFF; padding-bottom: 0; }
+    .apercu-f .apercu-nom { display: flex; align-items: flex-end; gap: 0.15em; font-family: "Big Shoulders Display", sans-serif; font-weight: 900; text-transform: uppercase; font-size: clamp(2.4rem, 11vw, 3rem); line-height: 0.85; }
+    .apercu-f svg { height: 0.8em; width: auto; color: #D42A20; }
+    .apercu-f .apercu-bandeau { align-self: stretch; margin: 0.6rem -1.25rem 0; padding: 0.35rem 1.25rem; background: #D42A20; font-family: "Big Shoulders Display", sans-serif; font-weight: 900; text-transform: uppercase; white-space: nowrap; overflow: hidden; }
+    /* Aperçu G : fond doré, le bol au trait et le nom en Fraunces. */
+    .apercu-g { background: #F3B53F; color: #2A1B13; gap: 0.75rem; }
+    .apercu-g svg { width: 4.5rem; height: auto; }
+    .apercu-g .apercu-nom { font-family: "Fraunces", serif; font-variation-settings: "SOFT" 100; font-weight: 800; line-height: 0.95; }
     .corps {
       display: flex;
       flex-direction: column;
@@ -130,8 +143,8 @@
 </head>
 <body>
   <main>
-    <h1>Au Bonheur : 4 propositions</h1>
-    <p class="intro">Quatre directions pour le site du 11 rue Cadet. Même contenu, même carte, quatre façons de la montrer. Laquelle vous ressemble le plus ?</p>
+    <h1>Au Bonheur : 7 propositions</h1>
+    <p class="intro">Sept directions pour le site du 11 rue Cadet. Même contenu, même carte, sept façons de la montrer. Laquelle vous ressemble le plus ?</p>
 
     <ul class="propositions" role="list">
       <li class="proposition">
@@ -168,6 +181,33 @@
           <p>Une nouvelle identité : jade du bol céladon, rouge piment, jaune d'œuf. Un plateau de cartes de menu qui défile, et un bouton d'appel toujours sous le pouce.</p>
           <div class="pastilles" aria-hidden="true"><span style="background:#0E4A3B"></span><span style="background:#D7E6DA"></span><span style="background:#B02E17"></span><span style="background:#F4B400"></span><span style="background:#EAF2EC"></span></div>
           <p class="ouvrir" aria-hidden="true">Voir la proposition D</p>
+        </div>
+      </li>
+      <li class="proposition">
+        <div class="apercu apercu-e" aria-hidden="true"><svg viewBox="8 -860 969 954" fill="currentColor" aria-hidden="true" focusable="false"><path transform="scale(1 -1)" d="M538 -52Q538 -58 521.5 -68.0Q505 -78 480.0 -86.0Q455 -94 427 -94H408V405L544 352H791L852 419L977 323Q973 317 962.5 311.0Q952 305 936 302V-54Q936 -57 917.0 -65.0Q898 -73 872.5 -79.5Q847 -86 825 -86H802V-19H538ZM283 -49Q283 -53 269.5 -63.0Q256 -73 231.5 -81.5Q207 -90 173 -90H149V289Q86 241 16 205L8 213Q54 257 94.0 309.5Q134 362 166.5 418.0Q199 474 223 530Q240 571 251 609H43L34 637H245L318 707L437 593Q430 586 420.5 582.5Q411 579 392 577Q357 507 301 438Q295 431 289 424Q344 401 371 373Q401 341 404.5 311.0Q408 281 393.0 261.0Q378 241 353.5 238.5Q329 236 304 260Q304 288 298 318Q292 345 283 371ZM585 441Q585 436 568.0 426.5Q551 417 525.5 409.5Q500 402 473 402H455V701L589 650H752L812 716L939 621Q935 615 925.0 609.0Q915 603 899 600V446Q899 443 879.5 436.5Q860 430 834.0 424.0Q808 418 786 418H762V456H585ZM762 484V622H585V484ZM851 860 864 850Q876 840 895.5 824.5Q915 809 936.5 791.0Q958 773 975 758Q971 742 947 742H405L397 770H783ZM127 857Q201 847 240.5 825.0Q280 803 293.0 776.5Q306 750 298.5 726.0Q291 702 270.0 687.5Q249 673 220.5 674.0Q192 675 163 700Q162 728 155.5 755.0Q149 782 140.0 807.5Q131 833 120 853ZM538 158V9H615V158ZM802 9V158H730V9ZM615 324H538V186H615ZM802 186V324H730V186Z"/></svg><span class="apercu-nom">Au<br>Bonheur</span></div>
+        <div class="corps">
+          <h2><a href="e/index.html">E : Plateau tournant</a></h2>
+          <p>Inspirée de Mister Jiu's et BAO : l'enseigne bilingue avec 福 (« le bonheur »), et le plateau tournant des tables chinoises qu'on fait tourner du doigt pour voir les plats.</p>
+          <div class="pastilles" aria-hidden="true"><span style="background:#2A1B13"></span><span style="background:#F7F2E8"></span><span style="background:#D9A86C"></span><span style="background:#C23A22"></span><span style="background:#F0B43C"></span></div>
+          <p class="ouvrir" aria-hidden="true">Voir la proposition E</p>
+        </div>
+      </li>
+      <li class="proposition">
+        <div class="apercu apercu-f" aria-hidden="true"><span class="apercu-nom">Au Bonheur<svg viewBox="0 -880 2000 1000" fill="currentColor" aria-hidden="true" focusable="false"><path d="M147 -766H421V-846H573V-766H859V-641H573V-581H956V-455H717L806 -434Q778 -396 750 -361H886V-236H573V-171H933V-45H573V95H421V-45H68V-171H421V-236H129V-361H254Q250 -372 245 -385Q232 -412 219 -434L293 -455H46V-581H421V-641H147ZM342 -361H597Q603 -371 609 -381Q621 -404 632 -428Q638 -442 643 -455H372Q380 -442 389 -427Q403 -400 409 -380ZM1100 -802 1214 -852Q1237 -818 1260.0 -777.5Q1283 -737 1296 -708L1221 -671H1318L1342 -676L1422 -625Q1388 -525 1333 -434Q1330 -428 1327 -423Q1333 -418 1341 -412Q1359 -397 1381 -380Q1395 -368 1408 -357V-372H1950V93H1810V57H1541V93H1408V-276L1359 -209Q1347 -226 1331 -247Q1315 -266 1299 -286V96H1157V-213Q1116 -176 1074 -147Q1069 -167 1057.0 -194.5Q1045 -222 1032.0 -248.0Q1019 -274 1008 -287Q1071 -323 1126.5 -380.0Q1182 -437 1225 -506Q1236 -523 1245 -541H1046V-671H1170Q1160 -694 1144 -724Q1121 -767 1100 -802ZM1457 -669H1908V-404H1457ZM1402 -817H1952V-696H1402ZM1585 -561V-512H1774V-561ZM1541 -58H1611V-105H1541ZM1740 -58H1810V-105H1740ZM1810 -211V-257H1740V-211ZM1611 -257H1541V-211H1611Z"/></svg></span><span class="apercu-bandeau">T'as bien mangé ? · Raviolis · Nouilles · Riz</span></div>
+        <div class="corps">
+          <h2><a href="f/index.html">F : Bonheur Gang</a></h2>
+          <p>Dans l'esprit de BAO Family (Paris) : noir, blanc et aplats francs, typo condensée géante, logo bilingue avec 幸福 (« bonheur ») et bandeau rouge qui défile en chinois et en français.</p>
+          <div class="pastilles" aria-hidden="true"><span style="background:#000000"></span><span style="background:#FFFFFF"></span><span style="background:#D42A20"></span><span style="background:#FFD23F"></span><span style="background:#0E6B3C"></span></div>
+          <p class="ouvrir" aria-hidden="true">Voir la proposition F</p>
+        </div>
+      </li>
+      <li class="proposition">
+        <div class="apercu apercu-g" aria-hidden="true"><svg viewBox="0 0 240 240" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M98 128c0-14 10-14 10-28s-6-16 2-24"/><path d="M114 128c0-14 10-14 10-28s-6-16 2-24"/><path d="M104 78L214 22"/><path d="M110 88L224 44"/><path d="M28 128H212A92 78 0 0 1 28 128Z"/><path d="M86 214H154"/></svg><span class="apercu-nom">Au<br>Bonheur</span></div>
+        <div class="corps">
+          <h2><a href="g/index.html">G : Le service (tout animé)</a></h2>
+          <p>La version spectacle : le bol se dessine, la vapeur monte, puis en défilant l'horloge du midi avance et la salle se remplit place par place. Carte en cascade, phrase qui s'allume mot par mot.</p>
+          <div class="pastilles" aria-hidden="true"><span style="background:#F3B53F"></span><span style="background:#2A1B13"></span><span style="background:#FBF4E6"></span><span style="background:#A92F1A"></span></div>
+          <p class="ouvrir" aria-hidden="true">Voir la proposition G</p>
         </div>
       </li>
     </ul>

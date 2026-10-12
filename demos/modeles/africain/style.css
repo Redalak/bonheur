@@ -1,0 +1,137 @@
+/* =====================================================================
+   MODÈLE AFRICAIN : « Teranga » (cuisine d'Afrique de l'Ouest)
+   L'énergie du wax : safran, terre rouge, vert, indigo, sur crème.
+   Signature : une composition de formes géométriques qui glissent et
+   s'assemblent au chargement, et une frise wax qui défile.
+   Polices : Syne (titres) + DM Sans (texte).
+   ===================================================================== */
+
+:root {
+  --creme: #F7EFE2;
+  --noir: #1A1410;
+  --safran: #E2A72E;       /* noir dessus : 9,4 */
+  --terre: #A63E25;        /* terre rouge (blanc dessus : 6,0) */
+  --vert: #1F6B4A;         /* blanc dessus : 6,4 */
+  --indigo: #22306B;       /* blanc dessus : 11,6 */
+
+  --police-titre: "Syne", "Arial Black", sans-serif;
+  --police-texte: "DM Sans", "Helvetica Neue", sans-serif;
+  --focus: var(--noir);
+}
+
+body { background: var(--creme); color: var(--noir); font-family: var(--police-texte); }
+
+/* ---------- Header ---------- */
+.entete { background: var(--creme); border-bottom: 3px solid var(--noir); }
+.entete-nom { font-family: var(--police-titre); font-weight: 800; font-size: 1.25rem; }
+.bouton-langue { border: 2px solid var(--noir); border-radius: 999px; font-weight: 700; }
+.bouton-appel { background: var(--terre); color: #FFFFFF; border-radius: 999px; }
+
+/* ---------- Boutons ---------- */
+.bouton { border-radius: 999px; font-weight: 700; }
+.bouton-principal { background: var(--terre); border-color: var(--terre); color: #FFFFFF; }
+.bouton-contour { color: var(--noir); }
+
+/* ---------- Hero : les formes et la frise ---------- */
+.hero { display: grid; gap: 1.5rem; padding-bottom: 6rem; }
+
+.formes {
+  position: relative;
+  height: clamp(13rem, 60vw, 26rem);
+}
+.forme { position: absolute; display: block; }
+.demi-soleil { left: 4%;  top: 8%;  width: 46%; aspect-ratio: 2 / 1; background: var(--safran); border-radius: 999px 999px 0 0; }
+.rond        { left: 52%; top: 0;   width: 30%; aspect-ratio: 1;     background: var(--terre); border-radius: 50%; }
+.triangle    { left: 18%; top: 44%; width: 36%; aspect-ratio: 1;     background: var(--vert); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.quart       { left: 58%; top: 46%; width: 34%; aspect-ratio: 1;     background: var(--indigo); border-radius: 100% 0 0 0; }
+/* Trois rayures : l'élément + ses deux pseudo-éléments. */
+.rayures     { left: 82%; top: 6%;  width: 14%; height: 6%; background: var(--noir); }
+.rayures::before, .rayures::after { content: ""; position: absolute; left: 0; right: 0; height: 100%; background: var(--noir); }
+.rayures::before { top: 200%; }
+.rayures::after  { top: 400%; }
+
+/* Les formes arrivent de directions différentes et s'emboîtent. */
+.anims-actives .forme { animation: forme-arrive 1100ms cubic-bezier(0.2, 1.2, 0.3, 1) both; }
+.anims-actives .demi-soleil { animation-delay: 0ms;   --depart: translate(-40%, -30%) rotate(-20deg); }
+.anims-actives .rond        { animation-delay: 120ms; --depart: translate(60%, -40%) scale(0.4); }
+.anims-actives .triangle    { animation-delay: 240ms; --depart: translate(-50%, 60%) rotate(30deg); }
+.anims-actives .quart       { animation-delay: 360ms; --depart: translate(50%, 50%) rotate(90deg); }
+.anims-actives .rayures     { animation-delay: 480ms; --depart: translateX(120%); }
+@keyframes forme-arrive {
+  from { opacity: 0; transform: var(--depart); }
+  to   { opacity: 1; transform: none; }
+}
+
+.hero-type { color: var(--terre); font-weight: 700; font-size: 1rem; }
+.hero-nom {
+  margin-top: 0.3rem;
+  font-family: var(--police-titre);
+  font-weight: 800;
+  font-size: clamp(2.25rem, 10.5vw, 9rem);   /* Syne est très large : « TERANGA » doit tenir sur une ligne */
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+.anims-actives .hero-nom { --delai-titre: 600ms; }
+.hero-sous-titre { font-family: var(--police-titre); font-weight: 700; font-size: clamp(1.375rem, 5vw, 1.875rem); line-height: 1.15; }
+.hero .badge .badge-point { color: var(--vert); }
+
+/* La frise wax : 16 motifs à la suite ; on décale de la moitié, puis ça reboucle. */
+.wax { position: absolute; left: 0; right: 0; bottom: 0; overflow: hidden; height: 4rem; border-top: 3px solid var(--noir); }
+.wax-piste { display: flex; width: max-content; height: 100%; }
+.wax-motif { height: 100%; width: auto; }
+.anims-actives .wax-piste { animation: wax-defile 40s linear infinite; }
+@keyframes wax-defile { to { transform: translateX(-50%); } }
+
+/* ---------- Argument : indigo ---------- */
+.argument { background: var(--indigo); color: #FFFFFF; --focus: var(--safran); }
+.argument h2 { font-family: var(--police-titre); font-weight: 800; font-size: clamp(2.25rem, 9vw, 4.5rem); line-height: 0.95; text-transform: uppercase; color: var(--safran); }
+.argument .bouton-principal { background: var(--safran); border-color: var(--safran); color: var(--noir); }
+.argument .bouton-contour { color: #FFFFFF; }
+.argument-numero a { font-family: var(--police-titre); font-weight: 800; font-size: clamp(1.75rem, 7vw, 2.75rem); }
+
+/* ---------- Titres et carte ---------- */
+.titre-section { font-family: var(--police-titre); font-weight: 800; font-size: clamp(2.25rem, 9vw, 3.75rem); text-transform: uppercase; line-height: 1; }
+.mention-exemple { padding: 0.15rem 0.75rem; background: var(--noir); color: var(--creme); border-radius: 999px; }
+/* Chaque catégorie a sa pastille de couleur wax. */
+.carte-titre .carte-nom-categorie {
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  border-radius: 999px;
+  font-family: var(--police-titre);
+  font-weight: 800;
+  font-size: 1.375rem;
+  text-transform: uppercase;
+}
+.carte-categorie:nth-child(4n+1) .carte-nom-categorie { background: var(--safran); color: var(--noir); }
+.carte-categorie:nth-child(4n+2) .carte-nom-categorie { background: var(--terre); color: #FFFFFF; }
+.carte-categorie:nth-child(4n+3) .carte-nom-categorie { background: var(--vert); color: #FFFFFF; }
+.carte-categorie:nth-child(4n+4) .carte-nom-categorie { background: var(--indigo); color: #FFFFFF; }
+.carte-plat { border-bottom: 2px solid var(--noir); }
+.carte-nom { font-weight: 700; }
+.carte-detail { font-weight: 400; }
+.carte-prix { font-family: var(--police-titre); font-weight: 800; font-size: 1.25rem; color: var(--terre); }
+
+/* ---------- Le lieu : vert ---------- */
+.lieu { background: var(--vert); color: #FFFFFF; --focus: var(--safran); }
+.lieu .titre-section { font-size: 1.5rem; color: var(--safran); }
+.lieu-texte { font-family: var(--police-titre); font-weight: 700; font-size: clamp(1.75rem, 6.5vw, 3rem); line-height: 1.12; }
+
+/* ---------- Horaires, infos, accès ---------- */
+.horaires-table th, .horaires-table td { border-bottom: 2px solid var(--noir); }
+.horaires-table .est-aujourdhui th, .horaires-table .est-aujourdhui td { background: var(--safran); }
+.infos-liste li::before { border-radius: 50%; background: var(--terre); }
+
+/* ---------- Pied ---------- */
+.pied { background: var(--noir); color: var(--creme); --focus: var(--safran); }
+.pied-nom { font-family: var(--police-titre); font-weight: 800; font-size: 2.5rem; text-transform: uppercase; color: var(--safran); }
+
+/* ---------- Ordinateur : texte à gauche, formes à droite ---------- */
+@media (min-width: 1000px) {
+  .hero { grid-template-columns: 1fr 1fr; align-items: center; gap: 3rem; padding-top: 3.5rem; padding-bottom: 7rem; }
+  .formes { order: 2; }
+}
+
+/* Syne en capitales est très large : titres plus modestes dans la zone pratique et le pied de page. */
+.pratique .titre-section { font-size: clamp(1.625rem, 4.5vw, 2.25rem); }
+.pied-nom { font-size: clamp(2rem, 10vw, 2.5rem); }

@@ -1,0 +1,717 @@
+/* =====================================================================
+   DIRECTION F : « Bonheur Gang » (inspirée de BAO Family, Paris)
+   L'esprit streetwear des cantines asiatiques parisiennes :
+   - noir et blanc, et des aplats francs (rouge, jaune, vert) ;
+   - une typo condensée très grasse, tout en capitales ;
+   - un logo bilingue géant : « AU BONHEUR » + 幸福 (xìngfú, « bonheur ») ;
+   - un bandeau rouge qui défile, chinois + français.
+   Les caractères chinois sont des dessins SVG (aucune police chinoise à charger).
+   Polices : Big Shoulders Display (titres) + Schibsted Grotesk (texte).
+   ===================================================================== */
+
+:root {
+  --noir: #000000;
+  --blanc: #FFFFFF;
+  --rouge: #D42A20;       /* blanc dessus : 5,1 ; sur noir : 4,15 (gros titres seulement) */
+  --jaune: #FFD23F;       /* noir dessus : 14,5 */
+  --vert: #0E6B3C;        /* blanc dessus : 6,6 */
+
+  --police-titre: "Big Shoulders Display", "Arial Narrow", sans-serif;
+  --police-texte: "Schibsted Grotesk", "Helvetica Neue", sans-serif;
+
+  --marge: max(1.25rem, calc((100% - 74rem) / 2));
+  --hauteur-header: 6.75rem;
+  --focus: var(--noir);
+}
+
+body {
+  background: var(--blanc);
+  color: var(--noir);
+  font-family: var(--police-texte);
+}
+
+/* Style « enseigne » : capitales condensées très grasses. */
+.entete-nom,
+.logo-geant,
+.hero-sous-titre,
+.bandeau,
+.bouton,
+.argument h2,
+.titre-section,
+.carte-titre,
+.carte-prix,
+.lieu-texte,
+.pied-nom,
+.argument-numero a {
+  font-family: var(--police-titre);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+}
+
+
+/* ---------- Boutons ---------- */
+
+.boutons,
+.argument-boutons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3.25rem;
+  padding: 0 1.4rem;
+  border: 3px solid currentColor;
+  border-radius: 0;
+  font-weight: 800;
+  font-size: 1.375rem;
+  text-decoration: none;
+}
+
+.bouton-blanc {
+  background: var(--blanc);
+  border-color: var(--blanc);
+  color: var(--noir);
+}
+
+.bouton-plein {
+  background: var(--noir);
+  border-color: var(--noir);
+  color: var(--blanc);
+}
+
+.bouton-contour {
+  background: transparent;
+}
+
+.bouton:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 0.15em;
+}
+
+
+/* ---------- 1. Header ---------- */
+
+.entete {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--blanc);
+  border-bottom: 3px solid var(--noir);
+}
+
+.entete-ligne {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-height: 3.75rem;
+  padding: 0.25rem var(--marge);
+}
+
+.entete-nom {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-size: 1.75rem;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.entete-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.bouton-langue {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  background: transparent;
+  border: 2px solid var(--noir);
+  font-weight: 700;
+}
+
+.bouton-appel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  padding: 0 1rem;
+  background: var(--rouge);
+  color: var(--blanc);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.entete-nav ul {
+  display: flex;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0 var(--marge);
+  list-style: none;
+}
+
+.entete-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  font-family: var(--police-titre);
+  font-weight: 900;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.entete-nav a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 0.2em;
+}
+
+
+/* ---------- 2. Hero : le logo bilingue géant ---------- */
+
+.hero {
+  background: var(--noir);
+  color: var(--blanc);
+  --focus: var(--jaune);
+}
+
+.hero-contenu {
+  padding: 2rem var(--marge) 2.5rem;
+  overflow: hidden;
+}
+
+.logo-geant {
+  font-size: clamp(5.5rem, 27vw, 14rem);
+  line-height: 0.82;
+  /* L'unique animation d'entrée : le logo monte en place. */
+  animation: logo-entree 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes logo-entree {
+  from { opacity: 0; transform: translateY(0.25em); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.logo-ligne {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.12em;
+}
+
+/* 幸福 en rouge, à la hauteur des capitales. */
+.logo-zh {
+  height: 0.8em;
+  width: auto;
+  margin-bottom: 0.02em;
+  color: var(--rouge);           /* gros caractères : 4,15 sur noir, suffisant au-delà de 24 px */
+}
+
+.logo-traduction {
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+.hero-sous-titre {
+  max-width: 18ch;
+  margin-top: 1.25rem;
+  font-weight: 800;
+  font-size: clamp(1.75rem, 7vw, 2.75rem);
+  line-height: 1;
+}
+
+.hero-texte {
+  max-width: 36ch;
+  margin-top: 0.6rem;
+  font-size: 1.0625rem;
+}
+
+.hero .badge {
+  margin-top: 0.75rem;
+  font-weight: 700;
+}
+
+.hero .badge.est-ouvert .badge-point {
+  background: var(--jaune);
+  border-color: var(--jaune);
+}
+
+.hero .boutons {
+  margin-top: 0.75rem;
+}
+
+.hero .boutons .bouton {
+  flex: 1 1 9rem;
+}
+
+/* --- Le bandeau rouge qui défile --- */
+
+.bandeau {
+  display: flex;
+  align-items: stretch;
+  background: var(--rouge);
+  color: var(--blanc);              /* 5,1 */
+  font-size: clamp(1.75rem, 7vw, 2.75rem);
+  line-height: 1;
+}
+
+.bandeau-fenetre {
+  flex: 1;
+  overflow: hidden;
+  padding: 0.9rem 0;
+}
+
+/* La piste contient 2 fois la même série : on la décale de la moitié, puis ça reboucle. */
+.bandeau-piste {
+  display: flex;
+  width: max-content;
+  animation: bandeau-defile 28s linear infinite;
+}
+
+@keyframes bandeau-defile {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.hero.est-en-pause .bandeau-piste {
+  animation-play-state: paused;
+}
+
+.bandeau-element {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding-right: 1.2em;
+  white-space: nowrap;
+}
+
+/* Petit carré jaune entre deux éléments du bandeau. */
+.bandeau-element::after {
+  content: "";
+  width: 0.28em;
+  height: 0.28em;
+  margin-left: 0.8em;
+  background: var(--jaune);
+}
+
+.bandeau-zh {
+  height: 0.9em;
+  width: auto;
+}
+
+.bouton-bandeau {
+  flex-shrink: 0;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0 1rem;
+  background: var(--noir);
+  color: var(--blanc);
+  border: 0;
+  border-left: 3px solid var(--noir);
+  font-family: var(--police-titre);
+  font-weight: 900;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  --focus: var(--jaune);
+}
+
+/* Moins d'animations : le bandeau est figé, le bouton Pause ne sert à rien. */
+@media (prefers-reduced-motion: reduce) {
+  .bouton-bandeau {
+    display: none;
+  }
+}
+
+
+/* ---------- 3. Argument clé : aplat jaune ---------- */
+
+.argument {
+  padding: 3rem var(--marge) 3.25rem;
+  background: var(--jaune);
+  color: var(--noir);               /* 14,5 */
+}
+
+.argument h2 {
+  max-width: 11ch;
+  font-size: clamp(3.25rem, 16vw, 8rem);
+  line-height: 0.85;
+}
+
+.argument-texte {
+  max-width: 34ch;
+  margin-top: 1rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.argument-boutons {
+  margin-top: 1.5rem;
+}
+
+.argument-boutons .bouton {
+  flex: 1 1 15rem;
+  max-width: 24rem;
+  min-height: 3.75rem;
+  font-size: 1.5rem;
+}
+
+.argument-numero a {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.5rem 0;
+  font-size: clamp(2.25rem, 11vw, 4rem);
+  font-variant-numeric: tabular-nums;
+  text-decoration-thickness: 4px;
+  text-underline-offset: 0.12em;
+}
+
+
+/* ---------- Sections claires ---------- */
+
+.section {
+  padding: 3.5rem var(--marge);
+}
+
+.titre-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.15em;
+  font-size: clamp(3rem, 14vw, 6.5rem);
+  line-height: 0.85;
+}
+
+.titre-zh {
+  height: 0.78em;
+  width: auto;
+  margin-left: 0.1em;
+  color: var(--rouge);
+}
+
+.section-entete {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.75rem 1.25rem;
+}
+
+.mention-exemple {
+  padding: 0.2rem 0.6rem;
+  background: var(--noir);
+  color: var(--blanc);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+
+/* ---------- 4. La carte ---------- */
+
+.carte {
+  margin-top: 2rem;
+}
+
+.carte-categorie + .carte-categorie {
+  margin-top: 2.25rem;
+}
+
+.carte-titre {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.4rem;
+  padding-top: 0.6rem;
+  border-top: 5px solid var(--noir);
+  font-size: 2.25rem;
+  line-height: 0.9;
+}
+
+.carte-numero {
+  display: none;
+}
+
+.categorie-zh {
+  height: 0.8em;
+  width: auto;
+  color: var(--rouge);              /* 5,1 sur blanc */
+}
+
+.carte-liste {
+  margin-top: 0.5rem;
+}
+
+.carte-plat {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.65rem 0;
+  border-bottom: 1.5px solid var(--noir);
+  font-size: 1.0625rem;
+  font-weight: 700;
+}
+
+.carte-points {
+  display: none;
+}
+
+.carte-prix {
+  font-size: 1.75rem;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.carte-note,
+.carte-alcool {
+  max-width: 44ch;
+  margin-top: 1.75rem;
+  font-size: 1rem;
+}
+
+
+/* ---------- 5. Le lieu : aplat vert ---------- */
+
+.lieu {
+  background: var(--vert);
+  color: var(--blanc);              /* 6,6 */
+  --focus: var(--jaune);
+}
+
+.lieu .titre-section {
+  font-size: 1.75rem;
+}
+
+.lieu-texte {
+  max-width: 18ch;
+  margin-top: 0.75rem;
+  font-weight: 800;
+  font-size: clamp(2.25rem, 10vw, 5rem);
+  line-height: 0.92;
+}
+
+
+/* ---------- 6 et 7. Horaires, infos, accès ---------- */
+
+.pratique .titre-section {
+  font-size: clamp(2.5rem, 11vw, 4rem);
+}
+
+.horaires-table {
+  width: 100%;
+  max-width: 30rem;
+  margin-top: 1.5rem;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.horaires-table th,
+.horaires-table td {
+  padding: 0.7rem 0.6rem;
+  border-bottom: 1.5px solid var(--noir);
+  text-align: left;
+  vertical-align: top;
+}
+
+.horaires-table th {
+  font-weight: 700;
+}
+
+.horaires-table td {
+  text-align: right;
+}
+
+/* Jour actuel : aplat jaune. */
+.horaires-table .est-aujourdhui th,
+.horaires-table .est-aujourdhui td {
+  background: var(--jaune);
+  font-weight: 700;
+}
+
+.horaires-marque {
+  font-weight: 400;
+  font-size: 0.875rem;
+}
+
+.infos-liste {
+  margin-top: 1.25rem;
+}
+
+.infos-liste li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  font-weight: 700;
+}
+
+.infos-liste li::before {
+  content: "";
+  width: 0.6rem;
+  height: 0.6rem;
+  background: var(--rouge);
+  flex-shrink: 0;
+}
+
+.acces-adresse {
+  margin-top: 1.25rem;
+  font-style: normal;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.acces .boutons {
+  margin-top: 1.25rem;
+}
+
+
+/* ---------- 8. Footer ---------- */
+
+.pied {
+  display: grid;
+  gap: 0.5rem;
+  padding: 3rem var(--marge);
+  background: var(--noir);
+  color: var(--blanc);
+  --focus: var(--jaune);
+}
+
+.pied-nom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.15em;
+  font-size: clamp(3rem, 15vw, 6rem);
+  line-height: 0.85;
+}
+
+.pied-zh {
+  height: 0.8em;
+  width: auto;
+  color: var(--rouge);
+}
+
+.pied-adresse {
+  margin-top: 0.75rem;
+  font-style: normal;
+}
+
+.pied-adresse a {
+  display: inline-block;
+  padding: 0.7rem 0;
+}
+
+
+/* ---------- Tablette (768 px et plus) ---------- */
+
+@media (min-width: 768px) {
+  :root {
+    --hauteur-header: 4.75rem;
+  }
+
+  .entete {
+    display: flex;
+    align-items: center;
+    padding: 0 var(--marge);
+  }
+  .entete-ligne {
+    display: contents;
+  }
+  .entete-nom {
+    order: 1;
+    min-height: 4.5rem;
+  }
+  .entete-nav {
+    order: 2;
+    margin-left: auto;
+    margin-right: 1.5rem;
+  }
+  .entete-nav ul {
+    padding: 0;
+    gap: 1.5rem;
+  }
+  .entete-actions {
+    order: 3;
+  }
+
+  .hero-contenu {
+    padding-top: 3rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .carte {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem 4rem;
+  }
+  .carte-categorie + .carte-categorie {
+    margin-top: 0;
+  }
+
+  .pratique {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 3rem;
+    padding: 0 var(--marge);
+  }
+  .pratique .section {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .horaires {
+    grid-row: span 2;
+  }
+  .acces {
+    padding-top: 0;
+  }
+}
+
+/* ---------- Ordinateur (1000 px et plus) ---------- */
+
+@media (min-width: 1000px) {
+  /* Le logo à gauche, le texte en colonne à droite, alignés en bas. */
+  .hero-contenu {
+    display: grid;
+    grid-template-columns: auto minmax(0, 26rem);
+    /* La 1re rangée absorbe la hauteur du logo : le texte de droite reste groupé en bas. */
+    grid-template-rows: 1fr auto auto auto;
+    grid-template-areas:
+      "logo  sous-titre"
+      "logo  texte"
+      "logo  badge"
+      "trad  boutons";
+    column-gap: 4rem;
+    align-items: end;
+  }
+  .logo-geant       { grid-area: logo; }
+  .logo-traduction  { grid-area: trad; align-self: start; }
+  .hero-sous-titre  { grid-area: sous-titre; }
+  .hero-texte       { grid-area: texte; }
+  .hero .badge      { grid-area: badge; }
+  .hero .boutons    { grid-area: boutons; }
+
+  .pratique {
+    grid-template-columns: 1.2fr 1fr 1fr;
+  }
+  .horaires {
+    grid-row: auto;
+  }
+  .acces {
+    padding-top: 3.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .pratique .acces {
+    padding-top: 0;
+  }
+}

@@ -225,6 +225,87 @@ Bouton **Pause / Relancer** (WCAG 2.2.2) ; tout est figé avec `prefers-reduced-
 
 ---
 
+## E : « Plateau tournant » (inspirée de restaurants asiatiques de référence)
+
+**Références regardées.** *Mister Jiu's* (San Francisco) : l'enseigne bilingue, nom latin + caractères
+chinois, qui ancre le lieu sans kitsch. *BAO* (Londres) : un seul objet au centre de l'écran, beaucoup de
+calme autour. Les deux reposent sur la photo ; sans photo, on transpose en graphisme et en interaction.
+
+**Le seul élément audacieux :** le **plateau tournant** des tables chinoises, vu du dessus : une table
+en bois blond (le bois de la vraie salle), 6 assiettes en porcelaine tirées de `CONFIG.carte`, et au
+centre un moyeu gravé de **福**. Il tourne lentement ; on le fait tourner d'un glissement horizontal
+(le défilement vertical reste libre) ou avec les boutons Précédent / Suivant. L'assiette « devant vous »
+s'affiche en grand sous le plateau.
+
+**L'enseigne.** « Au Bonheur » + **福** (fú, « le bonheur ») : c'est la **traduction du nom**, affichée
+comme telle (« 福, fú : le bonheur en chinois »), pas un nom chinois inventé. [À VÉRIFIER] demander au
+patron s'il a un nom chinois officiel (le logo rond au mur ?) pour le mettre à la place.
+Le caractère vient de Noto Serif SC (OFL), converti en tracé SVG (1,2 Ko) : pas de police chinoise à charger.
+
+**Polices.** Young Serif (titres, une graisse) + Schibsted Grotesk 400/700 (texte).
+
+**Palette (6).** sauce soja `#2A1B13` (fond), riz `#F7F2E8` (texte, infos pratiques ; 14,9),
+bois blond `#D9A86C` (la table ; 7,7 sur soja), piment `#C23A22` (appel ; blanc dessus 5,35),
+moutarde `#F0B43C` (福, titres ; 8,9 sur soja), blanc (porcelaine). Vert thé écarté (4,2 : échoue).
+
+**Mouvement.** Entrée de la table (0,8 s), puis rotation lente (5°/s) qui s'arrête 4 s après chaque geste.
+Bouton Pause ; rien ne tourne avec `prefers-reduced-motion`. Mouvement continu : écart assumé avec le brief, comme D.
+
+---
+
+## F : « Bonheur Gang » (dans l'esprit de BAO Family, Paris)
+
+**Référence regardée.** baofamily.co : noir et blanc, aplats francs (rouge, vert, jaune), typo condensée
+très grasse en capitales, logos bilingues géants (« GROS 大包子 BAO »), bandeau rouge qui défile en chinois
+et en français, ton streetwear et fier. Leur site repose sur la photo ; ici, les aplats et la typo portent l'énergie.
+
+**Le seul élément audacieux :** le **logo bilingue géant** « AU 幸福 BONHEUR » sur fond noir, suivi du
+**bandeau rouge** qui défile : 吃饱了吗？ (« t'as bien mangé ? », la salutation du quotidien), 饺子 raviolis,
+面条 nouilles, 米饭 riz. Chaque mot chinois est accompagné du français. La carte affiche aussi 菜单 (la carte)
+et les catégories 前菜, 主菜, 甜点, 饮料 (champ `zh` de `CONFIG.carte`).
+
+**Chinois.** 幸福 (xìngfú) = « bonheur » : **traduction** du nom, présentée comme telle, pas un nom officiel
+([À VÉRIFIER] avec le patron). Les caractères sont des **dessins SVG** tirés de Noto Sans SC Black (OFL) :
+aucune police chinoise à charger, fonctionne hors ligne partout.
+
+**Polices.** Big Shoulders Display 800/900 (titres condensés) + Schibsted Grotesk 400/700 (texte).
+
+**Palette (5).** noir `#000000`, blanc `#FFFFFF`, rouge `#D42A20` (blanc dessus 5,1 ; sur noir 4,15, donc
+réservé aux très gros caractères), jaune `#FFD23F` (noir dessus 14,5), vert `#0E6B3C` (blanc dessus 6,6).
+
+**Mouvement.** Entrée du logo (0,7 s) et défilement du bandeau (28 s par boucle), avec bouton Pause ;
+tout est figé avec `prefers-reduced-motion`. Mouvement continu : écart assumé avec le brief, comme D et E.
+
+---
+
+## G : « Le service » (la version tout animée, à la demande de Reda)
+
+**Concept.** La page raconte un service du midi. Recommandations du skill UI/UX appliquées : entrées en
+cascade avec une courbe « expo out », **une seule** section épinglée pilotée par le défilement, petits
+décalages sur les listes, uniquement `transform` et `opacity`, état final lisible si l'animation est coupée.
+Tout en JavaScript vanilla (pas de GSAP : le brief interdit les librairies et la démo doit marcher hors ligne).
+
+**La chorégraphie.**
+1. Ouverture : le bol se dessine trait par trait, la vapeur monte en boucle, les baguettes soulèvent les
+   nouilles ; « Au Bonheur » arrive lettre par lettre (mot par mot, jamais coupé), puis le reste du hero.
+2. Le rush (épinglé, `position: sticky` sur 280 vh) : l'horloge avance de 11h45 à 13h00 et les 24 places de
+   la salle se remplissent pendant le défilement ; à salle pleine, « Le midi, ça se remplit vite » passe en or.
+3. La carte : catégories puis plats en cascade, trait doré qui se dessine sous chaque catégorie.
+4. Le lieu : la phrase s'allume mot par mot pendant le défilement.
+5. Détails : barre de progression dorée sous le header, grand « Au Bonheur » qui glisse dans le pied de page,
+   bol qui suit légèrement la souris et boutons « aimantés » (ordinateur uniquement).
+
+**Accessibilité.** Toutes les animations dépendent de la classe `anims-actives` posée par le script :
+sans JavaScript, avec `prefers-reduced-motion`, ou après un clic sur **« Couper les animations »**, tout est
+affiché dans son état final (salle pleine, 13h00, tous les mots allumés). Écart assumé avec le brief
+(« aucune animation au scroll ») : demandé pour G uniquement.
+
+**Polices.** Fraunces (axe SOFT, déjà utilisée par C) + Schibsted Grotesk.
+**Palette (5).** or `#F3B53F` (soja dessus 9,1), soja `#2A1B13`, crème `#FBF4E6` (soja dessus 15,2),
+piment `#A92F1A` (blanc dessus 6,8 ; sur crème 6,2), blanc.
+
+---
+
 ## Règles communes
 
 - Mobile d'abord : tout est pensé à 375 px, puis élargi à 768 et 1280 px.

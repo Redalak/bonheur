@@ -1,0 +1,26 @@
+/* =====================================================================
+   L'HEURE BLEUE : VARIANTE SIGNATURE (haut de gamme, plus réaliste)
+   Ambiance : Bar de nuit : bougies ambrées et reflets émeraude sur le laiton.
+   Tout le système (ambiance photographique, typographie, animations) est dans
+   commun/signature.css ; ici, seulement les couleurs et les polices.
+   ===================================================================== */
+
+:root {
+  --fond: #0B0F0E;
+  --fond-2: #121A18;
+  --texte: #EDE6D6;
+  --texte-doux: #B9B2A3;       /* texte secondaire (contraste AA vérifié par axe-core) */
+  --accent: #C9A96B;
+  --sur-accent: #0B0F0E;      /* texte posé sur l'accent */
+
+  /* Les 4 couleurs des halos de lumière du hero */
+  --lumiere-1: #E0A04F;
+  --lumiere-2: #1F6B57;
+  --lumiere-3: #C9705A;
+  --lumiere-4: #F3D9A4;
+
+  --police-titre: "Italiana", "Georgia", serif;
+  --police-texte: "Jost", "Helvetica Neue", sans-serif;
+  --poids-titre: 400;
+  --italique: normal;
+}

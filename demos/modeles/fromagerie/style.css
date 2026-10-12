@@ -1,0 +1,104 @@
+/* =====================================================================
+   MODÈLE FROMAGERIE : « La Meule »
+   Lait, pâte de comté, croûte, et le bleu d'un bleu d'Auvergne.
+   (Pas de correspondance fiable dans la base du skill UI/UX pour une
+   fromagerie : palette et polices choisies à la main.)
+   Signature : la meule se pose, une part se détache, les trous apparaissent.
+   Polices : DM Serif Display (titres) + Work Sans (texte).
+   ===================================================================== */
+
+:root {
+  --lait: #FFFBF2;
+  --comte: #F2C14E;        /* pâte de comté (encre dessus : 10,6) */
+  --croute: #B4561A;       /* croûte (décor) */
+  --bleu: #2E4A7D;         /* bleu d'Auvergne (blanc dessus : 8,9) */
+  --paille: #EDE3CC;       /* paille (sections) */
+  --encre: #2A2118;
+
+  --police-titre: "DM Serif Display", "Georgia", serif;
+  --police-texte: "Work Sans", "Helvetica Neue", sans-serif;
+  --focus: var(--encre);
+}
+
+body { background: var(--lait); color: var(--encre); font-family: var(--police-texte); }
+
+/* ---------- Header ---------- */
+.entete { background: var(--lait); border-bottom: 2px solid var(--encre); }
+.entete-nom { font-family: var(--police-titre); font-size: 1.625rem; }
+.bouton-langue { border: 1.5px solid var(--encre); border-radius: 4px; }
+.bouton-appel { background: var(--bleu); color: #FFFFFF; border-radius: 4px; }
+
+/* ---------- Boutons ---------- */
+.bouton { border-radius: 4px; }
+.bouton-principal { background: var(--bleu); border-color: var(--bleu); color: #FFFFFF; }
+.bouton-contour { color: var(--encre); }
+
+/* ---------- Hero : la meule ---------- */
+.hero { display: grid; gap: 1rem; }
+
+.meule { justify-self: center; width: min(78vw, 22rem); height: auto; overflow: visible; }
+.croute { fill: #D98C3A; stroke: var(--encre); stroke-width: 3; }
+.dessus { fill: var(--comte); stroke: var(--encre); stroke-width: 3; }
+.trou { fill: #DFA73A; }
+.part-pate { fill: #F7D27A; stroke: var(--encre); stroke-width: 3; }
+.part-dessus { fill: var(--comte); stroke: var(--encre); stroke-width: 3; }
+.part-croute { fill: var(--croute); }
+
+/* La meule se pose, la part glisse vers la droite, les trous apparaissent. */
+.anims-actives .meule-entiere { animation: meule-pose 800ms cubic-bezier(0.3, 1.4, 0.5, 1) both 200ms; }
+@keyframes meule-pose { from { opacity: 0; transform: translateY(-40px); } to { opacity: 1; transform: none; } }
+.anims-actives .part { animation: part-glisse 900ms cubic-bezier(0.2, 0.8, 0.3, 1) forwards 1000ms; }
+@keyframes part-glisse { to { transform: translate(26px, 14px) rotate(4deg); } }
+.anims-actives .trou { scale: 0; transform-box: fill-box; transform-origin: center; animation: trou 400ms ease-out forwards; animation-delay: calc(1500ms + var(--n) * 110ms); }
+@keyframes trou { to { scale: 1; } }
+
+.hero-type { color: var(--croute); font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; font-size: 1rem; }
+.hero-nom { margin-top: 0.25rem; font-family: var(--police-titre); font-weight: 400; font-size: clamp(4rem, 20vw, 9rem); line-height: 0.9; letter-spacing: -0.02em; }
+.hero-sous-titre { font-family: var(--police-titre); font-style: italic; font-size: clamp(1.5rem, 6vw, 2.25rem); line-height: 1.12; }
+.hero .badge .badge-point { color: var(--bleu); }
+
+/* ---------- Argument ---------- */
+.argument { background: var(--bleu); color: #FFFFFF; --focus: #FFFFFF; }
+.argument h2 { font-family: var(--police-titre); font-weight: 400; font-size: clamp(2.25rem, 9vw, 4.25rem); line-height: 1; }
+.argument .bouton-principal { background: var(--comte); border-color: var(--comte); color: var(--encre); }
+.argument .bouton-contour { color: #FFFFFF; }
+.argument-numero a { font-family: var(--police-titre); font-size: clamp(1.75rem, 7vw, 2.5rem); }
+
+/* ---------- Titres et carte : les étiquettes du comptoir ---------- */
+.titre-section { font-family: var(--police-titre); font-weight: 400; font-size: clamp(2.5rem, 10vw, 4rem); line-height: 1; }
+.mention-exemple { padding: 0.1rem 0.6rem; background: var(--comte); border-radius: 4px; }
+.carte-titre {
+  font-family: var(--police-titre);
+  font-weight: 400;
+  font-size: 1.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 4px solid var(--comte);
+}
+.carte-sous-titre { font-family: var(--police-titre); font-style: italic; color: var(--bleu); }
+.carte-plat { border-bottom: 1px solid rgba(42, 33, 24, 0.15); }
+/* Les prix comme de petites étiquettes de fromager */
+.carte-prix {
+  padding: 0.1rem 0.5rem;
+  background: var(--paille);
+  border: 1px solid rgba(42, 33, 24, 0.35);
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+/* ---------- Le lieu ---------- */
+.lieu { background: var(--comte); }
+.lieu .titre-section { font-size: 1.5rem; color: var(--bleu); }
+.lieu-texte { font-family: var(--police-titre); font-size: clamp(1.75rem, 6.5vw, 3rem); line-height: 1.12; }
+
+/* ---------- Pratique et pied ---------- */
+.pratique { background: var(--paille); }
+.horaires-table th, .horaires-table td { border-bottom: 1px solid rgba(42, 33, 24, 0.2); }
+.horaires-table .est-aujourdhui th, .horaires-table .est-aujourdhui td { background: var(--comte); }
+.infos-liste li::before { width: 0.8rem; height: 0.55rem; border-radius: 50% 50% 0 0; background: var(--croute); }
+.pied { background: var(--encre); color: var(--lait); --focus: var(--comte); }
+.pied-nom { font-family: var(--police-titre); font-size: 2.5rem; color: var(--comte); }
+
+@media (min-width: 1000px) {
+  .hero { grid-template-columns: 1fr 24rem; align-items: center; gap: 3rem; padding-top: 3rem; padding-bottom: 4rem; }
+  .meule { order: 2; width: 100%; }
+}

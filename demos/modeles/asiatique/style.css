@@ -1,0 +1,156 @@
+/* =====================================================================
+   MODÈLE ASIATIQUE : « Maison Kaze » (cantine japonaise)
+   Washi, encre sumi, indigo (ai) et vermillon (shu).
+   Signature : les rideaux noren de l'entrée ondulent dans le vent
+   (kaze = « le vent »), avec 風 sur le pan central ; le menu est
+   écrit à la verticale, comme sur une enseigne japonaise.
+   Polices : Shippori Mincho (titres) + Zen Kaku Gothic New (texte).
+   ===================================================================== */
+
+:root {
+  --washi: #F3EFE6;       /* papier */
+  --kinari: #E7DECB;      /* lin écru (sections) */
+  --sumi: #1C1B1A;        /* encre */
+  --ai: #22385A;          /* indigo (washi dessus : 10,6) */
+  --shu: #B23A22;         /* vermillon (blanc dessus : 5,9) */
+
+  --police-titre: "Shippori Mincho", "Hiragino Mincho ProN", serif;
+  --police-texte: "Zen Kaku Gothic New", "Hiragino Sans", sans-serif;
+  --focus: var(--ai);
+}
+
+body { background: var(--washi); color: var(--sumi); font-family: var(--police-texte); }
+
+/* ---------- Header ---------- */
+.entete { background: var(--washi); border-bottom: 1px solid rgba(28, 27, 26, 0.2); }
+.entete-nom { font-family: var(--police-titre); font-weight: 800; font-size: 1.375rem; }
+.bouton-langue { border: 1px solid var(--sumi); }
+.bouton-appel { background: var(--ai); color: var(--washi); }
+
+/* ---------- Boutons ---------- */
+.bouton { border-radius: 4px; border-width: 1.5px; }
+.bouton-principal { background: var(--ai); border-color: var(--ai); color: var(--washi); }
+.bouton-contour { color: var(--sumi); }
+
+/* ---------- Hero : les noren et le nom ---------- */
+.hero { padding-top: 0; }
+
+.noren {
+  display: flex;
+  gap: 6px;                            /* les fentes entre les pans */
+  margin: 0 calc(-1 * var(--marge)) 2.5rem;
+  height: clamp(9rem, 32vw, 13rem);
+}
+.noren-pan {
+  position: relative;
+  flex: 1;
+  display: grid;
+  place-items: center;
+  background: var(--ai);
+  transform-origin: top center;
+}
+/* Le pan du milieu porte 風 dans un cercle vermillon. */
+.noren-kanji {
+  width: clamp(3.5rem, 13vw, 5.5rem);
+  height: auto;
+  padding: 0.6rem;
+  border-radius: 50%;
+  background: var(--shu);
+  color: var(--washi);
+}
+/* Le coup de vent à l'arrivée, puis une ondulation très légère. */
+.anims-actives .noren-pan {
+  animation: coup-de-vent 1800ms cubic-bezier(0.2, 0.8, 0.3, 1) both, ondule 7s ease-in-out 1800ms infinite;
+  animation-delay: calc(var(--n) * 140ms), calc(1800ms + var(--n) * 600ms);
+}
+@keyframes coup-de-vent {
+  0%   { transform: skewX(-14deg) scaleY(0.88); }
+  45%  { transform: skewX(7deg) scaleY(1); }
+  75%  { transform: skewX(-3deg); }
+  100% { transform: none; }
+}
+@keyframes ondule {
+  0%, 100% { transform: none; }
+  50%      { transform: skewX(-1.5deg); }
+}
+
+.hero-contenu {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 1.25rem;
+  align-items: start;
+}
+.hero-contenu > :not(.hero-vertical) { grid-column: 2; }
+
+/* Le menu écrit à la verticale, comme une enseigne. */
+.hero-vertical {
+  grid-row: 1 / span 8;
+  writing-mode: vertical-rl;
+  font-family: var(--police-titre);
+  font-weight: 600;
+  font-size: 1.125rem;
+  letter-spacing: 0.35em;
+  color: var(--shu);
+  border-left: 1px solid rgba(178, 58, 34, 0.5);
+  padding-left: 0.5rem;
+}
+
+.hero-nom {
+  font-family: var(--police-titre);
+  font-weight: 800;
+  font-size: clamp(2.75rem, 12vw, 6.5rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+.anims-actives .hero-nom { --delai-titre: 700ms; }
+.hero-kanji-legende { margin-top: 0.5rem; font-size: 1rem; color: var(--ai); }
+.hero-sous-titre { font-family: var(--police-titre); font-weight: 600; font-size: clamp(1.375rem, 5vw, 1.875rem); }
+.hero .badge .badge-point { color: var(--shu); }
+
+/* ---------- Argument : indigo ---------- */
+.argument { background: var(--ai); color: var(--washi); --focus: var(--washi); }
+.argument h2 { font-family: var(--police-titre); font-weight: 800; font-size: clamp(2rem, 8vw, 3.75rem); line-height: 1.1; }
+.argument .bouton-principal { background: var(--washi); border-color: var(--washi); color: var(--ai); }
+.argument .bouton-contour { color: var(--washi); }
+.argument-numero a { font-family: var(--police-titre); font-weight: 600; font-size: clamp(1.5rem, 6vw, 2.25rem); }
+
+/* ---------- Titres et carte ---------- */
+.titre-section { font-family: var(--police-titre); font-weight: 800; font-size: clamp(2rem, 8vw, 3.25rem); }
+.mention-exemple { padding: 0.1rem 0.6rem; border: 1px solid var(--shu); color: var(--shu); }
+.carte-titre {
+  align-items: center;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--sumi);
+  font-family: var(--police-titre);
+  font-weight: 800;
+  font-size: 1.625rem;
+}
+/* Petit tampon hanko vermillon devant chaque catégorie. */
+.carte-titre::before {
+  content: "";
+  width: 0.9rem;
+  height: 0.9rem;
+  background: var(--shu);
+  border-radius: 2px;
+}
+.carte-prix { font-family: var(--police-titre); font-weight: 800; font-size: 1.1875rem; }
+.carte-plat { border-bottom: 1px solid rgba(28, 27, 26, 0.12); }
+
+/* ---------- Le lieu : lin écru ---------- */
+.lieu { background: var(--kinari); }
+.lieu .titre-section { font-size: 1.5rem; color: var(--ai); }
+.lieu-texte { font-family: var(--police-titre); font-weight: 600; font-size: clamp(1.625rem, 6vw, 2.75rem); line-height: 1.3; }
+
+/* ---------- Horaires, infos, accès ---------- */
+.horaires-table th, .horaires-table td { border-bottom: 1px solid rgba(28, 27, 26, 0.15); }
+.horaires-table .est-aujourdhui th, .horaires-table .est-aujourdhui td { background: var(--ai); color: var(--washi); }
+.infos-liste li::before { background: var(--shu); border-radius: 50%; }
+
+/* ---------- Pied ---------- */
+.pied { background: var(--sumi); color: var(--washi); --focus: var(--washi); }
+.pied-nom { font-family: var(--police-titre); font-weight: 800; font-size: 2rem; }
+
+@media (min-width: 1000px) {
+  .noren { gap: 10px; }
+  .hero-contenu { column-gap: 2.5rem; }
+}

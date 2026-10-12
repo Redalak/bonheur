@@ -1,0 +1,872 @@
+/* =====================================================================
+   DIRECTION G : « Le service » (la version tout animée)
+   Une page qui raconte un service : le bol se dessine, la vapeur monte,
+   les baguettes soulèvent les nouilles ; puis le rush du midi remplit la
+   salle pendant qu'on fait défiler ; la carte arrive en cascade ;
+   « Le lieu » s'allume mot par mot.
+
+   IMPORTANT : toutes les animations sont écrites sous « .anims-actives »
+   (classe ajoutée sur <html> par script.js). Sans JavaScript, avec
+   « réduire les animations », ou après « Couper les animations » :
+   tout s'affiche directement dans son état final.
+
+   Polices : Fraunces (titres, axe SOFT) + Schibsted Grotesk (texte).
+   ===================================================================== */
+
+:root {
+  --or: #F3B53F;          /* le bouillon doré (soja dessus : 9,1) */
+  --soja: #2A1B13;        /* texte, sections sombres (crème dessus : 15,2) */
+  --creme: #FBF4E6;       /* fond clair */
+  --piment: #A92F1A;      /* boutons d'appel (blanc dessus : 6,8 ; sur crème : 6,2) */
+  --blanc: #FFFFFF;
+
+  --police-titre: "Fraunces", "Georgia", serif;
+  --police-texte: "Schibsted Grotesk", "Helvetica Neue", sans-serif;
+
+  /* Courbe « expo out » : départ rapide, arrivée très douce (recommandée pour les entrées). */
+  --sortie-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Petit rebond, pour les places qui se remplissent. */
+  --rebond: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --marge: max(1.25rem, calc((100% - 72rem) / 2));
+  --hauteur-header: 6.75rem;
+  --focus: var(--soja);
+}
+
+body {
+  background: var(--creme);
+  color: var(--soja);
+  font-family: var(--police-texte);
+}
+
+/* Fraunces avec l'axe SOFT au maximum : des formes rondes, gourmandes. */
+.hero-nom,
+.hero-sous-titre,
+.rush-heure,
+.rush h2,
+.titre-section,
+.carte-titre,
+.carte-prix,
+.lieu-texte,
+.pied-nom,
+.pied-geant,
+.entete-nom {
+  font-family: var(--police-titre);
+  font-variation-settings: "SOFT" 100;
+}
+
+
+/* ---------- Boutons ---------- */
+
+.boutons,
+.argument-boutons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3.25rem;
+  padding: 0 1.4rem;
+  border: 2px solid currentColor;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 200ms ease-out;   /* effet « aimant » sur ordinateur (script.js) */
+}
+
+.bouton-piment {
+  background: var(--piment);
+  border-color: var(--piment);
+  color: var(--blanc);
+}
+
+.bouton-plein {
+  background: var(--soja);
+  border-color: var(--soja);
+  color: var(--creme);
+}
+
+.bouton-contour {
+  background: transparent;
+}
+
+.bouton:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* Petit bouton texte « Couper les animations » */
+.bouton-anims {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  margin-top: 0.75rem;
+  padding: 0;
+  background: none;
+  border: 0;
+  font-size: 1rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+
+/* ---------- 1. Header + barre de progression ---------- */
+
+.entete {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--soja);
+  color: var(--creme);
+  --focus: var(--or);
+}
+
+/* La barre dorée s'allonge à mesure qu'on descend (scaleX, calculé par script.js). */
+.progression {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  background: var(--or);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.anims-coupees .progression {
+  display: none;
+}
+
+.entete-ligne {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-height: 3.75rem;
+  padding: 0.25rem var(--marge);
+}
+
+.entete-nom {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-weight: 700;
+  font-size: 1.375rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.entete-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.bouton-langue {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  background: transparent;
+  border: 1.5px solid var(--creme);
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.bouton-appel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  padding: 0 1rem;
+  background: var(--or);
+  color: var(--soja);              /* 9,1 */
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.entete-nav ul {
+  display: flex;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0 var(--marge);
+  list-style: none;
+}
+
+.entete-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  font-size: 0.9375rem;
+  text-decoration: none;
+}
+
+.entete-nav a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+
+/* ---------- 2. Hero doré : la scène du bol ---------- */
+
+.hero {
+  display: grid;
+  gap: 1rem;
+  padding: 1.5rem var(--marge) 3rem;
+  background: var(--or);
+  color: var(--soja);
+  overflow: hidden;
+}
+
+.hero-scene {
+  justify-self: center;
+  width: min(50vw, 22rem);
+  /* Suit légèrement la souris sur ordinateur (variables mises à jour par script.js). */
+  transform: translate(var(--souris-x, 0), var(--souris-y, 0));
+  transition: transform 400ms ease-out;
+}
+
+.bol-anime {
+  display: block;
+  width: 100%;
+  height: auto;
+  stroke-width: 6;
+  overflow: visible;
+}
+
+.vapeur {
+  stroke-width: 4;
+  opacity: 0.55;
+}
+
+.hero-nom {
+  font-weight: 800;
+  font-size: clamp(3.5rem, 17vw, 7.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  overflow: hidden;                 /* les lettres « montent » depuis une ligne cachée */
+  padding-bottom: 0.08em;
+}
+
+.hero-sous-titre {
+  margin-top: 0.75rem;
+  font-weight: 600;
+  font-size: clamp(1.375rem, 5.5vw, 2rem);
+  line-height: 1.15;
+}
+
+.hero-texte {
+  max-width: 34ch;
+  margin-top: 0.5rem;
+  font-size: 1.0625rem;
+}
+
+.hero .badge {
+  margin-top: 0.75rem;
+  font-weight: 700;
+}
+
+.hero .badge.est-ouvert .badge-point {
+  background: var(--piment);
+  border-color: var(--piment);
+}
+
+.hero .boutons {
+  margin-top: 0.75rem;
+}
+
+.hero .boutons .bouton {
+  flex: 1 1 9rem;
+}
+
+/* --- Les animations du hero (uniquement avec .anims-actives) --- */
+
+/* Les traits du bol se dessinent : pointillé très long que l'on fait glisser. */
+.anims-actives .trace {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: dessin 1400ms var(--sortie-expo) forwards;
+}
+.anims-actives .nouille  { animation-delay: 500ms; }
+.anims-actives .baguette { animation-delay: 800ms; }
+
+@keyframes dessin {
+  to { stroke-dashoffset: 0; }
+}
+
+/* La vapeur monte et s'efface, en boucle, chaque volute décalée. */
+.anims-actives .vapeur {
+  opacity: 0;
+  animation: vapeur 3200ms ease-in-out 1400ms infinite;
+}
+.anims-actives .v2 { animation-delay: 2400ms; }
+.anims-actives .v3 { animation-delay: 1900ms; }
+
+@keyframes vapeur {
+  0%   { opacity: 0;    transform: translateY(14px); }
+  35%  { opacity: 0.6; }
+  100% { opacity: 0;    transform: translateY(-26px); }
+}
+
+/* Les baguettes soulèvent les nouilles, puis les reposent. */
+.anims-actives .baguettes-nouilles {
+  animation: souleve 2600ms ease-in-out 1800ms infinite alternate;
+}
+
+@keyframes souleve {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-14px); }
+}
+
+/* Le titre : chaque lettre monte de sous la ligne, en cascade. */
+.mot-entier {
+  display: inline-block;
+  white-space: nowrap;              /* jamais « Bonhe / ur » */
+}
+
+.lettre {
+  display: inline-block;
+}
+.anims-actives .lettre {
+  transform: translateY(110%) rotate(6deg);
+  animation: lettre 900ms var(--sortie-expo) forwards;
+  animation-delay: calc(300ms + var(--n) * 45ms);
+}
+
+@keyframes lettre {
+  to { transform: translateY(0) rotate(0); }
+}
+
+/* Le reste du hero arrive juste après le titre, en cascade. */
+.anims-actives .hero-contenu > :not(.hero-nom) {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: monte 700ms var(--sortie-expo) forwards;
+}
+.anims-actives .hero-sous-titre { animation-delay: 850ms; }
+.anims-actives .hero-texte      { animation-delay: 950ms; }
+.anims-actives .hero .badge     { animation-delay: 1050ms; }
+.anims-actives .hero .boutons   { animation-delay: 1150ms; }
+.anims-actives .bouton-anims    { animation-delay: 1250ms; }
+
+@keyframes monte {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ---------- 3. Le rush du midi (section épinglée) ---------- */
+
+.rush {
+  background: var(--soja);
+  color: var(--creme);              /* 15,2 */
+  --focus: var(--or);
+}
+
+/* Avec animations : la section est haute, et son contenu reste collé à l'écran. */
+.anims-actives .rush {
+  height: 280vh;
+}
+.anims-actives .rush-collant {
+  position: sticky;
+  top: var(--hauteur-header);
+  min-height: calc(100svh - var(--hauteur-header) - var(--hauteur-barre-demo));
+}
+
+.rush-collant {
+  display: grid;
+  align-content: center;
+  gap: 1.5rem;
+  padding: 1.75rem var(--marge);
+}
+
+.rush-heure {
+  color: var(--or);                 /* 9,1 */
+  font-weight: 800;
+  font-size: clamp(3.5rem, 18vw, 8rem);
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums;
+}
+
+/* La salle : 24 places, qui se remplissent pendant le défilement. */
+.rush-places {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 0.5rem;
+  max-width: 26rem;
+  margin-top: 0.75rem;
+}
+
+.place {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 3px solid rgba(251, 244, 230, 0.55);
+  transform: scale(0.7);
+  transition: transform 300ms var(--rebond), background-color 200ms ease-out, border-color 200ms ease-out;
+}
+
+.place.est-prise {
+  background: var(--or);
+  border-color: var(--or);
+  transform: scale(1);
+}
+
+.rush-indice {
+  margin-top: 0.75rem;
+  font-size: 1rem;
+  /* Disparaît dès qu'on commence à défiler (--progression est donnée par script.js). */
+  opacity: calc(1 - var(--progression, 0) * 5);
+}
+
+.anims-coupees .rush-indice {
+  display: none;
+}
+
+.rush h2 {
+  max-width: 14ch;
+  font-weight: 800;
+  font-size: clamp(2.25rem, 9vw, 4.25rem);
+  line-height: 1;
+}
+
+/* Le texte remonte doucement pendant que la salle se remplit (transform seulement). */
+.anims-actives .rush-texte {
+  transform: translateY(calc((1 - var(--progression, 0)) * 1.5rem));
+}
+
+/* Salle pleine : le titre passe en or. */
+.rush.est-pleine h2 {
+  color: var(--or);
+  transition: color 300ms ease-out;
+}
+
+.argument-texte {
+  max-width: 34ch;
+  margin-top: 0.75rem;
+  font-size: 1.0625rem;
+}
+
+.argument-boutons {
+  margin-top: 1.25rem;
+}
+
+.argument-boutons .bouton {
+  flex: 1 1 14rem;
+  max-width: 22rem;
+  min-height: 3.25rem;
+}
+
+.argument-numero a {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.6rem 0;
+  font-family: var(--police-titre);
+  font-size: clamp(1.5rem, 6.5vw, 2.25rem);
+  font-variant-numeric: tabular-nums;
+  text-underline-offset: 0.18em;
+}
+
+
+/* ---------- Sections claires ---------- */
+
+.section {
+  padding: 3.5rem var(--marge);
+}
+
+.titre-section {
+  font-weight: 800;
+  font-size: clamp(2.25rem, 9vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.section-entete {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.25rem;
+}
+
+.mention-exemple {
+  padding: 0.15rem 0.75rem;
+  border: 1.5px solid var(--piment);
+  border-radius: 999px;
+  color: var(--piment);             /* 6,2 */
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* Apparition générique au défilement : monte et apparaît, une fois. */
+.anims-actives [data-revele] {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 700ms var(--sortie-expo), transform 700ms var(--sortie-expo);
+}
+.anims-actives [data-revele].est-visible {
+  opacity: 1;
+  transform: none;
+}
+
+
+/* ---------- 4. La carte : cascade ---------- */
+
+.carte {
+  margin-top: 2rem;
+}
+
+.carte-categorie + .carte-categorie {
+  margin-top: 2.25rem;
+}
+
+.carte-titre {
+  position: relative;
+  padding-bottom: 0.5rem;
+  font-weight: 700;
+  font-size: 1.625rem;
+}
+
+/* Le trait sous chaque catégorie se dessine de gauche à droite. */
+.carte-titre::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--or);
+  transform-origin: left center;
+}
+
+.carte-numero {
+  display: none;
+}
+
+.carte-plat {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(42, 27, 19, 0.15);
+  font-size: 1.0625rem;
+}
+
+.carte-points {
+  display: none;
+}
+
+.carte-prix {
+  color: var(--piment);             /* 6,2 */
+  font-weight: 700;
+  font-size: 1.25rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.carte-note,
+.carte-alcool {
+  max-width: 44ch;
+  margin-top: 1.75rem;
+  font-size: 1rem;
+}
+
+/* Cascade : chaque catégorie, puis chaque plat, avec un léger décalage.
+   La section elle-même ne bouge pas (sinon double mouvement). */
+.anims-actives .section-carte[data-revele] {
+  opacity: 1;
+  transform: none;
+}
+.anims-actives .section-carte .carte-plat,
+.anims-actives .section-carte .carte-titre {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 500ms var(--sortie-expo), transform 500ms var(--sortie-expo);
+}
+.anims-actives .section-carte .carte-titre::after {
+  transform: scaleX(0);
+  transition: transform 800ms var(--sortie-expo) 200ms;
+}
+.anims-actives .section-carte.est-visible .carte-plat,
+.anims-actives .section-carte.est-visible .carte-titre {
+  opacity: 1;
+  transform: none;
+}
+.anims-actives .section-carte.est-visible .carte-titre::after {
+  transform: scaleX(1);
+}
+.carte-categorie:nth-child(2) { --c: 1; }
+.carte-categorie:nth-child(3) { --c: 2; }
+.carte-categorie:nth-child(4) { --c: 3; }
+.carte-plat:nth-child(1) { --p: 1; }
+.carte-plat:nth-child(2) { --p: 2; }
+.carte-plat:nth-child(3) { --p: 3; }
+.carte-plat:nth-child(4) { --p: 4; }
+.carte-plat:nth-child(5) { --p: 5; }
+.carte-plat:nth-child(6) { --p: 6; }
+.anims-actives .section-carte .carte-titre {
+  transition-delay: calc(var(--c, 0) * 120ms);
+}
+.anims-actives .section-carte .carte-plat {
+  transition-delay: calc(var(--c, 0) * 120ms + var(--p, 0) * 40ms);
+}
+
+
+/* ---------- 5. Le lieu : la phrase s'allume mot par mot ---------- */
+
+.lieu {
+  background: var(--or);
+  color: var(--soja);               /* 9,1 */
+}
+
+.lieu .titre-section {
+  font-size: 1.25rem;
+}
+
+.lieu-texte {
+  max-width: 20ch;
+  margin-top: 0.75rem;
+  font-weight: 700;
+  font-size: clamp(2rem, 8.5vw, 4rem);
+  line-height: 1.08;
+}
+
+.mot {
+  transition: opacity 250ms ease-out;
+}
+.anims-actives .mot {
+  opacity: 0.18;
+}
+.anims-actives .mot.est-allume {
+  opacity: 1;
+}
+
+
+/* ---------- 6 et 7. Horaires, infos, accès ---------- */
+
+.horaires-table {
+  width: 100%;
+  max-width: 30rem;
+  margin-top: 1.5rem;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.horaires-table th,
+.horaires-table td {
+  padding: 0.7rem 0.75rem;
+  border-bottom: 1px solid rgba(42, 27, 19, 0.15);
+  text-align: left;
+  vertical-align: top;
+}
+
+.horaires-table th {
+  font-weight: 400;
+}
+
+.horaires-table td {
+  text-align: right;
+}
+
+.horaires-table .est-aujourdhui th,
+.horaires-table .est-aujourdhui td {
+  background: var(--or);            /* soja sur or : 9,1 */
+  font-weight: 700;
+}
+.horaires-table .est-aujourdhui th { border-radius: 999px 0 0 999px; }
+.horaires-table .est-aujourdhui td { border-radius: 0 999px 999px 0; }
+
+.horaires-marque {
+  font-weight: 400;
+  font-size: 0.875rem;
+}
+
+.infos-liste {
+  margin-top: 1.25rem;
+}
+
+.infos-liste li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.45rem 0;
+}
+
+.infos-liste li::before {
+  content: "";
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  background: var(--or);
+  border: 2px solid var(--soja);
+  flex-shrink: 0;
+}
+
+.acces-adresse {
+  margin-top: 1.25rem;
+  font-style: normal;
+  font-size: 1.125rem;
+}
+
+.acces .boutons {
+  margin-top: 1.25rem;
+}
+
+.pratique .bouton-plein {
+  background: var(--soja);
+  color: var(--creme);
+}
+
+
+/* ---------- 8. Footer ---------- */
+
+.pied {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0 var(--marge) 3rem;
+  background: var(--soja);
+  color: var(--creme);
+  overflow: hidden;
+  --focus: var(--or);
+}
+
+/* Le grand nom qui glisse avec le défilement (script.js). */
+.pied-geant {
+  margin: 0 calc(-1 * var(--marge)) 1.5rem;
+  padding-top: 2rem;
+  color: var(--or);
+  font-weight: 800;
+  font-size: clamp(4rem, 22vw, 12rem);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.pied-geant span {
+  display: inline-block;
+}
+
+.pied-nom {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.pied-adresse {
+  font-style: normal;
+}
+
+.pied-adresse a {
+  display: inline-block;
+  padding: 0.7rem 0;
+}
+
+
+/* ---------- Tablette (768 px et plus) ---------- */
+
+@media (min-width: 768px) {
+  :root {
+    --hauteur-header: 4.75rem;
+  }
+
+  .entete {
+    display: flex;
+    align-items: center;
+    padding: 0 var(--marge);
+  }
+  .entete-ligne {
+    display: contents;
+  }
+  .entete-nom {
+    order: 1;
+    min-height: 4.5rem;
+  }
+  .entete-nav {
+    order: 2;
+    margin-left: auto;
+    margin-right: 1.5rem;
+  }
+  .entete-nav ul {
+    padding: 0;
+    gap: 1.5rem;
+  }
+  .entete-actions {
+    order: 3;
+  }
+
+  .carte {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem 4rem;
+  }
+  .carte-categorie + .carte-categorie {
+    margin-top: 0;
+  }
+  .carte-categorie:nth-child(3),
+  .carte-categorie:nth-child(4) {
+    --c: 2;
+  }
+
+  .pratique {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 3rem;
+    padding: 0 var(--marge);
+  }
+  .pratique .section {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .horaires {
+    grid-row: span 2;
+  }
+  .acces {
+    padding-top: 0;
+  }
+}
+
+/* ---------- Ordinateur (1000 px et plus) ---------- */
+
+@media (min-width: 1000px) {
+  .hero {
+    grid-template-columns: 1fr minmax(0, 30rem);
+    align-items: center;
+    padding-top: 3.5rem;
+    padding-bottom: 4rem;
+  }
+  .hero-scene {
+    order: 2;
+    width: 100%;
+  }
+
+  .rush-collant {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 4rem;
+  }
+
+  .pratique {
+    grid-template-columns: 1.2fr 1fr 1fr;
+  }
+  .horaires {
+    grid-row: auto;
+  }
+  .acces {
+    padding-top: 3.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .pratique .acces {
+    padding-top: 0;
+  }
+  /* Mobile : la salle est plus compacte pour que tout tienne à l'écran pendant l'épinglage. */
+  .rush-collant {
+    gap: 0.75rem;
+  }
+  .rush-places {
+    gap: 0.35rem;
+    max-width: 18rem;
+  }
+}

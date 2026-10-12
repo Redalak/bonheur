@@ -1,0 +1,26 @@
+/* =====================================================================
+   LA MEULE : VARIANTE SIGNATURE (haut de gamme, plus réaliste)
+   Ambiance : Cave d'affinage à la bougie : pierre, croûte dorée, bleu.
+   Tout le système (ambiance photographique, typographie, animations) est dans
+   commun/signature.css ; ici, seulement les couleurs et les polices.
+   ===================================================================== */
+
+:root {
+  --fond: #1B1612;
+  --fond-2: #241E18;
+  --texte: #F2EAD8;
+  --texte-doux: #BFB4A0;       /* texte secondaire (contraste AA vérifié par axe-core) */
+  --accent: #D9A845;
+  --sur-accent: #1B1612;      /* texte posé sur l'accent */
+
+  /* Les 4 couleurs des halos de lumière du hero */
+  --lumiere-1: #E8B24A;
+  --lumiere-2: #6B5E4E;
+  --lumiere-3: #2E4A7D;
+  --lumiere-4: #F5D88A;
+
+  --police-titre: "DM Serif Display", "Georgia", serif;
+  --police-texte: "Work Sans", "Helvetica Neue", sans-serif;
+  --poids-titre: 400;
+  --italique: italic;
+}

@@ -1,0 +1,113 @@
+/* =====================================================================
+   MODÈLE FLEURISTE : « Pétale »
+   Style « Organic Biophilic » du skill UI/UX : vert profond, rose,
+   sauge, sur papier crème ; formes rondes et souples.
+   Signature : la tige pousse, les feuilles sortent, puis la fleur
+   s'ouvre pétale par pétale ; des pétales tombent doucement.
+   Polices : Playfair Display (titres) + Inter (texte), paire « Classic Elegant ».
+   ===================================================================== */
+
+:root {
+  --creme: #FBF7F2;
+  --vert: #1F4D3A;         /* vert profond (crème dessus : 9,4) */
+  --rose: #EBA3AE;         /* pétales (décor) */
+  --rose-fonce: #A3324F;   /* bouton d'appel (blanc dessus : 6,6) */
+  --sauge: #B7CDB0;        /* feuilles, sections */
+  --encre: #22302A;        /* texte */
+
+  --police-titre: "Playfair Display", "Didot", serif;
+  --police-texte: "Inter", "Helvetica Neue", sans-serif;
+  --focus: var(--vert);
+}
+
+body { background: var(--creme); color: var(--encre); font-family: var(--police-texte); }
+
+/* ---------- Header ---------- */
+.entete { background: var(--creme); border-bottom: 1px solid rgba(31, 77, 58, 0.2); }
+.entete-nom { font-family: var(--police-titre); font-style: italic; font-weight: 600; font-size: 1.75rem; color: var(--vert); }
+.bouton-langue { border: 1.5px solid var(--vert); color: var(--vert); border-radius: 999px; }
+.bouton-appel { background: var(--rose-fonce); color: #FFFFFF; border-radius: 999px; }
+
+/* ---------- Boutons ---------- */
+.bouton { border-radius: 999px; border-width: 1.5px; }
+.bouton-principal { background: var(--rose-fonce); border-color: var(--rose-fonce); color: #FFFFFF; }
+.bouton-contour { color: var(--vert); }
+
+/* ---------- Hero ---------- */
+.hero { display: grid; gap: 1rem; padding-top: 1.5rem; }
+
+.fleur { justify-self: center; width: min(56vw, 15rem); height: auto; overflow: visible; }
+.tige { fill: none; stroke: var(--vert); stroke-width: 6; stroke-linecap: round; }
+.feuille { fill: var(--sauge); stroke: var(--vert); stroke-width: 2; }
+.petale { fill: var(--rose); stroke: var(--rose-fonce); stroke-width: 1.5; }
+.coeur { fill: #E9B949; stroke: var(--vert); stroke-width: 2; }
+
+/* La fleur pousse : tige, feuilles, puis pétales (propriété « scale », qui s'ajoute
+   à la rotation déjà posée sur chaque pétale dans le SVG). */
+.anims-actives .tige { stroke-dasharray: 1; stroke-dashoffset: 1; animation: pousse 1100ms ease-out forwards; }
+@keyframes pousse { to { stroke-dashoffset: 0; } }
+.anims-actives .feuille { transform-box: fill-box; transform-origin: left center; scale: 0; animation: eclot 600ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+.anims-actives .f1 { animation-delay: 700ms; }
+.anims-actives .f2 { transform-origin: right center; animation-delay: 900ms; }
+.anims-actives .petale { transform-origin: 0 0; scale: 0; animation: eclot 700ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards; animation-delay: calc(1100ms + var(--n) * 90ms); }
+.anims-actives .coeur { scale: 0; animation: eclot 500ms ease-out forwards 1900ms; }
+@keyframes eclot { to { scale: 1; } }
+
+/* Les pétales qui tombent */
+.pluie { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.petale-volante {
+  position: absolute;
+  top: -2rem;
+  left: var(--x);
+  width: 0.9rem;
+  height: 1.3rem;
+  border-radius: 50% 50% 50% 0;
+  background: var(--rose);
+  opacity: 0;
+}
+.anims-actives .petale-volante { animation: tombe 9s linear infinite; animation-delay: calc(2s + var(--n) * 1.4s); }
+@keyframes tombe {
+  0%   { opacity: 0;   transform: translate(0, 0) rotate(0); }
+  10%  { opacity: 0.8; }
+  50%  { transform: translate(2rem, 50vh) rotate(160deg); }
+  100% { opacity: 0;   transform: translate(-1rem, 100vh) rotate(320deg); }
+}
+
+.hero-type { color: var(--vert); font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; font-size: 1rem; }
+.hero-nom { margin-top: 0.25rem; font-family: var(--police-titre); font-style: italic; font-weight: 600; font-size: clamp(4rem, 20vw, 9rem); line-height: 0.9; color: var(--vert); }
+.hero-sous-titre { font-family: var(--police-titre); font-weight: 700; font-size: clamp(1.5rem, 5.5vw, 2.25rem); line-height: 1.15; }
+.hero .badge .badge-point { color: var(--rose-fonce); }
+
+/* ---------- Argument ---------- */
+.argument { background: var(--rose-fonce); color: #FFFFFF; --focus: #FFFFFF; border-radius: 2.5rem 2.5rem 0 0; }
+.argument h2 { font-family: var(--police-titre); font-style: italic; font-weight: 600; font-size: clamp(2.25rem, 9vw, 4.25rem); line-height: 1.02; }
+.argument .bouton-principal { background: #FFFFFF; border-color: #FFFFFF; color: var(--rose-fonce); }
+.argument .bouton-contour { color: #FFFFFF; }
+.argument-numero a { font-family: var(--police-titre); font-weight: 700; font-size: clamp(1.75rem, 7vw, 2.5rem); }
+
+/* ---------- Titres et carte ---------- */
+.titre-section { font-family: var(--police-titre); font-weight: 700; font-size: clamp(2.25rem, 9vw, 3.75rem); line-height: 1; color: var(--vert); }
+.mention-exemple { padding: 0.1rem 0.7rem; background: var(--sauge); border-radius: 999px; }
+.carte-titre { font-family: var(--police-titre); font-style: italic; font-weight: 600; font-size: 1.875rem; color: var(--vert); }
+.carte-sous-titre { font-family: var(--police-texte); font-style: normal; font-size: 1rem; color: var(--encre); }
+.carte-plat { border-bottom: 1px solid rgba(31, 77, 58, 0.15); }
+.carte-prix { font-family: var(--police-titre); font-weight: 700; font-size: 1.25rem; color: var(--rose-fonce); }
+
+/* ---------- Le lieu ---------- */
+.lieu { background: var(--vert); color: var(--creme); --focus: var(--creme); border-radius: 0 0 2.5rem 2.5rem; }
+.lieu .titre-section { font-size: 1.5rem; color: var(--rose); }
+.lieu-texte { font-family: var(--police-titre); font-style: italic; font-weight: 600; font-size: clamp(1.75rem, 6.5vw, 3rem); line-height: 1.15; }
+
+/* ---------- Pratique et pied ---------- */
+.horaires-table th, .horaires-table td { border-bottom: 1px solid rgba(31, 77, 58, 0.15); }
+.horaires-table .est-aujourdhui th, .horaires-table .est-aujourdhui td { background: var(--sauge); }
+.horaires-table .est-aujourdhui th { border-radius: 999px 0 0 999px; }
+.horaires-table .est-aujourdhui td { border-radius: 0 999px 999px 0; }
+.infos-liste li::before { width: 0.7rem; height: 0.9rem; border-radius: 50% 50% 50% 0; background: var(--rose-fonce); }
+.pied { background: var(--vert); color: var(--creme); --focus: var(--creme); }
+.pied-nom { font-family: var(--police-titre); font-style: italic; font-weight: 600; font-size: 2.5rem; color: var(--rose); }
+
+@media (min-width: 1000px) {
+  .hero { grid-template-columns: 1fr 20rem; align-items: center; gap: 3rem; padding-top: 3rem; padding-bottom: 4rem; }
+  .fleur { order: 2; width: 100%; }
+}

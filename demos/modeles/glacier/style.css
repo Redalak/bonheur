@@ -1,0 +1,115 @@
+/* =====================================================================
+   MODÈLE GLACIER : « Givre »
+   Ludique et pastel (paire « Playful Creative » du skill UI/UX) :
+   vanille, fraise, pistache, menthe, avec du chocolat pour le texte.
+   Signature : les boules tombent une à une sur le cornet et rebondissent,
+   puis les vermicelles apparaissent.
+   Polices : Fredoka (titres) + Nunito (texte).
+   ===================================================================== */
+
+:root {
+  --vanille: #FFF1C9;      /* fond (chocolat dessus : 11,9) */
+  --fraise: #F7A8B8;
+  --pistache: #BFE3C0;
+  --menthe: #9FD9D0;
+  --chocolat: #4A2C21;     /* texte */
+  --framboise: #A8295C;    /* bouton d'appel (blanc dessus : 6,6) */
+  --cornet: #E6B26A;
+
+  --police-titre: "Fredoka", "Arial Rounded MT Bold", sans-serif;
+  --police-texte: "Nunito", "Helvetica Neue", sans-serif;
+  --focus: var(--chocolat);
+}
+
+body { background: var(--vanille); color: var(--chocolat); font-family: var(--police-texte); }
+
+/* ---------- Header ---------- */
+.entete { background: var(--vanille); border-bottom: 3px dashed var(--fraise); }
+.entete-nom { font-family: var(--police-titre); font-weight: 700; font-size: 1.75rem; }
+.bouton-langue { border: 2px solid var(--chocolat); border-radius: 999px; font-weight: 700; }
+.bouton-appel { background: var(--framboise); color: #FFFFFF; border-radius: 999px; font-weight: 700; }
+
+/* ---------- Boutons : ronds et un peu bombés ---------- */
+.bouton { border-radius: 999px; border-width: 3px; font-weight: 700; transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+.bouton:hover { transform: translateY(-2px) scale(1.03); }
+.bouton-principal { background: var(--framboise); border-color: var(--framboise); color: #FFFFFF; }
+.bouton-contour { color: var(--chocolat); }
+
+/* ---------- Hero : le cornet ---------- */
+.hero { display: grid; gap: 1rem; }
+
+.cornet { justify-self: center; width: min(46vw, 13rem); height: auto; overflow: visible; }
+.cone { fill: var(--cornet); stroke: var(--chocolat); stroke-width: 4; stroke-linejoin: round; }
+.gaufre { stroke: #B9823B; stroke-width: 3; fill: none; }
+.boule { stroke: var(--chocolat); stroke-width: 4; }
+.b1 { fill: var(--fraise); }
+.b2 { fill: var(--pistache); }
+.b3 { fill: #C98E6E; }
+/* Chaque vermicelle tourne sur lui-même (--r, posé dans le HTML) : propriété « rotate », autour de son centre. */
+.vermicelle { transform-box: fill-box; transform-origin: center; rotate: var(--r); }
+.vermicelle:nth-child(4n+1) { fill: var(--framboise); }
+.vermicelle:nth-child(4n+2) { fill: #4F8FD6; }
+.vermicelle:nth-child(4n+3) { fill: #FFFFFF; }
+.vermicelle:nth-child(4n+4) { fill: #3E9C6E; }
+
+/* Les boules tombent du ciel et rebondissent, l'une après l'autre. */
+.anims-actives .boule { animation: boule-tombe 900ms cubic-bezier(0.3, 1.5, 0.5, 1) both; }
+.anims-actives .b1 { animation-delay: 200ms; }
+.anims-actives .b2 { animation-delay: 650ms; }
+.anims-actives .b3 { animation-delay: 1100ms; }
+@keyframes boule-tombe {
+  0%   { transform: translateY(-420px); }
+  70%  { transform: translateY(6px) scaleY(0.94); }
+  100% { transform: none; }
+}
+.anims-actives .vermicelle { scale: 0; animation: pique 400ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards; animation-delay: calc(1700ms + var(--n) * 60ms); }
+@keyframes pique { to { scale: 1; } }
+
+.hero-type { font-weight: 700; color: var(--framboise); font-size: 1rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.hero-nom { font-family: var(--police-titre); font-weight: 700; font-size: clamp(4.5rem, 24vw, 10rem); line-height: 0.85; letter-spacing: -0.02em; }
+/* Le titre rebondit lettre par lettre */
+.anims-actives .hero-nom .lettre { animation-name: lettre-rebond; animation-timing-function: cubic-bezier(0.3, 1.6, 0.5, 1); }
+@keyframes lettre-rebond { from { opacity: 0; transform: translateY(-0.8em) scale(0.6); } to { opacity: 1; transform: none; } }
+.hero-sous-titre { font-family: var(--police-titre); font-weight: 600; font-size: clamp(1.5rem, 6vw, 2.25rem); line-height: 1.1; }
+.hero .badge .badge-point { color: var(--framboise); }
+
+/* ---------- Argument ---------- */
+.argument { background: var(--framboise); color: #FFFFFF; --focus: #FFFFFF; border-radius: 2rem; margin: 0 0.75rem; }
+.argument h2 { font-family: var(--police-titre); font-weight: 700; font-size: clamp(2.25rem, 9vw, 4.25rem); line-height: 1; }
+.argument .bouton-principal { background: var(--vanille); border-color: var(--vanille); color: var(--framboise); }
+.argument .bouton-contour { color: #FFFFFF; }
+.argument-numero a { font-family: var(--police-titre); font-weight: 700; font-size: clamp(1.75rem, 7vw, 2.5rem); }
+
+/* ---------- Titres et carte ---------- */
+.titre-section { font-family: var(--police-titre); font-weight: 700; font-size: clamp(2.5rem, 10vw, 4rem); line-height: 1; }
+.mention-exemple { padding: 0.15rem 0.75rem; background: #FFFFFF; border-radius: 999px; font-weight: 700; }
+.carte-categorie { padding: 1.25rem; border-radius: 1.5rem; border: 3px solid var(--chocolat); }
+.carte-categorie:nth-child(4n+1) { background: var(--fraise); }
+.carte-categorie:nth-child(4n+2) { background: var(--pistache); }
+.carte-categorie:nth-child(4n+3) { background: var(--menthe); }
+.carte-categorie:nth-child(4n+4) { background: #FFFFFF; }
+.carte-titre { font-family: var(--police-titre); font-weight: 700; font-size: 1.75rem; }
+.carte-sous-titre { font-weight: 700; }
+.carte-plat { border-bottom: 2px dashed rgba(74, 44, 33, 0.3); }
+.carte-plat:last-child { border-bottom: 0; }
+.carte-nom { font-weight: 700; }
+.carte-prix { font-family: var(--police-titre); font-weight: 700; font-size: 1.25rem; }
+
+/* ---------- Le lieu ---------- */
+.lieu { background: var(--pistache); border-radius: 2rem; margin: 0 0.75rem; }
+.lieu-texte { font-family: var(--police-titre); font-weight: 600; font-size: clamp(1.75rem, 6.5vw, 3rem); line-height: 1.15; }
+
+/* ---------- Pratique et pied ---------- */
+.horaires-table th, .horaires-table td { border-bottom: 2px dashed rgba(74, 44, 33, 0.25); }
+.horaires-table .est-aujourdhui th, .horaires-table .est-aujourdhui td { background: var(--fraise); }
+.horaires-table .est-aujourdhui th { border-radius: 999px 0 0 999px; }
+.horaires-table .est-aujourdhui td { border-radius: 0 999px 999px 0; }
+.infos-liste li::before { width: 0.8rem; height: 0.8rem; border-radius: 50%; background: var(--framboise); }
+.pied { background: var(--chocolat); color: var(--vanille); --focus: var(--vanille); border-radius: 2rem 2rem 0 0; }
+.pied-nom { font-family: var(--police-titre); font-weight: 700; font-size: 3rem; color: var(--fraise); }
+
+@media (min-width: 1000px) {
+  .hero { grid-template-columns: 1fr 18rem; align-items: center; gap: 3rem; padding-top: 3rem; padding-bottom: 4rem; }
+  .cornet { order: 2; width: 100%; }
+  .argument, .lieu { margin: 0 var(--marge); padding-left: 3rem; padding-right: 3rem; }
+}

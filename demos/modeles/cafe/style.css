@@ -1,0 +1,107 @@
+/* =====================================================================
+   MODÈLE CAFÉ : « Grain Noir » (café et torréfacteur)
+   Éditorial et torréfié : espresso, crema, papier, encre bleue.
+   Signature : le tampon du torréfacteur, dont le texte tourne lentement
+   autour d'un grain de café ; titres façon magazine.
+   Polices : Newsreader (titres, typo éditoriale du skill) + Figtree (texte).
+   ===================================================================== */
+
+:root {
+  --espresso: #241A15;     /* fond sombre (papier dessus : 14,6) */
+  --crema: #D9A066;        /* crema (sur espresso : 7,9) */
+  --papier: #F4ECE1;       /* papier */
+  --bleu: #23419A;         /* encre bleue du tampon (blanc dessus : 8,8) */
+
+  --police-titre: "Newsreader", "Georgia", serif;
+  --police-texte: "Figtree", "Helvetica Neue", sans-serif;
+  --focus: var(--espresso);
+}
+
+body { background: var(--papier); color: var(--espresso); font-family: var(--police-texte); }
+
+/* ---------- Header ---------- */
+.entete { background: var(--espresso); color: var(--papier); --focus: var(--crema); }
+.entete-nom { font-family: var(--police-titre); font-weight: 600; font-size: 1.5rem; }
+.bouton-langue { border: 1px solid var(--crema); color: var(--crema); }
+.bouton-appel { background: var(--crema); color: var(--espresso); }
+
+/* ---------- Boutons ---------- */
+.bouton { border-radius: 0; }
+.bouton-principal { background: var(--bleu); border-color: var(--bleu); color: #FFFFFF; }
+.bouton-contour { color: inherit; }
+
+/* ---------- Hero ---------- */
+.hero { background: var(--espresso); color: var(--papier); display: grid; gap: 2rem; --focus: var(--crema); }
+.hero .bouton-principal { background: var(--crema); border-color: var(--crema); color: var(--espresso); }
+.hero .badge { color: var(--crema); }
+
+.hero-type {
+  display: inline-block;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--crema);
+  color: var(--crema);
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.hero-nom {
+  margin-top: 1rem;
+  font-family: var(--police-titre);
+  font-weight: 600;
+  font-size: clamp(3.75rem, 18vw, 9.5rem);
+  line-height: 0.88;
+  letter-spacing: -0.03em;
+}
+.hero-sous-titre { font-family: var(--police-titre); font-style: italic; font-weight: 500; font-size: clamp(1.5rem, 6vw, 2.25rem); line-height: 1.15; }
+
+/* Le tampon tournant */
+.tampon { justify-self: center; width: min(62vw, 17rem); }
+.tampon svg { width: 100%; height: auto; overflow: visible; }
+.tampon text { fill: var(--crema); font-family: var(--police-texte); font-weight: 700; font-size: 13.5px; letter-spacing: 3.2px; }
+.tampon-rond { fill: none; stroke: var(--crema); stroke-width: 1.5; stroke-dasharray: 3 6; }
+.grain-cafe ellipse { fill: var(--crema); }
+.grain-cafe path { fill: none; stroke: var(--espresso); stroke-width: 5; stroke-linecap: round; }
+.tampon-texte { transform-origin: 110px 110px; }
+.anims-actives .tampon-texte { animation: tampon-tourne 26s linear infinite; }
+@keyframes tampon-tourne { to { transform: rotate(360deg); } }
+.anims-actives .grain-cafe { transform-origin: 110px 110px; animation: grain-pose 1200ms cubic-bezier(0.34, 1.56, 0.64, 1) both 300ms; }
+@keyframes grain-pose { from { transform: scale(0) rotate(-90deg); } to { transform: none; } }
+
+/* ---------- Argument : l'encre bleue ---------- */
+.argument { background: var(--bleu); color: #FFFFFF; --focus: #FFFFFF; }
+.argument h2 { font-family: var(--police-titre); font-weight: 600; font-size: clamp(2.25rem, 9vw, 4.25rem); line-height: 1; letter-spacing: -0.02em; }
+.argument .bouton-principal { background: #FFFFFF; border-color: #FFFFFF; color: var(--bleu); }
+.argument .bouton-contour { color: #FFFFFF; }
+.argument-numero a { font-family: var(--police-titre); font-weight: 600; font-size: clamp(1.75rem, 7vw, 2.5rem); }
+
+/* ---------- Titres et carte : mise en page de magazine ---------- */
+.titre-section { font-family: var(--police-titre); font-weight: 600; font-size: clamp(2.5rem, 10vw, 4.5rem); line-height: 1; letter-spacing: -0.02em; }
+.mention-exemple { color: var(--bleu); font-weight: 700; }
+.carte-titre {
+  padding: 0.6rem 0 0.4rem;
+  border-top: 4px solid var(--espresso);
+  border-bottom: 1px solid var(--espresso);
+  font-family: var(--police-titre);
+  font-weight: 600;
+  font-size: 1.75rem;
+}
+.carte-detail { font-family: var(--police-titre); font-style: italic; font-weight: 500; }
+.carte-plat { border-bottom: 1px solid rgba(36, 26, 21, 0.15); }
+.carte-prix { font-family: var(--police-titre); font-weight: 600; font-size: 1.25rem; }
+
+/* ---------- Le lieu ---------- */
+.lieu { background: var(--espresso); color: var(--papier); --focus: var(--crema); }
+.lieu .titre-section { font-size: 1.5rem; color: var(--crema); }
+.lieu-texte { font-family: var(--police-titre); font-style: italic; font-weight: 500; font-size: clamp(1.75rem, 6.5vw, 3rem); line-height: 1.15; }
+
+/* ---------- Pratique et pied ---------- */
+.horaires-table th, .horaires-table td { border-bottom: 1px solid rgba(36, 26, 21, 0.15); }
+.horaires-table .est-aujourdhui th, .horaires-table .est-aujourdhui td { background: var(--crema); }
+.infos-liste li::before { background: var(--bleu); }
+.pied { background: var(--espresso); color: var(--papier); --focus: var(--crema); }
+.pied-nom { font-family: var(--police-titre); font-weight: 600; font-size: 2.5rem; letter-spacing: -0.02em; }
+
+@media (min-width: 1000px) {
+  .hero { grid-template-columns: 1fr 22rem; align-items: center; gap: 4rem; padding-top: 4rem; padding-bottom: 4rem; }
+  .tampon { width: 100%; }
+}

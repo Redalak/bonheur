@@ -1,0 +1,26 @@
+/* =====================================================================
+   TERANGA : VARIANTE SIGNATURE (haut de gamme, plus réaliste)
+   Ambiance : Coucher de soleil : safran, braise et indigo profond.
+   Tout le système (ambiance photographique, typographie, animations) est dans
+   commun/signature.css ; ici, seulement les couleurs et les polices.
+   ===================================================================== */
+
+:root {
+  --fond: #1A120C;
+  --fond-2: #241910;
+  --texte: #F5EBDD;
+  --texte-doux: #C4B6A3;       /* texte secondaire (contraste AA vérifié par axe-core) */
+  --accent: #E2A72E;
+  --sur-accent: #1A120C;      /* texte posé sur l'accent */
+
+  /* Les 4 couleurs des halos de lumière du hero */
+  --lumiere-1: #E07A3F;
+  --lumiere-2: #F0B94A;
+  --lumiere-3: #2B3A7A;
+  --lumiere-4: #A63E25;
+
+  --police-titre: "Cormorant Garamond", "Georgia", serif;
+  --police-texte: "DM Sans", "Helvetica Neue", sans-serif;
+  --poids-titre: 500;
+  --italique: italic;
+}

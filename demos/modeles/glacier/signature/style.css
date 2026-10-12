@@ -1,0 +1,29 @@
+/* =====================================================================
+   GIVRE : VARIANTE SIGNATURE (haut de gamme, plus réaliste)
+   Ambiance : Pastels en flou doux : pistache, fraise, vanille, menthe.
+   Tout le système (ambiance photographique, typographie, animations) est dans
+   commun/signature.css ; ici, seulement les couleurs et les polices.
+   ===================================================================== */
+
+:root {
+  --fond: #FBF5EE;
+  --fond-2: #F4EADF;
+  --texte: #3A2A24;
+  --texte-doux: #6A5850;       /* texte secondaire (contraste AA vérifié par axe-core) */
+  --accent: #9E3B5F;
+  --sur-accent: #FFFFFF;      /* texte posé sur l'accent */
+
+  /* Les 4 couleurs des halos de lumière du hero */
+  --lumiere-1: #CFE6C4;
+  --lumiere-2: #F4C3CC;
+  --lumiere-3: #FBE6B5;
+  --lumiere-4: #C9E4EE;
+
+  --police-titre: "Gilda Display", "Georgia", serif;
+  --police-texte: "Nunito", "Helvetica Neue", sans-serif;
+  --poids-titre: 400;
+  --italique: normal;
+}
+
+/* Variante claire : les halos « teintent » le fond comme une lumière chaude (mode multiplier). */
+.ambiance .lumiere { mix-blend-mode: multiply; opacity: 0.75; }

@@ -1,0 +1,26 @@
+/* =====================================================================
+   KERVAN : VARIANTE SIGNATURE (haut de gamme, plus réaliste)
+   Ambiance : Lampes de cuivre et éclats de faïence turquoise dans la nuit bleue.
+   Tout le système (ambiance photographique, typographie, animations) est dans
+   commun/signature.css ; ici, seulement les couleurs et les polices.
+   ===================================================================== */
+
+:root {
+  --fond: #0D1726;
+  --fond-2: #13203A;
+  --texte: #F1EADF;
+  --texte-doux: #B9B5AE;       /* texte secondaire (contraste AA vérifié par axe-core) */
+  --accent: #D29A5A;
+  --sur-accent: #0D1726;      /* texte posé sur l'accent */
+
+  /* Les 4 couleurs des halos de lumière du hero */
+  --lumiere-1: #E3A157;
+  --lumiere-2: #2A9D96;
+  --lumiere-3: #9C2F3B;
+  --lumiere-4: #F5D9A8;
+
+  --police-titre: "Marcellus", "Georgia", serif;
+  --police-texte: "Figtree", "Helvetica Neue", sans-serif;
+  --poids-titre: 400;
+  --italique: normal;
+}

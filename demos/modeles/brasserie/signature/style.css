@@ -1,0 +1,26 @@
+/* =====================================================================
+   BRASSERIE LUMIÈRE : VARIANTE SIGNATURE (haut de gamme, plus réaliste)
+   Ambiance : Reflets de laiton et de velours rouge dans les miroirs, le soir.
+   Tout le système (ambiance photographique, typographie, animations) est dans
+   commun/signature.css ; ici, seulement les couleurs et les polices.
+   ===================================================================== */
+
+:root {
+  --fond: #14110E;
+  --fond-2: #1D1915;
+  --texte: #F1E9DA;
+  --texte-doux: #BEB3A1;       /* texte secondaire (contraste AA vérifié par axe-core) */
+  --accent: #C9A45C;
+  --sur-accent: #14110E;      /* texte posé sur l'accent */
+
+  /* Les 4 couleurs des halos de lumière du hero */
+  --lumiere-1: #D6A85A;
+  --lumiere-2: #7A1E1E;
+  --lumiere-3: #F3E3C2;
+  --lumiere-4: #B07A3A;
+
+  --police-titre: "Bodoni Moda", "Georgia", serif;
+  --police-texte: "Libre Franklin", "Helvetica Neue", sans-serif;
+  --poids-titre: 600;
+  --italique: italic;
+}

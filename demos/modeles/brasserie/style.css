@@ -1,0 +1,168 @@
+/* =====================================================================
+   MODÈLE BRASSERIE : « Brasserie Lumière »
+   Brasserie parisienne : miroir doré, banquettes rouges, carrelage noir
+   et blanc, ardoise du jour.
+   Signature : le nom se dore lettre par lettre dans le miroir, un reflet
+   le traverse ; l'ardoise du jour s'écrit ligne par ligne.
+   Polices : Bodoni Moda (titres, italique pour l'ardoise) + Libre Franklin (texte).
+   ===================================================================== */
+
+:root {
+  --noir: #121212;
+  --ivoire: #F5F1E8;
+  --laiton: #C9A45C;       /* dorures (sur noir : 8,9) */
+  --rouge: #8E1B1B;        /* banquettes (ivoire dessus : 9,6) */
+  --ardoise: #1E2421;      /* tableau noir */
+  --bois: #6B4A2B;         /* cadre de l'ardoise */
+
+  --police-titre: "Bodoni Moda", "Didot", serif;
+  --police-texte: "Libre Franklin", "Helvetica Neue", sans-serif;
+  --focus: var(--noir);
+}
+
+body { background: var(--ivoire); color: var(--noir); font-family: var(--police-texte); }
+
+/* ---------- Header ---------- */
+.entete { background: var(--noir); color: var(--ivoire); --focus: var(--laiton); }
+.entete-nom { font-family: var(--police-titre); font-weight: 600; font-size: 1.0625rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--laiton); }
+.bouton-langue { border: 1px solid var(--laiton); color: var(--laiton); }
+.bouton-appel { background: var(--laiton); color: var(--noir); }
+
+/* ---------- Boutons ---------- */
+.bouton { border-radius: 2px; letter-spacing: 0.04em; }
+.bouton-principal { background: var(--rouge); border-color: var(--rouge); color: var(--ivoire); }
+.bouton-contour { color: inherit; }
+
+/* ---------- Hero : miroir, ardoise, carrelage ---------- */
+.hero {
+  background: var(--noir);
+  color: var(--ivoire);
+  display: grid;
+  gap: 2rem;
+  padding-bottom: 5.5rem;          /* place pour le carrelage */
+  --focus: var(--laiton);
+}
+.hero .bouton-principal { background: var(--laiton); border-color: var(--laiton); color: var(--noir); }
+.hero .badge { color: var(--laiton); }
+
+/* Le miroir : arche dorée à double filet, et un reflet qui le traverse une fois. */
+.miroir {
+  position: relative;
+  overflow: hidden;
+  padding: 3.5rem 1.5rem 2rem;
+  text-align: center;
+  border: 2px solid var(--laiton);
+  border-radius: 7rem 7rem 4px 4px;     /* l'arche du miroir (plus marquée sur grand écran) */
+  outline: 1px solid rgba(201, 164, 92, 0.55);
+  outline-offset: 6px;
+}
+.anims-actives .miroir::after {
+  content: "";
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  left: 0;
+  width: 18%;
+  background: rgba(255, 255, 255, 0.10);
+  transform: translateX(-200%) skewX(-20deg);
+  animation: reflet 1800ms ease-in-out 1500ms forwards;
+}
+@keyframes reflet { to { transform: translateX(700%) skewX(-20deg); } }
+
+.hero-type { font-size: 1rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ivoire); }
+.hero-nom {
+  margin-top: 0.75rem;
+  font-family: var(--police-titre);
+  font-weight: 800;
+  font-size: clamp(2.5rem, 11vw, 5.75rem);
+  line-height: 0.95;
+  color: var(--laiton);
+}
+/* Les lettres « se dorent » : elles passent de l'ivoire pâle au laiton. */
+.anims-actives .hero-nom .lettre {
+  transform: none;
+  animation-name: dorure;
+  animation-duration: 900ms;
+  animation-delay: calc(250ms + var(--n) * 60ms);
+}
+@keyframes dorure {
+  from { opacity: 0; color: var(--ivoire); transform: translateY(0.25em); }
+  to   { opacity: 1; color: var(--laiton); transform: none; }
+}
+
+.hero-sous-titre { font-family: var(--police-titre); font-style: italic; font-weight: 400; font-size: clamp(1.375rem, 5vw, 1.875rem); line-height: 1.2; }
+
+/* L'ardoise du jour */
+.ardoise {
+  position: relative;
+  z-index: 1;
+  align-self: start;
+  padding: 1.5rem 1.5rem 1.75rem;
+  background: var(--ardoise);
+  border: 12px solid var(--bois);
+  color: var(--ivoire);
+}
+.ardoise-titre { font-family: var(--police-titre); font-style: italic; font-weight: 400; font-size: 1.75rem; }
+.ardoise-liste { margin-top: 0.75rem; }
+.ardoise-ligne {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px dashed rgba(245, 241, 232, 0.35);
+  font-family: var(--police-titre);
+  font-style: italic;
+  font-size: 1.25rem;
+}
+.ardoise-prix { font-style: normal; white-space: nowrap; }
+/* Chaque ligne « s'écrit » de gauche à droite, à la craie. */
+.anims-actives .ardoise-ligne {
+  clip-path: inset(0 100% 0 0);
+  animation: craie 900ms ease-out forwards;
+  animation-delay: calc(1300ms + var(--n, 0) * 450ms);
+}
+@keyframes craie { to { clip-path: inset(0 0 0 0); } }
+
+.carrelage { position: absolute; left: 0; right: 0; bottom: 0; display: block; }
+
+/* ---------- Argument : banquette rouge ---------- */
+.argument { background: var(--rouge); color: var(--ivoire); --focus: var(--ivoire); }
+.argument h2 { font-family: var(--police-titre); font-weight: 800; font-size: clamp(2.125rem, 8.5vw, 4rem); line-height: 1; }
+.argument .bouton-principal { background: var(--ivoire); border-color: var(--ivoire); color: var(--rouge); }
+.argument-numero a { font-family: var(--police-titre); font-size: clamp(1.5rem, 6vw, 2.25rem); }
+
+/* ---------- Titres et carte ---------- */
+.titre-section { font-family: var(--police-titre); font-weight: 800; font-size: clamp(2.25rem, 9vw, 3.75rem); line-height: 1; }
+.mention-exemple { padding: 0.1rem 0.6rem; border: 1px solid var(--noir); }
+.carte-titre {
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--noir);
+  font-family: var(--police-titre);
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.carte-plat { align-items: flex-end; }
+.carte-points { display: block; flex: 1 1 1rem; min-width: 1rem; margin-bottom: 0.45em; border-bottom: 1px dotted rgba(18, 18, 18, 0.45); }
+.carte-prix { font-family: var(--police-titre); font-weight: 600; font-size: 1.1875rem; color: var(--rouge); }
+
+/* ---------- Le lieu : le noir des miroirs ---------- */
+.lieu { background: var(--noir); color: var(--ivoire); --focus: var(--laiton); }
+.lieu .titre-section { font-size: 1.5rem; color: var(--laiton); }
+.lieu-texte { font-family: var(--police-titre); font-style: italic; font-weight: 400; font-size: clamp(1.75rem, 6.5vw, 3rem); line-height: 1.15; }
+
+/* ---------- Horaires, infos, accès ---------- */
+.horaires-table th, .horaires-table td { border-bottom: 1px solid rgba(18, 18, 18, 0.15); }
+.horaires-table .est-aujourdhui th, .horaires-table .est-aujourdhui td { background: var(--noir); color: var(--laiton); }
+.infos-liste li::before { background: var(--rouge); transform: rotate(45deg); }
+
+/* ---------- Pied ---------- */
+.pied { background: var(--noir); color: var(--ivoire); border-top: 4px double var(--laiton); --focus: var(--laiton); }
+.pied-nom { font-family: var(--police-titre); font-weight: 600; font-size: 1.5rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--laiton); }
+
+/* ---------- Ordinateur : miroir et texte à gauche, ardoise à droite ---------- */
+@media (min-width: 1000px) {
+  .hero { grid-template-columns: 1fr 22rem; align-items: center; gap: 3.5rem; padding-top: 3.5rem; }
+  .miroir { padding: 3.75rem 2.5rem 2.5rem; border-radius: 12rem 12rem 4px 4px; }
+}

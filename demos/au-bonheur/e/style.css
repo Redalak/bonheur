@@ -1,0 +1,780 @@
+/* =====================================================================
+   DIRECTION E : « Plateau tournant »
+   Inspirée des sites de restaurants asiatiques de référence :
+   - Mister Jiu's (San Francisco) : l'enseigne bilingue, nom + caractères ;
+   - BAO (Londres) : un seul objet au centre, beaucoup de calme autour.
+   Sans photo, l'objet central est le plateau tournant des tables
+   chinoises, vu du dessus, avec les plats de la carte.
+   Polices : Young Serif (titres) + Schibsted Grotesk (texte).
+   ===================================================================== */
+
+:root {
+  --soja: #2A1B13;        /* fond : sauce soja (riz dessus : 14,9) */
+  --soja-clair: #3D281C;  /* footer */
+  --riz: #F7F2E8;         /* texte sur sombre, fond des infos pratiques */
+  --bois: #D9A86C;        /* le bois blond de la vraie salle : la table (soja dessus : 7,7) */
+  --bois-fonce: #B8894F;  /* bord de la table */
+  --piment: #C23A22;      /* boutons d'appel (blanc dessus : 5,35) */
+  --moutarde: #F0B43C;    /* 福, titres sur sombre (sur soja : 8,9) */
+  --blanc: #FFFFFF;       /* la porcelaine des assiettes */
+
+  --police-titre: "Young Serif", "Georgia", serif;
+  --police-texte: "Schibsted Grotesk", "Helvetica Neue", sans-serif;
+
+  --marge: max(1.25rem, calc((100% - 72rem) / 2));
+  --hauteur-header: 6.75rem;
+  --focus: var(--moutarde);
+}
+
+body {
+  background: var(--soja);
+  color: var(--riz);
+  font-family: var(--police-texte);
+}
+
+
+/* ---------- Boutons ---------- */
+
+.boutons,
+.argument-boutons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3.25rem;
+  padding: 0 1.4rem;
+  border: 2px solid currentColor;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.bouton-piment {
+  background: var(--piment);
+  border-color: var(--piment);
+  color: var(--blanc);
+}
+
+.bouton-plein {
+  background: var(--riz);
+  border-color: var(--riz);
+  color: var(--soja);
+}
+
+.bouton-contour {
+  background: transparent;
+}
+
+.bouton:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+
+/* ---------- 1. Header ---------- */
+
+.entete {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--soja);
+  border-bottom: 1px solid rgba(247, 242, 232, 0.16);
+}
+
+.entete-ligne {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-height: 3.75rem;
+  padding: 0.25rem var(--marge);
+}
+
+.entete-nom {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-family: var(--police-titre);
+  font-size: 1.375rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.entete-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.bouton-langue {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  background: transparent;
+  border: 1.5px solid var(--riz);
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.bouton-appel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  padding: 0 1rem;
+  background: var(--piment);
+  color: var(--blanc);
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.entete-nav ul {
+  display: flex;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0 var(--marge);
+  list-style: none;
+}
+
+.entete-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  font-size: 0.9375rem;
+  text-decoration: none;
+}
+
+.entete-nav a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+
+/* ---------- 2. Hero : l'enseigne et le plateau ---------- */
+
+.hero {
+  display: grid;
+  gap: 2.5rem;
+  padding: 2.5rem var(--marge) 3rem;
+  overflow: hidden;
+}
+
+/* L'enseigne bilingue : 福 à gauche, le nom sur deux lignes à droite. */
+.enseigne {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.enseigne-fu {
+  height: clamp(5.5rem, 26vw, 10rem);
+  width: auto;
+  color: var(--moutarde);
+}
+
+.enseigne-nom {
+  font-family: var(--police-titre);
+  font-weight: 400;
+  font-size: clamp(2.75rem, 12.5vw, 5.75rem);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+}
+
+.enseigne-traduction {
+  margin-top: 0.75rem;
+  color: var(--bois);              /* 7,7 */
+  font-size: 1rem;
+}
+
+.hero-sous-titre {
+  margin-top: 1.5rem;
+  font-family: var(--police-titre);
+  font-size: clamp(1.375rem, 5.5vw, 2rem);
+  line-height: 1.15;
+}
+
+.hero-texte {
+  max-width: 34ch;
+  margin-top: 0.5rem;
+  font-size: 1.0625rem;
+}
+
+.hero .badge {
+  margin-top: 0.75rem;
+  font-weight: 700;
+}
+
+.hero .badge.est-ouvert .badge-point {
+  background: var(--moutarde);
+  border-color: var(--moutarde);
+}
+
+.hero .boutons {
+  margin-top: 0.75rem;
+}
+
+.hero .boutons .bouton {
+  flex: 1 1 9rem;
+}
+
+/* --- Le plateau tournant --- */
+
+.plateau-bloc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --taille : le diamètre de la table. Tout le reste en dépend. */
+.plateau {
+  --taille: min(calc(100vw - 2.5rem), 30rem);
+  position: relative;
+  width: var(--taille);
+  height: var(--taille);
+  border-radius: 50%;
+  background: var(--bois);                         /* la table en bois blond */
+  border: calc(var(--taille) * 0.022) solid var(--bois-fonce);
+  touch-action: pan-y;                             /* on peut toujours faire défiler la page */
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+  /* L'unique animation d'entrée : la table apparaît avec une petite mise à l'échelle. */
+  animation: plateau-entree 800ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes plateau-entree {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Le disque qui tourne (le plateau en verre posé sur la table). */
+.plateau-disque {
+  position: absolute;
+  inset: 6%;
+  border-radius: 50%;
+  border: 2px solid rgba(42, 27, 19, 0.25);
+  transform: rotate(var(--angle, 0deg));           /* --angle est mis à jour par script.js */
+}
+
+.plateau-assiettes {
+  position: absolute;
+  inset: 0;
+}
+
+/* Une assiette : posée à sa place (--i × 60°), à 30 % du diamètre du centre. */
+.assiette {
+  --diametre: calc(var(--taille) * 0.27);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--diametre);
+  height: var(--diametre);
+  margin: calc(var(--diametre) / -2) 0 0 calc(var(--diametre) / -2);
+  border-radius: 50%;
+  background: var(--blanc);
+  border: calc(var(--taille) * 0.013) solid var(--moutarde);
+  transform: rotate(calc(var(--i) * 60deg)) translateY(calc(var(--taille) * -0.3));
+}
+
+.assiette:nth-child(even) {
+  border-color: var(--bois-fonce);
+}
+
+/* Le creux de l'assiette : un cercle fin à l'intérieur. */
+.assiette::before {
+  content: "";
+  position: absolute;
+  inset: 9%;
+  border-radius: 50%;
+  border: 1px solid #E6DAC6;
+}
+
+/* Le texte de l'assiette tourne en sens inverse : il reste toujours droit. */
+.assiette-contenu {
+  position: absolute;
+  inset: 12%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15em;
+  text-align: center;
+  color: var(--soja);
+  font-size: calc(var(--taille) * 0.032);
+  line-height: 1.05;
+  transform: rotate(calc(-1 * (var(--angle, 0deg) + var(--i) * 60deg)));
+}
+
+.assiette-categorie {
+  font-size: 0.8em;
+  opacity: 0.85;
+}
+
+.assiette-nom {
+  font-weight: 700;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  overflow-wrap: anywhere;
+}
+
+.assiette-prix {
+  font-family: var(--police-titre);
+  font-size: 1.35em;
+}
+
+/* L'assiette devant soi : bord piment. */
+.assiette.est-devant {
+  border-color: var(--piment);
+}
+
+/* Le moyeu central, fixe, gravé de 福. */
+.plateau-moyeu {
+  position: absolute;
+  inset: 38%;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--soja);
+  border: calc(var(--taille) * 0.012) solid var(--bois-fonce);
+  color: var(--moutarde);
+}
+
+.moyeu-fu {
+  width: 58%;
+  height: auto;
+}
+
+/* « Devant vous : Bo bun 13,00 € » */
+.plateau-vedette {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.25rem 0.75rem;
+  margin-top: 1.25rem;
+  text-align: center;
+}
+
+.vedette-etiquette {
+  flex-basis: 100%;
+  color: var(--bois);
+  font-size: 1rem;
+}
+
+.vedette-nom,
+.vedette-prix {
+  font-family: var(--police-titre);
+  font-size: clamp(1.5rem, 6vw, 2rem);
+  line-height: 1.1;
+}
+
+.vedette-prix {
+  color: var(--moutarde);
+  font-variant-numeric: tabular-nums;
+}
+
+.plateau-commandes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.bouton-plateau {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0 1rem;
+  background: transparent;
+  border: 1.5px solid rgba(247, 242, 232, 0.7);
+  border-radius: 999px;
+  font-size: 1rem;
+}
+
+.bouton-plateau:hover {
+  border-color: var(--riz);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* Moins d'animations : le plateau ne tourne pas tout seul, le bouton Pause ne sert à rien. */
+@media (prefers-reduced-motion: reduce) {
+  [data-pause-grille] {
+    display: none;
+  }
+}
+
+
+/* ---------- 3. Argument clé : aplat piment ---------- */
+
+.argument {
+  padding: 3rem var(--marge) 3.25rem;
+  background: var(--piment);
+  color: var(--blanc);              /* 5,35 */
+  --focus: var(--blanc);
+}
+
+.argument h2 {
+  max-width: 14ch;
+  font-family: var(--police-titre);
+  font-weight: 400;
+  font-size: clamp(2.25rem, 9vw, 4.25rem);
+  line-height: 1;
+}
+
+.argument-texte {
+  max-width: 34ch;
+  margin-top: 1rem;
+  font-size: 1.125rem;
+}
+
+.argument-boutons {
+  margin-top: 1.5rem;
+}
+
+.argument-boutons .bouton {
+  flex: 1 1 15rem;
+  max-width: 22rem;
+  min-height: 3.5rem;
+  font-size: 1.0625rem;
+}
+
+.argument .bouton-plein {
+  background: var(--blanc);
+  border-color: var(--blanc);
+  color: var(--piment);             /* 5,35 */
+}
+
+.argument-numero a {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.6rem 0;
+  font-family: var(--police-titre);
+  font-size: clamp(1.5rem, 7vw, 2.25rem);
+  font-variant-numeric: tabular-nums;
+  text-underline-offset: 0.18em;
+}
+
+
+/* ---------- Sections ---------- */
+
+.section {
+  padding: 3.5rem var(--marge);
+}
+
+.titre-section {
+  font-family: var(--police-titre);
+  font-weight: 400;
+  font-size: clamp(2rem, 8vw, 3rem);
+  line-height: 1;
+}
+
+.section-entete {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.25rem;
+}
+
+.mention-exemple {
+  padding: 0.15rem 0.75rem;
+  border: 1.5px solid var(--bois);
+  border-radius: 999px;
+  color: var(--bois);               /* 7,7 */
+  font-size: 1rem;
+}
+
+
+/* ---------- 4. La carte : menu du soir, sur fond soja ---------- */
+
+.section-carte .titre-section {
+  color: var(--moutarde);
+}
+
+.carte {
+  margin-top: 2rem;
+}
+
+.carte-categorie + .carte-categorie {
+  margin-top: 2.25rem;
+}
+
+.carte-titre {
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--bois);
+  font-family: var(--police-titre);
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: var(--bois);
+}
+
+.carte-numero {
+  display: none;
+}
+
+.carte-liste {
+  margin-top: 0.25rem;
+}
+
+.carte-plat {
+  display: flex;
+  align-items: baseline;
+  padding: 0.6rem 0;
+  font-size: 1.0625rem;
+}
+
+/* Points de conduite fins entre le nom et le prix */
+.carte-points {
+  flex: 1 1 1rem;
+  min-width: 1rem;
+  margin: 0 0.5rem;
+  border-bottom: 1.5px dotted rgba(247, 242, 232, 0.35);
+  transform: translateY(-0.3em);
+}
+
+.carte-prix {
+  font-family: var(--police-titre);
+  font-size: 1.1875rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.carte-note,
+.carte-alcool {
+  max-width: 44ch;
+  margin-top: 1.75rem;
+  font-size: 1rem;
+}
+
+
+/* ---------- 5. Le lieu : la table en bois ---------- */
+
+.lieu {
+  background: var(--bois);
+  color: var(--soja);               /* 7,7 */
+  --focus: var(--soja);
+}
+
+.lieu .titre-section {
+  font-size: 1.25rem;
+}
+
+.lieu-texte {
+  max-width: 22ch;
+  margin-top: 0.75rem;
+  font-family: var(--police-titre);
+  font-size: clamp(1.625rem, 6.5vw, 2.75rem);
+  line-height: 1.12;
+}
+
+
+/* ---------- 6 et 7. Horaires, infos, accès : fond riz ---------- */
+
+.pratique {
+  background: var(--riz);
+  color: var(--soja);               /* 14,9 */
+  --focus: var(--soja);
+}
+
+.pratique .bouton-piment,
+.pratique .bouton-plein {
+  background: var(--soja);
+  border-color: var(--soja);
+  color: var(--riz);
+}
+
+.pratique .bouton-contour {
+  color: var(--soja);
+}
+
+.horaires-table {
+  width: 100%;
+  max-width: 30rem;
+  margin-top: 1.5rem;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.horaires-table th,
+.horaires-table td {
+  padding: 0.7rem 0.75rem;
+  border-bottom: 1px solid rgba(42, 27, 19, 0.18);
+  text-align: left;
+  vertical-align: top;
+}
+
+.horaires-table th {
+  font-weight: 400;
+}
+
+.horaires-table td {
+  text-align: right;
+}
+
+/* Jour actuel : pastille moutarde. */
+.horaires-table .est-aujourdhui th,
+.horaires-table .est-aujourdhui td {
+  background: var(--moutarde);      /* soja sur moutarde : 8,9 */
+  font-weight: 700;
+}
+.horaires-table .est-aujourdhui th { border-radius: 999px 0 0 999px; }
+.horaires-table .est-aujourdhui td { border-radius: 0 999px 999px 0; }
+
+.horaires-marque {
+  font-weight: 400;
+  font-size: 0.875rem;
+}
+
+.infos-liste {
+  margin-top: 1.25rem;
+}
+
+.infos-liste li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.45rem 0;
+}
+
+/* Puce : une mini-assiette (cercle cerclé). */
+.infos-liste li::before {
+  content: "";
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  border: 2px solid var(--piment);
+  flex-shrink: 0;
+}
+
+.acces-adresse {
+  margin-top: 1.25rem;
+  font-style: normal;
+  font-size: 1.125rem;
+}
+
+.acces .boutons {
+  margin-top: 1.25rem;
+}
+
+
+/* ---------- 8. Footer ---------- */
+
+.pied {
+  display: grid;
+  gap: 0.5rem;
+  padding: 3rem var(--marge);
+  background: var(--soja-clair);
+  color: var(--riz);                /* 12,4 */
+}
+
+.pied-nom {
+  font-family: var(--police-titre);
+  font-size: 1.75rem;
+  color: var(--moutarde);
+}
+
+.pied-adresse {
+  font-style: normal;
+}
+
+.pied-adresse a {
+  display: inline-block;
+  padding: 0.7rem 0;
+}
+
+
+/* ---------- Tablette (768 px et plus) ---------- */
+
+@media (min-width: 768px) {
+  :root {
+    --hauteur-header: 4.75rem;
+  }
+
+  .entete {
+    display: flex;
+    align-items: center;
+    padding: 0 var(--marge);
+  }
+  .entete-ligne {
+    display: contents;
+  }
+  .entete-nom {
+    order: 1;
+    min-height: 4.5rem;
+  }
+  .entete-nav {
+    order: 2;
+    margin-left: auto;
+    margin-right: 1.5rem;
+  }
+  .entete-nav ul {
+    padding: 0;
+    gap: 1.5rem;
+  }
+  .entete-actions {
+    order: 3;
+  }
+
+  .carte {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem 4rem;
+  }
+  .carte-categorie + .carte-categorie {
+    margin-top: 0;
+  }
+
+  .pratique {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 3rem;
+    padding: 0 var(--marge);
+  }
+  .pratique .section {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .horaires {
+    grid-row: span 2;
+  }
+  .acces {
+    padding-top: 0;
+  }
+}
+
+/* ---------- Ordinateur (1000 px et plus) : enseigne à gauche, plateau à droite ---------- */
+
+@media (min-width: 1000px) {
+  .hero {
+    grid-template-columns: 1fr minmax(0, 32rem);
+    align-items: center;
+    gap: 3rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+  .plateau {
+    --taille: min(32rem, 40vw);
+  }
+  .pratique {
+    grid-template-columns: 1.2fr 1fr 1fr;
+  }
+  .horaires {
+    grid-row: auto;
+  }
+  .acces {
+    padding-top: 3.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .pratique .acces {
+    padding-top: 0;
+  }
+}

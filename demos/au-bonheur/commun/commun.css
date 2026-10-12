@@ -63,6 +63,35 @@
   src: url("fonts/fraunces-latin-soft-normal.woff2") format("woff2");
   font-weight: 100 900; font-style: normal; font-display: swap;
 }
+/* Direction E : Young Serif (titres, une seule graisse) + Schibsted Grotesk (texte) */
+@font-face {
+  font-family: "Young Serif";
+  src: url("fonts/young-serif-latin-400-normal.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Schibsted Grotesk";
+  src: url("fonts/schibsted-grotesk-latin-400-normal.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Schibsted Grotesk";
+  src: url("fonts/schibsted-grotesk-latin-700-normal.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
+/* Direction F : Big Shoulders Display (titres condensés très gras) ; texte en Schibsted Grotesk */
+@font-face {
+  font-family: "Big Shoulders Display";
+  src: url("fonts/big-shoulders-display-latin-800-normal.woff2") format("woff2");
+  font-weight: 800; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Big Shoulders Display";
+  src: url("fonts/big-shoulders-display-latin-900-normal.woff2") format("woff2");
+  font-weight: 900; font-style: normal; font-display: swap;
+}
+
 /* Direction D : Archivo, fichier « variable » avec deux axes :
    la graisse (100 à 900) et la largeur (62 % à 125 %, via font-stretch). */
 @font-face {
@@ -281,13 +310,42 @@ section[id] {
 }
 
 
+/* ---------- Téléphones (moins de 480 px) ----------
+   Avec 8 liens (A à G + « Les 7 »), la barre démo passe sur deux lignes :
+   les liens, puis « Proposition de… ». On réserve la hauteur correspondante. */
+@media (max-width: 479px) {
+  :root {
+    --hauteur-barre-demo: 6.75rem;
+  }
+  .barre-demo {
+    flex-wrap: wrap;
+    row-gap: 0.25rem;
+  }
+  /* Avec 8 liens : la liste « s'efface » (display: contents) pour que ses éléments
+     se rangent directement dans la barre : A à G sur la 1re ligne,
+     puis « Les 7 » et « Proposition de… » sur la 2e. */
+  .barre-demo-liens {
+    display: contents;
+  }
+  .barre-demo-liens li {
+    list-style: none;
+  }
+  .barre-demo {
+    gap: 0.25rem;
+  }
+  .barre-demo-texte {
+    flex: 1 1 12rem;
+    margin-left: 0.5rem;
+    text-align: left;
+  }
+}
+
 /* ---------- Très petits écrans (moins de 360 px, ex. iPhone SE 1re génération) ----------
-   - le bouton « Appeler » du header ne garde que son icône
-     (son aria-label « Appeler Au Bonheur au … » reste lu par les lecteurs d'écran) ;
-   - la barre démo passe sur deux lignes, et on réserve la hauteur correspondante. */
+   Le bouton « Appeler » du header ne garde que son icône
+   (son aria-label « Appeler Au Bonheur au … » reste lu par les lecteurs d'écran). */
 @media (max-width: 359px) {
   :root {
-    --hauteur-barre-demo: 6.5rem;
+    --hauteur-barre-demo: 9.75rem;   /* 3 lignes : les lettres passent sur deux lignes */
   }
   .bouton-appel [data-texte="appeler"] {
     position: absolute;
@@ -296,15 +354,6 @@ section[id] {
     overflow: hidden;
     clip: rect(0 0 0 0);
     white-space: nowrap;
-  }
-  .barre-demo {
-    flex-wrap: wrap;
-    row-gap: 0.25rem;
-  }
-  .barre-demo-texte {
-    flex-basis: 100%;
-    margin-left: 0;
-    text-align: left;
   }
 }
 

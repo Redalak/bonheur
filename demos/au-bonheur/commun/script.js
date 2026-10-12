@@ -62,12 +62,13 @@ const CONFIG = {
   },
 
   // [À VÉRIFIER] remplacer par la vraie carte (intitulés génériques et prix d'exemple)
-  // Chaque catégorie a un nom FR, un nom EN et une liste de plats.
+  // Chaque catégorie a un nom FR, un nom EN, un nom chinois (zh, affiché par la version F
+  // uniquement, sous forme de dessin : voir f/index.html) et une liste de plats.
   // Chaque plat : { fr: "nom français", en: "nom anglais", prix: nombre avec un point }.
   // Un plat avec alcool: true n'est affiché que si afficherAlcool vaut true.
   carte: [
     {
-      fr: "Entrées", en: "Starters",
+      fr: "Entrées", en: "Starters", zh: "前菜",
       plats: [
         { fr: "Raviolis vapeur", en: "Steamed dumplings", prix: 6.5 },
         { fr: "Raviolis grillés", en: "Pan-fried dumplings", prix: 6.5 },
@@ -76,7 +77,7 @@ const CONFIG = {
       ]
     },
     {
-      fr: "Plats", en: "Mains",
+      fr: "Plats", en: "Mains", zh: "主菜",
       plats: [
         { fr: "Nouilles sautées", en: "Stir-fried noodles", prix: 12.5 },
         { fr: "Soupe de nouilles", en: "Noodle soup", prix: 12.5 },
@@ -86,14 +87,14 @@ const CONFIG = {
       ]
     },
     {
-      fr: "Desserts", en: "Desserts",
+      fr: "Desserts", en: "Desserts", zh: "甜点",
       plats: [
         { fr: "Dessert du moment", en: "Dessert of the day", prix: 5 },
         { fr: "Glaces", en: "Ice cream", prix: 4.5 }
       ]
     },
     {
-      fr: "Boissons", en: "Drinks",
+      fr: "Boissons", en: "Drinks", zh: "饮料",
       plats: [
         { fr: "Thé chaud", en: "Hot tea", prix: 3 },
         { fr: "Thé glacé", en: "Iced tea", prix: 3.5 },
@@ -164,13 +165,27 @@ const CONFIG = {
       jours: ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"],
       // Barre démo
       demoNav: "Choisir une proposition",
-      demoIndex: "Les 4",
-      ariaDemoIndex: "Les 4 propositions",
+      demoIndex: "Les 7",
+      ariaDemoIndex: "Les 7 propositions",
       demoTexte: "Proposition de",
       pauseGrille: "Pause",
       relancerGrille: "Relancer",
       heroAdresse: "11 rue Cadet · métro Cadet",
-      appelFlottant: "Appeler · {telephone}"
+      appelFlottant: "Appeler · {telephone}",
+      fuTraduction: "福, fú : « le bonheur » en chinois",
+      devantVous: "Devant vous",
+      xingfuTraduction: "幸福, xìngfú : « bonheur » en chinois",
+      couperAnims: "Couper les animations",
+      remettreAnims: "Remettre les animations",
+      rushIndice: "Faites défiler : la salle se remplit.",
+      bandeauQuestion: "T'as bien mangé ?",
+      bandeauRaviolis: "Raviolis",
+      bandeauNouilles: "Nouilles",
+      bandeauRiz: "Riz",
+      platPrecedent: "Précédent",
+      platSuivant: "Suivant",
+      ariaPlatPrecedent: "Plat précédent",
+      ariaPlatSuivant: "Plat suivant"
     },
     en: {
       titrePage: "Au Bonheur: Chinese & Asian kitchen, 11 Rue Cadet, Paris 9th",
@@ -223,13 +238,27 @@ const CONFIG = {
       statutFerme: "Closed",
       jours: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
       demoNav: "Choose a proposal",
-      demoIndex: "All 4",
-      ariaDemoIndex: "All 4 proposals",
+      demoIndex: "All 7",
+      ariaDemoIndex: "All 7 proposals",
       demoTexte: "Proposal by",
       pauseGrille: "Pause",
       relancerGrille: "Play",
       heroAdresse: "11 Rue Cadet · Cadet metro",
-      appelFlottant: "Call · {telephone}"
+      appelFlottant: "Call · {telephone}",
+      fuTraduction: "福, fú: “happiness” in Chinese",
+      devantVous: "In front of you",
+      xingfuTraduction: "幸福, xìngfú: “happiness” in Chinese",
+      couperAnims: "Turn animations off",
+      remettreAnims: "Turn animations on",
+      rushIndice: "Scroll down: the room fills up.",
+      bandeauQuestion: "Had a good meal?",
+      bandeauRaviolis: "Dumplings",
+      bandeauNouilles: "Noodles",
+      bandeauRiz: "Rice",
+      platPrecedent: "Previous",
+      platSuivant: "Next",
+      ariaPlatPrecedent: "Previous dish",
+      ariaPlatSuivant: "Next dish"
     }
   },
 
@@ -417,6 +446,14 @@ function mettreAJourBadge() {
    3. CARTE ET HORAIRES, CONSTRUITS DEPUIS CONFIG
    ===================================================================== */
 
+// Renvoie une copie du dessin SVG d'un mot chinois, pris dans la « bibliothèque »
+// cachée de la page (<div hidden data-hanzi-bibliotheque>), ou null s'il n'existe pas.
+// Les caractères chinois sont des dessins : pas besoin de charger une police chinoise.
+function hanzi(texte) {
+  const modele = document.querySelector('[data-hanzi-bibliotheque] [data-hanzi="' + texte + '"]');
+  return modele ? modele.cloneNode(true) : null;
+}
+
 // Construit la carte dans l'élément <div data-carte>.
 // Structure produite (la même pour A, B et C, seul le CSS change) :
 //   div.carte-categorie > h3.carte-titre (span.carte-numero + span.carte-nom-categorie)
@@ -431,6 +468,9 @@ function afficherCarte(langue) {
     const titre = creer("h3", "carte-titre");
     titre.appendChild(creer("span", "carte-numero", String(index + 1)));
     titre.appendChild(creer("span", "carte-nom-categorie", categorie[langue]));
+    // Nom chinois dessiné (version F uniquement : les autres pages n'ont pas la bibliothèque).
+    const dessin = categorie.zh ? hanzi(categorie.zh) : null;
+    if (dessin) titre.appendChild(dessin);
     bloc.appendChild(titre);
 
     const liste = creer("ul", "carte-liste");
@@ -590,6 +630,344 @@ function mettreAJourBoutonPause() {
 }
 
 
+// ---------------------------------------------------------------------
+// PLATEAU TOURNANT (version E)
+// Le plateau des tables chinoises, vu du dessus : 6 assiettes tirées de
+// CONFIG.carte tournent autour du centre. Tout le dessin est en CSS ;
+// le JavaScript ne fait que changer UN nombre : l'angle du plateau
+// (variable CSS --angle), et met à jour l'assiette « devant vous ».
+// ---------------------------------------------------------------------
+const NOMBRE_ASSIETTES = 6;
+const ECART_ASSIETTES = 360 / NOMBRE_ASSIETTES;   // 60 degrés entre deux assiettes
+const plateau = {
+  angle: 0,            // angle affiché, en degrés
+  cible: null,         // angle à atteindre après un clic sur un bouton (sinon null)
+  vitesse: 5,          // rotation automatique, en degrés par seconde
+  repriseApres: 0,     // instant où la rotation automatique reprend après un geste
+  assiettes: []        // la liste des 6 plats posés sur le plateau
+};
+
+// Choisit 6 plats en alternant les catégories (entrée, plat, dessert, boisson, entrée...).
+function choisirAssiettes() {
+  const choix = [];
+  const categories = CONFIG.carte.map(function (categorie) {
+    return categorie.plats
+      .filter(function (plat) { return !plat.alcool || CONFIG.afficherAlcool; })
+      .map(function (plat) { return { plat: plat, categorie: categorie }; });
+  });
+  for (let tour = 0; choix.length < NOMBRE_ASSIETTES && tour < 10; tour++) {
+    categories.forEach(function (liste) {
+      if (liste[tour] && choix.length < NOMBRE_ASSIETTES) choix.push(liste[tour]);
+    });
+  }
+  return choix;
+}
+
+// Construit les assiettes dans <div data-plateau-assiettes>.
+function afficherPlateau(langue) {
+  const conteneur = document.querySelector("[data-plateau-assiettes]");
+  if (!conteneur) return;
+  conteneur.textContent = "";
+  plateau.assiettes = choisirAssiettes();
+  plateau.assiettes.forEach(function (element, i) {
+    const assiette = creer("div", "assiette");
+    assiette.style.setProperty("--i", i);   // sa place autour du plateau (0 à 5)
+    const contenu = creer("div", "assiette-contenu");
+    contenu.appendChild(creer("span", "assiette-categorie", element.categorie[langue]));
+    contenu.appendChild(creer("span", "assiette-nom", element.plat[langue]));
+    contenu.appendChild(creer("span", "assiette-prix", formaterPrix(element.plat.prix, langue)));
+    assiette.appendChild(contenu);
+    conteneur.appendChild(assiette);
+  });
+  mettreAJourVedette();
+}
+
+// Quelle assiette est la plus proche de nous (en bas du plateau) ?
+function indexDevant() {
+  // L'assiette i est à l'angle (angle + i × 60°) ; « devant », c'est 180°.
+  let meilleur = 0;
+  let plusPetitEcart = 360;
+  for (let i = 0; i < NOMBRE_ASSIETTES; i++) {
+    const position = (((plateau.angle + i * ECART_ASSIETTES) % 360) + 360) % 360;
+    const ecart = Math.abs(position - 180);
+    if (ecart < plusPetitEcart) { plusPetitEcart = ecart; meilleur = i; }
+  }
+  return meilleur;
+}
+
+function mettreAJourVedette() {
+  const vedette = document.querySelector("[data-plateau-vedette]");
+  if (!vedette || plateau.assiettes.length === 0) return;
+  const i = indexDevant();
+  const element = plateau.assiettes[i];
+  vedette.querySelector("[data-vedette-nom]").textContent = element.plat[langueActuelle];
+  vedette.querySelector("[data-vedette-prix]").textContent = formaterPrix(element.plat.prix, langueActuelle);
+  document.querySelectorAll(".assiette").forEach(function (assiette, n) {
+    assiette.classList.toggle("est-devant", n === i);
+  });
+}
+
+function appliquerAngle() {
+  const disque = document.querySelector("[data-plateau-disque]");
+  if (disque) disque.style.setProperty("--angle", plateau.angle + "deg");
+  mettreAJourVedette();
+}
+
+// Fait tourner le plateau d'une assiette (sens = +1 ou -1), en douceur.
+function tournerDUneAssiette(sens) {
+  const depart = plateau.cible !== null ? plateau.cible : plateau.angle;
+  // On s'aligne sur la position d'assiette la plus proche, puis on avance d'un cran.
+  plateau.cible = Math.round(depart / ECART_ASSIETTES) * ECART_ASSIETTES + sens * ECART_ASSIETTES;
+  plateau.repriseApres = performance.now() + 4000;  // la rotation auto reprend 4 s plus tard
+  if (mouvementReduit()) { plateau.angle = plateau.cible; plateau.cible = null; appliquerAngle(); }
+}
+
+function mouvementReduit() {
+  return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function brancherPlateau() {
+  const zone = document.querySelector("[data-plateau]");
+  if (!zone) return;
+  const hero = document.querySelector(".hero");
+
+  // Boutons « Plat précédent » / « Plat suivant »
+  const precedent = document.querySelector("[data-plateau-precedent]");
+  const suivant = document.querySelector("[data-plateau-suivant]");
+  if (precedent) precedent.addEventListener("click", function () { tournerDUneAssiette(1); });
+  if (suivant) suivant.addEventListener("click", function () { tournerDUneAssiette(-1); });
+
+  // Glisser le doigt (ou la souris) horizontalement fait tourner le plateau.
+  // Le défilement vertical de la page reste libre (touch-action: pan-y dans le CSS).
+  let xPrecedent = null;
+  zone.addEventListener("pointerdown", function (evenement) {
+    xPrecedent = evenement.clientX;
+    plateau.cible = null;
+  });
+  zone.addEventListener("pointermove", function (evenement) {
+    if (xPrecedent === null) return;
+    plateau.angle += (evenement.clientX - xPrecedent) * 0.5;   // 2 px = 1 degré
+    xPrecedent = evenement.clientX;
+    plateau.repriseApres = performance.now() + 4000;
+    appliquerAngle();
+  });
+  ["pointerup", "pointercancel", "pointerleave"].forEach(function (type) {
+    zone.addEventListener(type, function () { xPrecedent = null; });
+  });
+
+  // La boucle d'animation : environ 60 fois par seconde.
+  let instantPrecedent = performance.now();
+  function boucle(instant) {
+    const secondes = Math.min((instant - instantPrecedent) / 1000, 0.1);
+    instantPrecedent = instant;
+    if (plateau.cible !== null) {
+      // Rapprochement en douceur vers la cible (15 % du chemin à chaque image).
+      plateau.angle += (plateau.cible - plateau.angle) * 0.15;
+      if (Math.abs(plateau.cible - plateau.angle) < 0.1) { plateau.angle = plateau.cible; plateau.cible = null; }
+      appliquerAngle();
+    } else if (!mouvementReduit() && !hero.classList.contains("est-en-pause") && instant > plateau.repriseApres) {
+      plateau.angle -= plateau.vitesse * secondes;   // rotation automatique, lente
+      appliquerAngle();
+    }
+    window.requestAnimationFrame(boucle);
+  }
+  window.requestAnimationFrame(boucle);
+}
+
+
+// ---------------------------------------------------------------------
+// VERSION G : « LE SERVICE », LA VERSION TOUT ANIMÉE
+// Principe : la page est lisible SANS animation. Le script ajoute la classe
+// « anims-actives » sur <html> ; c'est elle qui active les animations dans g/style.css.
+// Si l'appareil demande moins d'animations, ou si on clique sur
+// « Couper les animations », on la retire : tout s'affiche dans son état final.
+// Seules les propriétés transform et opacity sont animées (fluide sur mobile).
+// ---------------------------------------------------------------------
+const versionG = {
+  active: false,      // animations en cours ?
+  places: 24,         // nombre de places dessinées dans la salle du « rush »
+  enAttente: false    // un calcul de défilement est-il déjà prévu ?
+};
+
+function estVersionG() {
+  return document.body && document.body.getAttribute("data-version") === "g";
+}
+
+// Découpe un titre en lettres <span class="lettre"> pour les faire arriver une à une.
+// Les lettres sont regroupées par mot (<span class="mot-entier">) : un mot n'est jamais
+// coupé en fin de ligne. Le texte complet reste lisible par les lecteurs d'écran (aria-label).
+function decouperEnLettres(element) {
+  const texte = element.textContent.trim();
+  element.setAttribute("aria-label", texte);
+  element.textContent = "";
+  let n = 0;   // numéro de la lettre dans tout le titre (pour le décalage de la cascade)
+  texte.split(/\s+/).forEach(function (mot, indexMot) {
+    if (indexMot > 0) element.appendChild(document.createTextNode(" "));
+    const blocMot = creer("span", "mot-entier");
+    blocMot.setAttribute("aria-hidden", "true");
+    Array.prototype.forEach.call(mot, function (caractere) {
+      const lettre = creer("span", "lettre", caractere);
+      lettre.style.setProperty("--n", n++);
+      blocMot.appendChild(lettre);
+    });
+    element.appendChild(blocMot);
+  });
+}
+
+// Découpe un texte en mots <span class="mot"> (pour la phrase « Le lieu »).
+function decouperEnMots(element) {
+  const mots = element.textContent.trim().split(/\s+/);
+  element.textContent = "";
+  mots.forEach(function (mot, n) {
+    element.appendChild(creer("span", "mot", mot));
+    if (n < mots.length - 1) element.appendChild(document.createTextNode(" "));
+  });
+}
+
+// Prépare ce qui dépend de la langue (appelé après chaque changement de langue).
+function preparerGLangue() {
+  if (!estVersionG()) return;
+  document.querySelectorAll("[data-mots]").forEach(decouperEnMots);
+  const bouton = document.querySelector("[data-bascule-anims]");
+  if (bouton) bouton.textContent = CONFIG.textes[langueActuelle][versionG.active ? "couperAnims" : "remettreAnims"];
+  calculerDefilement();
+}
+
+function activerAnimations(oui) {
+  versionG.active = oui;
+  document.documentElement.classList.toggle("anims-actives", oui);
+  document.documentElement.classList.toggle("anims-coupees", !oui);
+  const bouton = document.querySelector("[data-bascule-anims]");
+  if (bouton) {
+    bouton.setAttribute("aria-pressed", String(!oui));
+    bouton.textContent = CONFIG.textes[langueActuelle][oui ? "couperAnims" : "remettreAnims"];
+  }
+  calculerDefilement();
+}
+
+// Tout ce qui dépend de la position de défilement, calculé au plus une fois par image.
+function calculerDefilement() {
+  if (!estVersionG()) return;
+  const hauteurEcran = window.innerHeight;
+
+  // 1. Barre de progression en haut de la page (0 → 1).
+  const barre = document.querySelector("[data-progression]");
+  const max = document.documentElement.scrollHeight - hauteurEcran;
+  if (barre) barre.style.transform = "scaleX(" + (max > 0 ? window.scrollY / max : 0) + ")";
+
+  // 2. Le rush : la salle se remplit pendant qu'on traverse la section.
+  const rush = document.querySelector("[data-rush]");
+  if (rush) {
+    const boite = rush.getBoundingClientRect();
+    const parcours = boite.height - hauteurEcran;
+    let p = parcours > 0 ? Math.min(Math.max(-boite.top / parcours, 0), 1) : 1;
+    if (!versionG.active) p = 1;                                   // sans animation : salle pleine
+    const remplies = Math.round(p * versionG.places);
+    document.querySelectorAll("[data-rush-places] .place").forEach(function (place, n) {
+      place.classList.toggle("est-prise", n < remplies);
+    });
+    const minutes = 11 * 60 + 45 + Math.round((p * 75) / 5) * 5;   // de 11h45 à 13h00, par 5 min
+    const heure = document.querySelector("[data-rush-heure]");
+    if (heure) heure.textContent = formaterHeure(minutes, langueActuelle);
+    rush.style.setProperty("--progression", p.toFixed(3));
+    rush.classList.toggle("est-pleine", p > 0.92);
+  }
+
+  // 3. « Le lieu » : les mots s'allument un par un pendant le défilement.
+  document.querySelectorAll("[data-mots]").forEach(function (phrase) {
+    const boite = phrase.getBoundingClientRect();
+    // 0 quand la phrase entre par le bas (90 % de l'écran), 1 quand elle atteint 40 %.
+    let p = (hauteurEcran * 0.9 - boite.top) / (hauteurEcran * 0.5);
+    p = versionG.active ? Math.min(Math.max(p, 0), 1) : 1;
+    const mots = phrase.querySelectorAll(".mot");
+    mots.forEach(function (mot, n) { mot.classList.toggle("est-allume", n < p * mots.length + 0.5); });
+  });
+
+  // 4. Le grand « AU BONHEUR » du pied de page glisse avec le défilement.
+  const geant = document.querySelector("[data-pied-geant]");
+  if (geant) {
+    const boite = geant.getBoundingClientRect();
+    const p = versionG.active ? (hauteurEcran - boite.top) / (hauteurEcran + boite.height) : 0.5;
+    geant.style.transform = "translateX(" + (-p * 30).toFixed(2) + "%)";
+  }
+}
+
+function demarrerG() {
+  if (!estVersionG()) return;
+
+  // Les places de la salle du « rush »
+  const salle = document.querySelector("[data-rush-places]");
+  if (salle) {
+    for (let n = 0; n < versionG.places; n++) {
+      const place = creer("span", "place");
+      place.style.setProperty("--n", n);
+      salle.appendChild(place);
+    }
+  }
+
+  // Le titre arrive lettre par lettre
+  document.querySelectorAll("[data-lettres]").forEach(decouperEnLettres);
+
+  // Apparition des blocs quand ils entrent à l'écran (une seule fois).
+  if ("IntersectionObserver" in window) {
+    const observateur = new IntersectionObserver(function (entrees) {
+      entrees.forEach(function (entree) {
+        if (entree.isIntersecting) {
+          entree.target.classList.add("est-visible");
+          observateur.unobserve(entree.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -12% 0px" });
+    document.querySelectorAll("[data-revele]").forEach(function (el) { observateur.observe(el); });
+  } else {
+    document.querySelectorAll("[data-revele]").forEach(function (el) { el.classList.add("est-visible"); });
+  }
+
+  // Défilement : un seul calcul par image, quoi qu'il arrive.
+  function surDefilement() {
+    if (versionG.enAttente) return;
+    versionG.enAttente = true;
+    window.requestAnimationFrame(function () { versionG.enAttente = false; calculerDefilement(); });
+  }
+  window.addEventListener("scroll", surDefilement, { passive: true });
+  window.addEventListener("resize", surDefilement);
+
+  // Ordinateur (souris) : le bol suit légèrement le pointeur, les boutons sont « aimantés ».
+  if (window.matchMedia("(pointer: fine)").matches) {
+    const scene = document.querySelector("[data-scene]");
+    const hero = document.querySelector(".hero");
+    if (scene && hero) {
+      hero.addEventListener("pointermove", function (evenement) {
+        if (!versionG.active) return;
+        const boite = hero.getBoundingClientRect();
+        const x = (evenement.clientX - boite.left) / boite.width - 0.5;   // de -0.5 à 0.5
+        const y = (evenement.clientY - boite.top) / boite.height - 0.5;
+        scene.style.setProperty("--souris-x", (x * 24).toFixed(1) + "px");
+        scene.style.setProperty("--souris-y", (y * 16).toFixed(1) + "px");
+      });
+    }
+    document.querySelectorAll("[data-aimant]").forEach(function (bouton) {
+      bouton.addEventListener("pointermove", function (evenement) {
+        if (!versionG.active) return;
+        const boite = bouton.getBoundingClientRect();
+        const dx = evenement.clientX - (boite.left + boite.width / 2);
+        const dy = evenement.clientY - (boite.top + boite.height / 2);
+        bouton.style.transform = "translate(" + (dx * 0.15).toFixed(1) + "px," + (dy * 0.25).toFixed(1) + "px)";
+      });
+      bouton.addEventListener("pointerleave", function () { bouton.style.transform = ""; });
+    });
+  }
+
+  // Bouton « Couper / Remettre les animations »
+  const bascule = document.querySelector("[data-bascule-anims]");
+  if (bascule) bascule.addEventListener("click", function () { activerAnimations(!versionG.active); });
+
+  // Au départ : animations actives, sauf si l'appareil demande moins de mouvement.
+  activerAnimations(!mouvementReduit());
+  preparerGLangue();
+}
+
+
 /* =====================================================================
    4. CHANGEMENT DE LANGUE
    ===================================================================== */
@@ -620,7 +998,9 @@ function appliquerLangue(langue) {
   afficherCarte(langue);
   afficherHoraires(langue);
   afficherGrilleHero(langue);
+  afficherPlateau(langue);
   mettreAJourBoutonPause();
+  preparerGLangue();
   mettreAJourBadge();
 
   // On mémorise le choix (facultatif). try/catch : en file:// ou en
@@ -665,6 +1045,8 @@ function demarrer() {
   } catch (erreur) { /* localStorage indisponible : on reste en français */ }
   appliquerLangue(langue);
   brancherPauseGrille();
+  brancherPlateau();
+  demarrerG();
 
   // Bouton FR / EN
   document.querySelectorAll("[data-bascule-langue]").forEach(function (bouton) {

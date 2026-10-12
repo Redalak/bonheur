@@ -1,0 +1,26 @@
+/* =====================================================================
+   MAISON KAZE : VARIANTE SIGNATURE (haut de gamme, plus réaliste)
+   Ambiance : Lanternes de papier dans la nuit, encre et indigo.
+   Tout le système (ambiance photographique, typographie, animations) est dans
+   commun/signature.css ; ici, seulement les couleurs et les polices.
+   ===================================================================== */
+
+:root {
+  --fond: #111316;
+  --fond-2: #181B20;
+  --texte: #ECE6DA;
+  --texte-doux: #B3AC9F;       /* texte secondaire (contraste AA vérifié par axe-core) */
+  --accent: #D9774A;
+  --sur-accent: #111316;      /* texte posé sur l'accent */
+
+  /* Les 4 couleurs des halos de lumière du hero */
+  --lumiere-1: #E88B3A;
+  --lumiere-2: #2E4A7A;
+  --lumiere-3: #F4E2C4;
+  --lumiere-4: #B5472E;
+
+  --police-titre: "Shippori Mincho", "Georgia", serif;
+  --police-texte: "Zen Kaku Gothic New", "Helvetica Neue", sans-serif;
+  --poids-titre: 600;
+  --italique: normal;
+}

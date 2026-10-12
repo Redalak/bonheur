@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Démo : la page ne doit pas être indexée par les moteurs de recherche. -->
+  <meta name="robots" content="noindex, nofollow">
+  <title data-texte="titrePage">Au Bonheur : cuisine chinoise et asiatique, 11 rue Cadet, Paris 9e</title>
+  <meta name="description" data-texte-meta="descriptionPage" content="Nouilles, riz, raviolis et bols, sur place, à emporter et en terrasse. La carte, les prix et les horaires. Réservation par téléphone au 01 47 70 50 22.">
+  <meta property="og:title" data-texte-meta="titrePage" content="Au Bonheur : cuisine chinoise et asiatique, 11 rue Cadet, Paris 9e">
+  <meta property="og:description" data-texte-meta="descriptionPage" content="Nouilles, riz, raviolis et bols, sur place, à emporter et en terrasse. La carte, les prix et les horaires. Réservation par téléphone au 01 47 70 50 22.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="theme-color" content="#2A1B13">
+  <link rel="stylesheet" href="../commun/commun.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../commun/script.js" defer></script>
+</head>
+<body>
+  <a class="lien-evitement" href="#contenu" data-texte="evitement">Aller au contenu</a>
+
+  <!-- ============ 1. HEADER ============ -->
+  <header class="entete">
+    <div class="entete-ligne">
+      <a class="entete-nom" href="#contenu">Au Bonheur</a>
+      <div class="entete-actions">
+        <button type="button" class="bouton-langue" data-bascule-langue aria-label="EN, switch to English" data-texte-aria="ariaLangue"><span data-texte="boutonLangue">EN</span></button>
+        <a class="bouton-appel" href="tel:+33147705022" data-lien-tel aria-label="Appeler Au Bonheur au 01 47 70 50 22" data-texte-aria="ariaAppeler">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg>
+          <span data-texte="appeler">Appeler</span>
+        </a>
+      </div>
+    </div>
+    <nav class="entete-nav" aria-label="Navigation principale" data-texte-aria="navLabel">
+      <ul>
+        <li><a href="#carte" data-texte="navCarte">Carte</a></li>
+        <li><a href="#horaires" data-texte="navHoraires">Horaires</a></li>
+        <li><a href="#acces" data-texte="navAcces">Accès</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="contenu">
+
+    <!-- ============ 2. HERO : l'enseigne bilingue et le plateau tournant ============ -->
+    <section class="hero" aria-labelledby="hero-titre">
+      <div class="hero-texte-bloc">
+        <!-- L'enseigne : le nom, et 福 (fú, « le bonheur »), sa traduction en chinois.
+             Ce n'est PAS un nom chinois du restaurant : seulement la traduction du mot. -->
+        <div class="enseigne">
+          <svg class="enseigne-fu" viewBox="8 -860 969 954" fill="currentColor" aria-hidden="true" focusable="false"><path transform="scale(1 -1)" d="M538 -52Q538 -58 521.5 -68.0Q505 -78 480.0 -86.0Q455 -94 427 -94H408V405L544 352H791L852 419L977 323Q973 317 962.5 311.0Q952 305 936 302V-54Q936 -57 917.0 -65.0Q898 -73 872.5 -79.5Q847 -86 825 -86H802V-19H538ZM283 -49Q283 -53 269.5 -63.0Q256 -73 231.5 -81.5Q207 -90 173 -90H149V289Q86 241 16 205L8 213Q54 257 94.0 309.5Q134 362 166.5 418.0Q199 474 223 530Q240 571 251 609H43L34 637H245L318 707L437 593Q430 586 420.5 582.5Q411 579 392 577Q357 507 301 438Q295 431 289 424Q344 401 371 373Q401 341 404.5 311.0Q408 281 393.0 261.0Q378 241 353.5 238.5Q329 236 304 260Q304 288 298 318Q292 345 283 371ZM585 441Q585 436 568.0 426.5Q551 417 525.5 409.5Q500 402 473 402H455V701L589 650H752L812 716L939 621Q935 615 925.0 609.0Q915 603 899 600V446Q899 443 879.5 436.5Q860 430 834.0 424.0Q808 418 786 418H762V456H585ZM762 484V622H585V484ZM851 860 864 850Q876 840 895.5 824.5Q915 809 936.5 791.0Q958 773 975 758Q971 742 947 742H405L397 770H783ZM127 857Q201 847 240.5 825.0Q280 803 293.0 776.5Q306 750 298.5 726.0Q291 702 270.0 687.5Q249 673 220.5 674.0Q192 675 163 700Q162 728 155.5 755.0Q149 782 140.0 807.5Q131 833 120 853ZM538 158V9H615V158ZM802 9V158H730V9ZM615 324H538V186H615ZM802 186V324H730V186Z"/></svg>
+          <h1 id="hero-titre" class="enseigne-nom">Au Bonheur</h1>
+        </div>
+        <p class="enseigne-traduction" data-texte="fuTraduction">福, fú : « le bonheur » en chinois</p>
+        <p class="hero-sous-titre" data-texte="heroSousTitre">Cuisine chinoise et asiatique, rue Cadet.</p>
+        <p class="hero-texte" data-texte="heroTexte">Nouilles, riz, raviolis et bols, servis copieux, midi et soir.</p>
+        <p class="badge" data-badge aria-live="polite"><span class="badge-point" aria-hidden="true"></span><span data-badge-texte>Du lundi au samedi, 12h00–15h00 et 18h30–23h00</span></p>
+        <div class="boutons">
+          <a class="bouton bouton-piment" href="tel:+33147705022" data-lien-tel aria-label="Appeler Au Bonheur au 01 47 70 50 22" data-texte-aria="ariaAppeler">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg>
+            <span data-texte="appeler">Appeler</span>
+          </a>
+          <a class="bouton bouton-contour" href="https://www.google.com/maps/search/?api=1&amp;query=Au+Bonheur+11+rue+Cadet+75009+Paris" target="_blank" rel="noopener noreferrer" data-lien-itineraire aria-label="Itinéraire vers Au Bonheur, ouvre Google Maps dans un nouvel onglet" data-texte-aria="ariaItineraire">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21.5s-6.5-6.2-6.5-11.5a6.5 6.5 0 0 1 13 0c0 5.3-6.5 11.5-6.5 11.5z"/><circle cx="12" cy="10" r="2.3"/></svg>
+            <span data-texte="itineraire">Itinéraire</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Le plateau tournant, vu du dessus. Décoratif pour les lecteurs d'écran
+           (aria-hidden) : la carte complète, en texte, est juste en dessous.
+           script.js pose 8 assiettes depuis CONFIG.carte et fait tourner le disque. -->
+      <div class="plateau-bloc">
+        <div class="plateau" data-plateau aria-hidden="true">
+          <div class="plateau-disque" data-plateau-disque>
+            <div class="plateau-assiettes" data-plateau-assiettes><div class="assiette" style="--i: 0;"><div class="assiette-contenu"><span class="assiette-categorie">Entrées</span><span class="assiette-nom">Raviolis vapeur</span><span class="assiette-prix">6,50&nbsp;€</span></div></div><div class="assiette" style="--i: 1;"><div class="assiette-contenu"><span class="assiette-categorie">Plats</span><span class="assiette-nom">Nouilles sautées</span><span class="assiette-prix">12,50&nbsp;€</span></div></div><div class="assiette" style="--i: 2;"><div class="assiette-contenu"><span class="assiette-categorie">Desserts</span><span class="assiette-nom">Dessert du moment</span><span class="assiette-prix">5,00&nbsp;€</span></div></div><div class="assiette est-devant" style="--i: 3;"><div class="assiette-contenu"><span class="assiette-categorie">Boissons</span><span class="assiette-nom">Thé chaud</span><span class="assiette-prix">3,00&nbsp;€</span></div></div><div class="assiette" style="--i: 4;"><div class="assiette-contenu"><span class="assiette-categorie">Entrées</span><span class="assiette-nom">Raviolis grillés</span><span class="assiette-prix">6,50&nbsp;€</span></div></div><div class="assiette" style="--i: 5;"><div class="assiette-contenu"><span class="assiette-categorie">Plats</span><span class="assiette-nom">Soupe de nouilles</span><span class="assiette-prix">12,50&nbsp;€</span></div></div></div>
+          </div>
+          <div class="plateau-moyeu"><svg class="moyeu-fu" viewBox="8 -860 969 954" fill="currentColor" aria-hidden="true" focusable="false"><path transform="scale(1 -1)" d="M538 -52Q538 -58 521.5 -68.0Q505 -78 480.0 -86.0Q455 -94 427 -94H408V405L544 352H791L852 419L977 323Q973 317 962.5 311.0Q952 305 936 302V-54Q936 -57 917.0 -65.0Q898 -73 872.5 -79.5Q847 -86 825 -86H802V-19H538ZM283 -49Q283 -53 269.5 -63.0Q256 -73 231.5 -81.5Q207 -90 173 -90H149V289Q86 241 16 205L8 213Q54 257 94.0 309.5Q134 362 166.5 418.0Q199 474 223 530Q240 571 251 609H43L34 637H245L318 707L437 593Q430 586 420.5 582.5Q411 579 392 577Q357 507 301 438Q295 431 289 424Q344 401 371 373Q401 341 404.5 311.0Q408 281 393.0 261.0Q378 241 353.5 238.5Q329 236 304 260Q304 288 298 318Q292 345 283 371ZM585 441Q585 436 568.0 426.5Q551 417 525.5 409.5Q500 402 473 402H455V701L589 650H752L812 716L939 621Q935 615 925.0 609.0Q915 603 899 600V446Q899 443 879.5 436.5Q860 430 834.0 424.0Q808 418 786 418H762V456H585ZM762 484V622H585V484ZM851 860 864 850Q876 840 895.5 824.5Q915 809 936.5 791.0Q958 773 975 758Q971 742 947 742H405L397 770H783ZM127 857Q201 847 240.5 825.0Q280 803 293.0 776.5Q306 750 298.5 726.0Q291 702 270.0 687.5Q249 673 220.5 674.0Q192 675 163 700Q162 728 155.5 755.0Q149 782 140.0 807.5Q131 833 120 853ZM538 158V9H615V158ZM802 9V158H730V9ZM615 324H538V186H615ZM802 186V324H730V186Z"/></svg></div>
+        </div>
+        <p class="plateau-vedette" data-plateau-vedette>
+          <span class="vedette-etiquette" data-texte="devantVous">Devant vous</span>
+          <span class="vedette-nom" data-vedette-nom>Thé chaud</span>
+          <span class="vedette-prix" data-vedette-prix>3,00 €</span>
+        </p>
+        <div class="plateau-commandes">
+          <button type="button" class="bouton-plateau" data-plateau-precedent aria-label="Plat précédent" data-texte-aria="ariaPlatPrecedent"><span data-texte="platPrecedent">Précédent</span></button>
+          <button type="button" class="bouton-plateau" data-pause-grille aria-pressed="false">Pause</button>
+          <button type="button" class="bouton-plateau" data-plateau-suivant aria-label="Plat suivant" data-texte-aria="ariaPlatSuivant"><span data-texte="platSuivant">Suivant</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3. ARGUMENT CLÉ ============ -->
+    <section class="argument" aria-labelledby="argument-titre">
+      <h2 id="argument-titre" data-texte="argTitre">Le midi, ça se remplit vite.</h2>
+      <p class="argument-texte" data-texte="argTexte">Appelez pour réserver votre table, ou pour faire préparer votre commande à emporter.</p>
+      <div class="argument-boutons">
+        <a class="bouton bouton-plein" href="tel:+33147705022" data-lien-tel>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg>
+          <span data-texte="argReserver">Réserver une table</span>
+        </a>
+        <a class="bouton bouton-contour" href="tel:+33147705022" data-lien-tel>
+          <span data-texte="argEmporter">Commander à emporter</span>
+        </a>
+      </div>
+      <p class="argument-numero"><a href="tel:+33147705022" data-lien-tel>01 47 70 50 22</a></p>
+    </section>
+
+    <!-- ============ 4. LA CARTE ============ -->
+    <section id="carte" class="section section-carte" aria-labelledby="carte-titre">
+      <div class="section-entete">
+        <h2 id="carte-titre" class="titre-section" data-texte="carteTitre">La carte</h2>
+        <p class="mention-exemple" data-mention-prix-exemple data-texte="prixExemple">Prix d'exemple</p>
+      </div>
+      <!-- La carte est reconstruite par script.js depuis CONFIG.carte.
+           Le contenu ci-dessous est une copie de secours si le JavaScript ne se charge pas. -->
+      <div class="carte" data-carte><div class="carte-categorie"><h3 class="carte-titre"><span class="carte-numero">1</span><span class="carte-nom-categorie">Entrées</span></h3><ul class="carte-liste"><li class="carte-plat"><span class="carte-nom">Raviolis vapeur</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">6,50&nbsp;€</span></li><li class="carte-plat"><span class="carte-nom">Raviolis grillés</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">6,50&nbsp;€</span></li><li class="carte-plat"><span class="carte-nom">Nems</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">5,50&nbsp;€</span></li><li class="carte-plat"><span class="carte-nom">Soupe de raviolis</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">7,00&nbsp;€</span></li></ul></div><div class="carte-categorie"><h3 class="carte-titre"><span class="carte-numero">2</span><span class="carte-nom-categorie">Plats</span></h3><ul class="carte-liste"><li class="carte-plat"><span class="carte-nom">Nouilles sautées</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">12,50&nbsp;€</span></li><li class="carte-plat"><span class="carte-nom">Soupe de nouilles</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">12,50&nbsp;€</span></li><li class="carte-plat"><span class="carte-nom">Riz sauté</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">11,50&nbsp;€</span></li><li class="carte-plat"><span class="carte-nom">Bo bun</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">13,00&nbsp;€</span></li><li class="carte-plat"><span class="carte-nom">Poulet croustillant</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">13,50&nbsp;€</span></li></ul></div><div class="carte-categorie"><h3 class="carte-titre"><span class="carte-numero">3</span><span class="carte-nom-categorie">Desserts</span></h3><ul class="carte-liste"><li class="carte-plat"><span class="carte-nom">Dessert du moment</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">5,00&nbsp;€</span></li><li class="carte-plat"><span class="carte-nom">Glaces</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">4,50&nbsp;€</span></li></ul></div><div class="carte-categorie"><h3 class="carte-titre"><span class="carte-numero">4</span><span class="carte-nom-categorie">Boissons</span></h3><ul class="carte-liste"><li class="carte-plat"><span class="carte-nom">Thé chaud</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">3,00&nbsp;€</span></li><li class="carte-plat"><span class="carte-nom">Thé glacé</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">3,50&nbsp;€</span></li><li class="carte-plat"><span class="carte-nom">Jus de fruits</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">3,50&nbsp;€</span></li><li class="carte-plat"><span class="carte-nom">Sodas</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">3,00&nbsp;€</span></li><li class="carte-plat"><span class="carte-nom">Eau minérale</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">2,50&nbsp;€</span></li></ul></div></div>
+      <p class="carte-note" data-texte="carteNote">Prix en euros TTC. Informations sur les allergènes disponibles sur demande.</p>
+      <p class="carte-alcool" data-mention-alcool hidden data-texte="mentionAlcool">L'abus d'alcool est dangereux pour la santé, à consommer avec modération.</p>
+    </section>
+
+    <!-- ============ 5. LE LIEU ============ -->
+    <section class="section lieu" aria-labelledby="lieu-titre">
+      <h2 id="lieu-titre" class="titre-section" data-texte="lieuTitre">Le lieu</h2>
+      <p class="lieu-texte" data-texte="lieuTexte">Une salle en bois clair sous des suspensions en rotin, et une terrasse sur la rue Cadet.</p>
+    </section>
+
+    <div class="pratique">
+      <!-- ============ 6. HORAIRES ============ -->
+      <section id="horaires" class="section horaires" aria-labelledby="horaires-titre">
+        <h2 id="horaires-titre" class="titre-section" data-texte="horairesTitre">Horaires</h2>
+        <table class="horaires-table">
+          <caption class="visuellement-cache" data-texte="horairesLegende">Horaires d'ouverture, jour par jour</caption>
+          <tbody data-horaires><tr><th class="horaires-jour" scope="row">Lundi</th><td class="horaires-services"><span class="horaires-service">12h00–15h00</span><span class="horaires-service">18h30–23h00</span></td></tr><tr><th class="horaires-jour" scope="row">Mardi</th><td class="horaires-services"><span class="horaires-service">12h00–15h00</span><span class="horaires-service">18h30–23h00</span></td></tr><tr><th class="horaires-jour" scope="row">Mercredi</th><td class="horaires-services"><span class="horaires-service">12h00–15h00</span><span class="horaires-service">18h30–23h00</span></td></tr><tr><th class="horaires-jour" scope="row">Jeudi</th><td class="horaires-services"><span class="horaires-service">12h00–15h00</span><span class="horaires-service">18h30–23h00</span></td></tr><tr><th class="horaires-jour" scope="row">Vendredi</th><td class="horaires-services"><span class="horaires-service">12h00–15h00</span><span class="horaires-service">18h30–23h00</span></td></tr><tr><th class="horaires-jour" scope="row">Samedi</th><td class="horaires-services"><span class="horaires-service">12h00–15h00</span><span class="horaires-service">18h30–23h00</span></td></tr><tr class="est-ferme"><th class="horaires-jour" scope="row">Dimanche</th><td class="horaires-services">Fermé</td></tr></tbody>
+        </table>
+      </section>
+
+      <!-- ============ 7. INFOS PRATIQUES ET ACCÈS ============ -->
+      <section class="section infos" aria-labelledby="infos-titre">
+        <h2 id="infos-titre" class="titre-section" data-texte="infosTitre">Infos pratiques</h2>
+        <ul class="infos-liste">
+          <li data-info="terrasse" data-texte="infoTerrasse">Terrasse sur la rue</li>
+          <li data-info="surPlaceEtEmporter" data-texte="infoSurPlace">Sur place et à emporter</li>
+          <li data-info="titresRestaurant" data-texte="infoTitres">Titres-restaurant acceptés</li>
+          <li data-info="fauteuilRoulant" data-texte="infoFauteuil">Accessible en fauteuil roulant</li>
+        </ul>
+      </section>
+
+      <section id="acces" class="section acces" aria-labelledby="acces-titre">
+        <h2 id="acces-titre" class="titre-section" data-texte="accesTitre">Accès</h2>
+        <address class="acces-adresse" data-texte="accesTexte">11 rue Cadet, 75009 Paris. Métro Cadet (ligne 7).</address>
+        <div class="boutons">
+          <a class="bouton bouton-plein" href="https://www.google.com/maps/search/?api=1&amp;query=Au+Bonheur+11+rue+Cadet+75009+Paris" target="_blank" rel="noopener noreferrer" data-lien-itineraire aria-label="Itinéraire vers Au Bonheur, ouvre Google Maps dans un nouvel onglet" data-texte-aria="ariaItineraire">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21.5s-6.5-6.2-6.5-11.5a6.5 6.5 0 0 1 13 0c0 5.3-6.5 11.5-6.5 11.5z"/><circle cx="12" cy="10" r="2.3"/></svg>
+            <span data-texte="itineraire">Itinéraire</span>
+          </a>
+          <a class="bouton bouton-contour" href="tel:+33147705022" data-lien-tel>01 47 70 50 22</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ============ 8. FOOTER ============ -->
+  <footer class="pied">
+    <p class="pied-nom">Au Bonheur</p>
+    <address class="pied-adresse">11 rue Cadet, 75009 Paris<br><a href="tel:+33147705022" data-lien-tel>01 47 70 50 22</a></address>
+    <p data-texte="footerHoraires">Du lundi au samedi, 12h00–15h00 et 18h30–23h00. Fermé le dimanche.</p>
+    <p class="pied-copyright" data-texte="copyright">© Au Bonheur</p>
+  </footer>
+
+  <!-- ============ BARRE DÉMO (à retirer pour la mise en ligne) ============ -->
+  <nav class="barre-demo" aria-label="Choisir une proposition" data-texte-aria="demoNav">
+    <ul class="barre-demo-liens">
+      <li><a href="../a/index.html">A</a></li>
+      <li><a href="../b/index.html">B</a></li>
+      <li><a href="../c/index.html">C</a></li>
+      <li><a href="../d/index.html">D</a></li>
+      <li><a href="../e/index.html" aria-current="page">E</a></li>
+      <li><a href="../f/index.html">F</a></li>
+      <li><a href="../g/index.html">G</a></li>
+      <li><a href="../index.html" aria-label="Les 7 propositions" data-texte-aria="ariaDemoIndex" data-texte="demoIndex">Les 7</a></li>
+    </ul>
+    <p class="barre-demo-texte"><span data-texte="demoTexte">Proposition de</span> <span class="barre-demo-nom"><span data-demo-nom>Reda Lakhledj</span>,</span> <a class="barre-demo-tel" href="tel:+33763456080" data-lien-demo>07 63 45 60 80</a></p>
+  </nav>
+</body>
+</html>

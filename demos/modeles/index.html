@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Démonstration : ne pas indexer. -->
+  <meta name="robots" content="noindex, nofollow">
+  <title>Modèles de sites : 12 commerces</title>
+  <meta name="description" content="Douze modèles de sites vitrines pour restaurants, bars et commerces de proximité, chacun avec sa direction artistique. Proposition de Reda Lakhledj.">
+  <meta property="og:title" content="Modèles de sites : 12 commerces">
+  <meta property="og:description" content="Restaurants et commerces : douze directions artistiques.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <link rel="stylesheet" href="commun/commun.css">
+  <style>
+    /* Styles propres à cette page de présentation des modèles. */
+    :root { --hauteur-barre-demo: 0rem; --focus: #111111; }
+    body {
+      background: #F4F1EC;
+      color: #161616;
+      font-family: "DM Sans", system-ui, sans-serif;
+      padding: 2.5rem max(1rem, calc((100% - 72rem) / 2)) 3rem;
+    }
+    h1 { font-family: "Syne", sans-serif; font-weight: 800; font-size: clamp(2rem, 8vw, 3.5rem); line-height: 1; }
+    .intro { max-width: 46ch; margin-top: 0.75rem; font-size: 1.125rem; }
+    .serie { margin-top: 2.5rem; font-family: "Syne", sans-serif; font-weight: 800; font-size: 1.75rem; }
+    .modeles { display: grid; gap: 1.25rem; margin-top: 2rem; }
+    @media (min-width: 700px) { .modeles { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1100px) { .modeles { grid-template-columns: repeat(3, 1fr); } }
+    .modele { position: relative; display: flex; flex-direction: column; background: #FFFFFF; border: 2px solid #161616; border-radius: 8px; overflow: hidden; }
+    .modele:focus-within { outline: 3px solid #161616; outline-offset: 3px; }
+    .apercu { display: flex; align-items: center; justify-content: center; min-height: 9rem; padding: 1.25rem; text-align: center; }
+    .apercu span { font-size: clamp(1.8rem, 7vw, 2.4rem); line-height: 1; }
+    .corps { display: flex; flex-direction: column; gap: 0.6rem; flex: 1; padding: 1.25rem; }
+    .corps h3 { font-size: 1.25rem; }
+    .corps h3 a { text-decoration: none; }
+    .corps h3 a::after { content: ""; position: absolute; inset: 0; }   /* toute la carte est cliquable */
+    .corps h3 a:focus-visible { outline: none; }
+    .signature { color: #444444; }
+    .pastilles { display: flex; gap: 0.375rem; margin-top: auto; padding-top: 0.5rem; }
+    .pastilles span { width: 1.6rem; height: 1.6rem; border-radius: 50%; border: 1px solid rgba(0, 0, 0, 0.3); }
+    .ouvrir { font-weight: 700; text-decoration: underline; text-underline-offset: 0.2em; }
+    /* Le lien vers la variante Signature passe au-dessus du lien qui couvre toute la carte. */
+    .liens-versions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 1rem; }
+    .lien-signature { position: relative; z-index: 1; display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0 0.9rem; border: 1px solid #161616; font-style: italic; text-decoration: none; }
+    .lien-signature:hover { background: #161616; color: #FFFFFF; }
+    .bas { margin-top: 2.5rem; }
+    .bas a { display: inline-block; padding: 0.6rem 0; font-weight: 700; }
+    /* Les 6 aperçus, chacun dans sa direction artistique */
+    .a-bar { background: #0E1513; color: #FFF3D6; }
+    .a-bar span { font-family: "Limelight", serif; text-shadow: 0 0 10px rgba(232, 201, 135, 0.8); }
+    .a-italien { background: #F6EFE3; color: #231A14; border-bottom: 4px solid #B3261E; }
+    .a-italien span { font-family: "Gloock", serif; }
+    .a-brasserie { background: #121212; color: #C9A45C; }
+    .a-brasserie span { font-family: "Bodoni Moda", serif; font-weight: 800; padding: 1rem 1.5rem 0.75rem; border: 2px solid #C9A45C; border-radius: 4rem 4rem 2px 2px; }
+    .a-asiatique { background: #F3EFE6; color: #1C1B1A; border-top: 2.5rem solid #22385A; min-height: 6.5rem; }
+    .a-asiatique span { font-family: "Shippori Mincho", serif; font-weight: 800; }
+    .a-turc { background: #1D3F8F; color: #FAF6EE; }
+    .a-turc span { font-family: "Marcellus", serif; letter-spacing: 0.18em; }
+    .a-africain { background: #F7EFE2; color: #1A1410; border-bottom: 1.25rem solid #E2A72E; }
+    .a-boulangerie { background: #3B2210; color: #FEF3C7; }
+    .a-boulangerie span { font-family: "Amatic SC", cursive; font-weight: 700; font-size: clamp(2.6rem, 11vw, 3.2rem); }
+    .a-cafe { background: #241A15; color: #F4ECE1; }
+    .a-cafe span { font-family: "Newsreader", serif; font-weight: 600; letter-spacing: -0.02em; }
+    .a-fleuriste { background: #FBF7F2; color: #1F4D3A; border-bottom: 4px solid #EBA3AE; }
+    .a-fleuriste span { font-family: "Playfair Display", serif; font-style: italic; font-weight: 600; }
+    .a-barbier { background: #1B2A41; color: #F3EADB; border-left: 1.5rem solid #A61E1E; }
+    .a-barbier span { font-family: "Abril Fatface", serif; }
+    .a-glacier { background: #FFF1C9; color: #4A2C21; border-bottom: 1rem solid #F7A8B8; }
+    .a-glacier span { font-family: "Fredoka", sans-serif; font-weight: 700; font-size: clamp(2.2rem, 9vw, 2.8rem); }
+    .a-fromagerie { background: #F2C14E; color: #2A2118; }
+    .a-fromagerie span { font-family: "DM Serif Display", serif; }
+    .a-africain span { font-family: "Syne", sans-serif; font-weight: 800; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>12 modèles de sites</h1>
+    <p class="intro">Six restaurants et six commerces de proximité, chacun en deux versions : <strong>illustrée</strong> (animations ludiques) et <strong>Signature</strong> (plus réaliste et haut de gamme, ambiance photographique). Même base solide : carte ou tarifs, horaires, appel, FR/EN. Noms et coordonnées fictifs.</p>
+
+    <h2 class="serie">Restaurants et bar</h2>
+
+    <ul class="modeles" role="list">
+      <li class="modele">
+        <div class="apercu a-bar" aria-hidden="true"><span>L'Heure Bleue</span></div>
+        <div class="corps">
+          <h3><a href="bar/index.html">Bar à cocktails : L'Heure Bleue</a></h3>
+          <p>Art déco de nuit : encre, champagne, émeraude.</p>
+          <p class="signature">Le nom s'allume comme un néon devant un soleil art déco.</p>
+          <div class="pastilles" aria-hidden="true"><span style="background:#0E1513"></span><span style="background:#E8C987"></span><span style="background:#1F5E4F"></span><span style="background:#F2EBDD"></span></div>
+          <p class="liens-versions"><span class="ouvrir" aria-hidden="true">Voir le modèle</span> <a class="lien-signature" href="bar/signature/index.html">Version Signature</a></p>
+        </div>
+      </li>
+      <li class="modele">
+        <div class="apercu a-italien" aria-hidden="true"><span>Trattoria Fiore</span></div>
+        <div class="corps">
+          <h3><a href="italien/index.html">Italien : Trattoria Fiore</a></h3>
+          <p>Trattoria moderne : papier crème, rouge tomate, basilic.</p>
+          <p class="signature">Un spaghetti dessiné à la main serpente autour du nom.</p>
+          <div class="pastilles" aria-hidden="true"><span style="background:#F6EFE3"></span><span style="background:#B3261E"></span><span style="background:#2F5D3A"></span><span style="background:#E9B949"></span></div>
+          <p class="liens-versions"><span class="ouvrir" aria-hidden="true">Voir le modèle</span> <a class="lien-signature" href="italien/signature/index.html">Version Signature</a></p>
+        </div>
+      </li>
+      <li class="modele">
+        <div class="apercu a-brasserie" aria-hidden="true"><span>Brasserie Lumière</span></div>
+        <div class="corps">
+          <h3><a href="brasserie/index.html">Brasserie : Brasserie Lumière</a></h3>
+          <p>Miroir doré, banquettes rouges, carrelage noir et blanc.</p>
+          <p class="signature">Le nom se dore dans le miroir, l'ardoise du jour s'écrit à la craie.</p>
+          <div class="pastilles" aria-hidden="true"><span style="background:#121212"></span><span style="background:#C9A45C"></span><span style="background:#8E1B1B"></span><span style="background:#F5F1E8"></span></div>
+          <p class="liens-versions"><span class="ouvrir" aria-hidden="true">Voir le modèle</span> <a class="lien-signature" href="brasserie/signature/index.html">Version Signature</a></p>
+        </div>
+      </li>
+      <li class="modele">
+        <div class="apercu a-asiatique" aria-hidden="true"><span>Maison Kaze</span></div>
+        <div class="corps">
+          <h3><a href="asiatique/index.html">Asiatique : Maison Kaze</a></h3>
+          <p>Cantine japonaise : washi, encre, indigo, vermillon.</p>
+          <p class="signature">Les rideaux noren ondulent dans le vent, le menu s'écrit à la verticale.</p>
+          <div class="pastilles" aria-hidden="true"><span style="background:#F3EFE6"></span><span style="background:#1C1B1A"></span><span style="background:#22385A"></span><span style="background:#B23A22"></span></div>
+          <p class="liens-versions"><span class="ouvrir" aria-hidden="true">Voir le modèle</span> <a class="lien-signature" href="asiatique/signature/index.html">Version Signature</a></p>
+        </div>
+      </li>
+      <li class="modele">
+        <div class="apercu a-turc" aria-hidden="true"><span>KERVAN</span></div>
+        <div class="corps">
+          <h3><a href="turc/index.html">Turc : Kervan</a></h3>
+          <p>Faïences d'Iznik : cobalt, turquoise, corail, cuivre.</p>
+          <p class="signature">Un mur de carreaux à étoile qui se retournent un à un.</p>
+          <div class="pastilles" aria-hidden="true"><span style="background:#1D3F8F"></span><span style="background:#138A86"></span><span style="background:#D2553D"></span><span style="background:#FAF6EE"></span></div>
+          <p class="liens-versions"><span class="ouvrir" aria-hidden="true">Voir le modèle</span> <a class="lien-signature" href="turc/signature/index.html">Version Signature</a></p>
+        </div>
+      </li>
+      <li class="modele">
+        <div class="apercu a-africain" aria-hidden="true"><span>Teranga</span></div>
+        <div class="corps">
+          <h3><a href="africain/index.html">Africain : Teranga</a></h3>
+          <p>Énergie wax : safran, terre rouge, vert, indigo.</p>
+          <p class="signature">Des formes géométriques qui s'assemblent, une frise wax qui défile.</p>
+          <div class="pastilles" aria-hidden="true"><span style="background:#E2A72E"></span><span style="background:#A63E25"></span><span style="background:#1F6B4A"></span><span style="background:#22306B"></span></div>
+          <p class="liens-versions"><span class="ouvrir" aria-hidden="true">Voir le modèle</span> <a class="lien-signature" href="africain/signature/index.html">Version Signature</a></p>
+        </div>
+      </li>
+    </ul>
+
+    <h2 class="serie">Commerces de proximité</h2>
+    <ul class="modeles" role="list">
+      <li class="modele">
+        <div class="apercu a-boulangerie" aria-hidden="true"><span>Maison Farine</span></div>
+        <div class="corps">
+          <h3><a href="boulangerie/index.html">Boulangerie : Maison Farine</a></h3>
+          <p>Le fournil : brun chaud, crème, blé.</p>
+          <p class="signature">La farine flotte dans la lumière, les grignes de la baguette se tracent.</p>
+          <div class="pastilles" aria-hidden="true"><span style="background:#3B2210"></span><span style="background:#92400E"></span><span style="background:#FEF3C7"></span><span style="background:#E8C77A"></span></div>
+          <p class="liens-versions"><span class="ouvrir" aria-hidden="true">Voir le modèle</span> <a class="lien-signature" href="boulangerie/signature/index.html">Version Signature</a></p>
+        </div>
+      </li>
+      <li class="modele">
+        <div class="apercu a-cafe" aria-hidden="true"><span>Grain Noir</span></div>
+        <div class="corps">
+          <h3><a href="cafe/index.html">Café torréfacteur : Grain Noir</a></h3>
+          <p>Éditorial et torréfié : espresso, crema, encre bleue.</p>
+          <p class="signature">Le tampon du torréfacteur tourne autour du grain de café.</p>
+          <div class="pastilles" aria-hidden="true"><span style="background:#241A15"></span><span style="background:#D9A066"></span><span style="background:#F4ECE1"></span><span style="background:#23419A"></span></div>
+          <p class="liens-versions"><span class="ouvrir" aria-hidden="true">Voir le modèle</span> <a class="lien-signature" href="cafe/signature/index.html">Version Signature</a></p>
+        </div>
+      </li>
+      <li class="modele">
+        <div class="apercu a-fleuriste" aria-hidden="true"><span>Pétale</span></div>
+        <div class="corps">
+          <h3><a href="fleuriste/index.html">Fleuriste : Pétale</a></h3>
+          <p>Organique : vert profond, rose, sauge.</p>
+          <p class="signature">La tige pousse et la fleur s'ouvre pétale par pétale.</p>
+          <div class="pastilles" aria-hidden="true"><span style="background:#FBF7F2"></span><span style="background:#1F4D3A"></span><span style="background:#EBA3AE"></span><span style="background:#A3324F"></span></div>
+          <p class="liens-versions"><span class="ouvrir" aria-hidden="true">Voir le modèle</span> <a class="lien-signature" href="fleuriste/signature/index.html">Version Signature</a></p>
+        </div>
+      </li>
+      <li class="modele">
+        <div class="apercu a-barbier" aria-hidden="true"><span>Le Coupe-Chou</span></div>
+        <div class="corps">
+          <h3><a href="barbier/index.html">Barbier : Le Coupe-Chou</a></h3>
+          <p>Rétro : marine, rouge barbier, laiton, damier.</p>
+          <p class="signature">Le poteau de barbier tourne sans fin, tarifs sur tableau.</p>
+          <div class="pastilles" aria-hidden="true"><span style="background:#1B2A41"></span><span style="background:#A61E1E"></span><span style="background:#F3EADB"></span><span style="background:#C9A465"></span></div>
+          <p class="liens-versions"><span class="ouvrir" aria-hidden="true">Voir le modèle</span> <a class="lien-signature" href="barbier/signature/index.html">Version Signature</a></p>
+        </div>
+      </li>
+      <li class="modele">
+        <div class="apercu a-glacier" aria-hidden="true"><span>Givre</span></div>
+        <div class="corps">
+          <h3><a href="glacier/index.html">Glacier : Givre</a></h3>
+          <p>Pastel et ludique : vanille, fraise, pistache.</p>
+          <p class="signature">Les boules tombent sur le cornet et rebondissent.</p>
+          <div class="pastilles" aria-hidden="true"><span style="background:#FFF1C9"></span><span style="background:#F7A8B8"></span><span style="background:#BFE3C0"></span><span style="background:#A8295C"></span></div>
+          <p class="liens-versions"><span class="ouvrir" aria-hidden="true">Voir le modèle</span> <a class="lien-signature" href="glacier/signature/index.html">Version Signature</a></p>
+        </div>
+      </li>
+      <li class="modele">
+        <div class="apercu a-fromagerie" aria-hidden="true"><span>La Meule</span></div>
+        <div class="corps">
+          <h3><a href="fromagerie/index.html">Fromagerie : La Meule</a></h3>
+          <p>Comté, croûte, lait et bleu d'Auvergne.</p>
+          <p class="signature">La meule se pose, une part se détache, les trous apparaissent.</p>
+          <div class="pastilles" aria-hidden="true"><span style="background:#FFFBF2"></span><span style="background:#F2C14E"></span><span style="background:#B4561A"></span><span style="background:#2E4A7D"></span></div>
+          <p class="liens-versions"><span class="ouvrir" aria-hidden="true">Voir le modèle</span> <a class="lien-signature" href="fromagerie/signature/index.html">Version Signature</a></p>
+        </div>
+      </li>
+    </ul>
+
+    <p class="bas">Proposition de Reda Lakhledj, <a href="tel:+33763456080">07 63 45 60 80</a></p>
+  </main>
+</body>
+</html>

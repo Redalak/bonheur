@@ -1,0 +1,29 @@
+/* =====================================================================
+   PÉTALE : VARIANTE SIGNATURE (haut de gamme, plus réaliste)
+   Ambiance : Lumière douce d'atelier, pétales et feuillages hors mise au point.
+   Tout le système (ambiance photographique, typographie, animations) est dans
+   commun/signature.css ; ici, seulement les couleurs et les polices.
+   ===================================================================== */
+
+:root {
+  --fond: #F7F2EE;
+  --fond-2: #EFE6E0;
+  --texte: #26302B;
+  --texte-doux: #55605A;       /* texte secondaire (contraste AA vérifié par axe-core) */
+  --accent: #8E3A52;
+  --sur-accent: #FFFFFF;      /* texte posé sur l'accent */
+
+  /* Les 4 couleurs des halos de lumière du hero */
+  --lumiere-1: #F2C1C8;
+  --lumiere-2: #B8CDB4;
+  --lumiere-3: #F5D0B0;
+  --lumiere-4: #FFFFFF;
+
+  --police-titre: "Playfair Display", "Georgia", serif;
+  --police-texte: "Inter", "Helvetica Neue", sans-serif;
+  --poids-titre: 700;
+  --italique: italic;
+}
+
+/* Variante claire : les halos « teintent » le fond comme une lumière chaude (mode multiplier). */
+.ambiance .lumiere { mix-blend-mode: multiply; opacity: 0.75; }

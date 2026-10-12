@@ -1,0 +1,185 @@
+/* =====================================================================
+   MODÈLE BAR : « L'Heure Bleue »
+   Art déco de nuit : encre, champagne, émeraude, laiton.
+   Signature : l'enseigne au néon s'allume lettre par lettre en grésillant,
+   devant un soleil art déco qui tourne très lentement.
+   Polices : Limelight (enseigne, titres) + Jost (texte).
+   ===================================================================== */
+
+:root {
+  --encre: #0E1513;        /* fond de nuit */
+  --nuit: #142521;         /* sections sombres */
+  --emeraude: #1F5E4F;     /* banquettes : bloc argument */
+  --champagne: #E8C987;    /* accents, titres, boutons */
+  --creme: #F2EBDD;        /* texte */
+  --laiton: #B8924A;       /* filets, soleil */
+
+  --police-titre: "Limelight", "Didot", serif;
+  --police-texte: "Jost", "Futura", sans-serif;
+  --focus: var(--champagne);
+}
+
+body {
+  background: var(--encre);
+  color: var(--creme);
+  font-family: var(--police-texte);
+}
+
+/* ---------- Header ---------- */
+.entete { background: var(--encre); border-bottom: 1px solid rgba(232, 201, 135, 0.35); }
+.entete-nom { font-family: var(--police-titre); font-size: 1.375rem; color: var(--champagne); }
+.bouton-langue { border: 1px solid var(--champagne); color: var(--champagne); letter-spacing: 0.1em; }
+.bouton-appel { background: var(--champagne); color: var(--encre); }
+.entete-nav a { letter-spacing: 0.14em; text-transform: uppercase; font-size: 0.9375rem; }
+
+/* ---------- Boutons ---------- */
+.bouton { border-radius: 0; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; }
+.bouton-principal { background: var(--champagne); border-color: var(--champagne); color: var(--encre); }
+.bouton-contour { color: var(--champagne); }
+
+/* ---------- Hero : le néon et le soleil ---------- */
+.hero {
+  min-height: 34rem;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding-top: 3.5rem;
+  padding-bottom: 4rem;
+}
+
+.soleil {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: max(52rem, 130vmin);
+  height: auto;
+  margin-left: calc(max(52rem, 130vmin) / -2);
+  margin-top: calc(max(52rem, 130vmin) / -2);
+  color: var(--laiton);
+  opacity: 0.32;
+  stroke-width: 1.2;
+}
+.anims-actives .soleil { animation: soleil-tourne 160s linear infinite; }
+@keyframes soleil-tourne { to { transform: rotate(360deg); } }
+
+/* Cadre art déco autour du contenu : double filet champagne. */
+.hero-contenu {
+  max-width: 40rem;
+  padding: 2.25rem 1.25rem 1.75rem;
+  background: var(--encre);
+  border: 1px solid var(--champagne);
+  outline: 1px solid rgba(232, 201, 135, 0.45);
+  outline-offset: 6px;
+}
+
+.hero-type {
+  color: var(--champagne);
+  font-size: 1rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+/* L'enseigne au néon */
+.neon {
+  margin-top: 0.75rem;
+  font-family: var(--police-titre);
+  font-weight: 400;
+  font-size: clamp(2.75rem, 12.5vw, 6.5rem);
+  line-height: 1;
+  color: #FFF3D6;
+  text-shadow: 0 0 4px rgba(255, 243, 214, 0.9), 0 0 14px rgba(232, 201, 135, 0.85), 0 0 34px rgba(232, 201, 135, 0.5);
+}
+/* Chaque lettre s'allume en grésillant, à son tour. */
+.anims-actives .neon .lettre {
+  transform: none;
+  animation-name: neon-allume;
+  animation-duration: 1400ms;
+  animation-timing-function: steps(1, end);
+  animation-delay: calc(300ms + var(--n) * 85ms);
+}
+@keyframes neon-allume {
+  0%   { opacity: 0.08; }
+  12%  { opacity: 1; }
+  16%  { opacity: 0.2; }
+  28%  { opacity: 1; }
+  32%  { opacity: 0.35; }
+  44%, 100% { opacity: 1; }
+}
+
+.hero-sous-titre { font-size: clamp(1.25rem, 5vw, 1.625rem); letter-spacing: 0.02em; }
+.hero-texte { margin-left: auto; margin-right: auto; }
+.hero .boutons { justify-content: center; }
+.hero .badge { color: var(--champagne); }
+
+/* Le texte du hero arrive après l'enseigne */
+.anims-actives .hero-contenu > :not(.neon):not(.hero-type) {
+  opacity: 0;
+  animation: bar-monte 900ms var(--sortie-expo) forwards;
+  animation-delay: 1500ms;
+}
+@keyframes bar-monte { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Argument : banquette émeraude ---------- */
+.argument { background: var(--emeraude); text-align: center; }
+.argument h2 {
+  margin: 0 auto;
+  font-family: var(--police-titre);
+  font-weight: 400;
+  font-size: clamp(2rem, 8vw, 3.75rem);
+  line-height: 1.05;
+  color: var(--champagne);
+}
+.argument-texte { margin-left: auto; margin-right: auto; }
+.argument-boutons { justify-content: center; }
+.argument-numero a { font-family: var(--police-titre); font-size: clamp(1.5rem, 6vw, 2.25rem); color: var(--champagne); }
+
+/* ---------- Titres de section ---------- */
+.titre-section {
+  font-family: var(--police-titre);
+  font-weight: 400;
+  font-size: clamp(2rem, 8vw, 3.25rem);
+  color: var(--champagne);
+}
+.mention-exemple { border: 1px solid var(--laiton); padding: 0.1rem 0.6rem; color: var(--champagne); }
+
+/* ---------- La carte du bar ---------- */
+.section-carte { background: var(--encre); }
+.carte-titre {
+  padding-bottom: 0.6rem;
+  border-bottom: 3px double var(--laiton);
+  font-family: var(--police-titre);
+  font-weight: 400;
+  font-size: 1.625rem;
+  color: var(--champagne);
+}
+.carte-sous-titre { font-family: var(--police-texte); letter-spacing: 0.12em; text-transform: uppercase; color: var(--creme); }
+.carte-plat { align-items: flex-end; }
+.carte-nom { font-size: 1.125rem; }
+.carte-points {
+  display: block;
+  flex: 1 1 1rem;
+  min-width: 1rem;
+  margin-bottom: 0.4em;
+  border-bottom: 1px dotted var(--laiton);
+}
+.carte-prix { font-family: var(--police-titre); font-size: 1.25rem; color: var(--champagne); }
+
+/* ---------- Le lieu ---------- */
+.lieu { background: var(--nuit); text-align: center; }
+.lieu .titre-section { font-size: 1.5rem; }
+.lieu-texte { margin: 0.75rem auto 0; font-size: clamp(1.5rem, 5.5vw, 2.25rem); line-height: 1.3; font-weight: 400; }
+
+/* ---------- Horaires, infos, accès ---------- */
+.pratique { background: var(--encre); }
+.horaires-table th, .horaires-table td { border-bottom: 1px solid rgba(232, 201, 135, 0.25); }
+.horaires-table .est-aujourdhui th, .horaires-table .est-aujourdhui td { background: var(--emeraude); color: var(--creme); }
+.infos-liste li::before { width: 0.55rem; height: 0.55rem; background: var(--champagne); transform: rotate(45deg); }
+
+/* ---------- Pied de page ---------- */
+.pied { background: #09100E; border-top: 3px double var(--laiton); text-align: center; justify-items: center; }
+.pied-nom { font-family: var(--police-titre); font-size: 2rem; color: var(--champagne); }
+
+/* ---------- Ordinateur ---------- */
+@media (min-width: 768px) {
+  .hero-contenu { padding: 3rem 3rem 2.25rem; }
+}
