@@ -45,14 +45,12 @@
 
   <main id="contenu">
 
-    <!-- ============ 2. HERO : l'ambiance photographique (variante Signature) ============ -->
-    <section class="hero hero-signature" aria-labelledby="hero-titre">
-      <!-- Halos de lumière hors mise au point + grain de film + vignettage (décoratif).
-           Pour une vraie photo : la mettre en fond de .ambiance (background-image) et garder le grain. -->
-      <div class="ambiance" aria-hidden="true"><span class="lumiere"></span><span class="lumiere"></span><span class="lumiere"></span><span class="lumiere"></span><span class="lumiere"></span><span class="lumiere"></span><svg class="grain" aria-hidden="true" focusable="false"><filter id="grain-filtre"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#grain-filtre)"/></svg><span class="vignette"></span></div>
+    <!-- ============ 2. HERO : composition et matière propres à cette variante Signature ============ -->
+    <section class="hero hero-sig hero-fromagerie" aria-labelledby="hero-titre">
+      <svg class="tex mur tex-pierre" aria-hidden="true" focusable="false" style="mix-blend-mode:normal"><filter id="tex-pierre-15" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="5" seed="15" result="n"/><feDiffuseLighting in="n" surfaceScale="4" lighting-color="#ffffff" result="l"><feDistantLight azimuth="235" elevation="55"/></feDiffuseLighting><feFlood flood-color="#9C9184" result="teinte"/><feBlend in="l" in2="teinte" mode="multiply"/></filter><rect width="100%" height="100%" filter="url(#tex-pierre-15)"/></svg>
+      <span class="bougie-lueur" aria-hidden="true"></span>
       <div class="hero-contenu">
         <p class="surtitre" data-texte="sigType">Fromagerie · Paris</p>
-        <span class="filet-or" aria-hidden="true"></span>
         <h1 id="hero-titre" class="hero-nom" data-lettres>La Meule</h1>
         <p class="hero-sous-titre" data-texte="heroSousTitre">Fromages affinés, coupés à la demande.</p>
         <p class="hero-texte" data-texte="heroTexte">Tommes, bleus, chèvres et pâtes molles, et des plateaux composés pour vos repas.</p>
@@ -69,7 +67,12 @@
         </div>
         <button type="button" class="bouton-anims" data-bascule-anims aria-pressed="false">Couper les animations</button>
       </div>
-      <a class="decouvrir" href="#carte" data-texte="decouvrir">Découvrir la carte</a>
+      <!-- L'étagère d'affinage : planche de bois et meules ; l'étiquette à la craie (décoratif). -->
+      <div class="etagere" aria-hidden="true">
+        <div class="meules"><span class="meule-sig m0"><span class="meule-face"></span></span><span class="meule-sig m1"><span class="meule-face"></span></span><span class="meule-sig m2"><span class="meule-face"></span></span><span class="meule-sig m3"><span class="meule-face"></span></span></div>
+        <div class="planche-sig"><svg class="tex tex-bois" aria-hidden="true" focusable="false" style="mix-blend-mode:normal"><filter id="tex-bois-16" x="0" y="0" width="100%" height="100%"><feTurbulence type="turbulence" baseFrequency="0.006 0.16" numOctaves="4" seed="16" stitchTiles="stitch"/><feColorMatrix type="matrix" values="0 0 0 0 0.165  0 0 0 0 0.086  0 0 0 0 0.031  1.20 0 0 0 -0.25"/></filter><rect width="100%" height="100%" filter="url(#tex-bois-16)"/></svg></div>
+        <span class="etiquette-craie"><svg class="tex tex-grain" aria-hidden="true" focusable="false" style="mix-blend-mode:normal"><filter id="tex-grain-17" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" seed="17" stitchTiles="stitch"/><feColorMatrix type="matrix" values="0 0 0 0 1.000  0 0 0 0 1.000  0 0 0 0 1.000  0.48 0 0 0 -0.10"/></filter><rect width="100%" height="100%" filter="url(#tex-grain-17)"/></svg><span>Comté · 18 mois</span></span>
+      </div>
     </section>
 
     <!-- ============ 3. ARGUMENT CLÉ : faire appeler ============ -->

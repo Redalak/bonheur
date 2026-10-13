@@ -242,3 +242,47 @@ body {
 /* ---------- Pied de page ---------- */
 .pied { text-align: center; justify-items: center; background: var(--fond-2); color: var(--texte-doux); border-top: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); }
 .pied-nom { font-family: var(--police-titre); font-weight: var(--poids-titre, 400); font-size: 2.25rem; color: var(--texte); }
+
+
+/* =====================================================================
+   HÉROS « SIGNATURE » À IDENTITÉ PROPRE (.hero-sig)
+   Chaque variante a sa composition et sa matière (voir son style.css).
+   Ici : la base commune (calques de matière, chorégraphie d'entrée).
+   ===================================================================== */
+
+.hero-sig {
+  display: grid;
+  align-items: center;
+  gap: 2rem;
+  min-height: max(36rem, calc(100svh - var(--hauteur-header) - var(--hauteur-barre-demo)));
+  padding-top: 3rem;
+  padding-bottom: 4rem;
+  isolation: isolate;
+}
+
+/* Calque de matière (papier, bois, cuir, pierre, lin, kraft, grain) : remplit son parent. */
+.tex { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.hero-sig > .tex { z-index: -1; }
+
+.hero-sig .surtitre { margin-bottom: 1rem; }
+.hero-sig .hero-sous-titre { margin-top: 1rem; font-family: var(--police-titre); font-style: var(--italique, italic); font-size: clamp(1.375rem, 5vw, 2rem); line-height: 1.2; }
+.hero-sig .hero-texte { color: var(--texte-doux); }
+.hero-sig .badge { font-weight: 400; letter-spacing: 0.03em; }
+.hero-sig .badge.est-ouvert .badge-point { color: var(--accent); }
+.hero-sig .boutons { margin-top: 1.5rem; }
+.hero-sig .bouton-anims { color: var(--texte-doux); }
+
+/* Chorégraphie : lettres qui sortent du flou, puis le reste en fondu. */
+.anims-actives .hero-sig [data-lettres] .lettre {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(0.12em);
+  animation: lettre-luxe 1500ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  animation-delay: calc(var(--delai-titre, 600ms) + var(--n) * 50ms);
+}
+.anims-actives .hero-sig .hero-contenu > :not(.hero-nom) {
+  opacity: 0;
+  animation: monte-doux 1300ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  animation-delay: 1500ms;
+}
+.anims-actives .hero-sig .hero-contenu > .surtitre { animation-delay: 300ms; }

@@ -1,26 +1,86 @@
 /* =====================================================================
-   KERVAN : VARIANTE SIGNATURE (haut de gamme, plus réaliste)
-   Ambiance : Lampes de cuivre et éclats de faïence turquoise dans la nuit bleue.
-   Tout le système (ambiance photographique, typographie, animations) est dans
-   commun/signature.css ; ici, seulement les couleurs et les polices.
+   KERVAN : VARIANTE SIGNATURE « L'ARCHE ÉMAILLÉE »
+   Une fenêtre en arc outrepassé, remplie d'une mosaïque de carreaux
+   émaillés aux bleus variés, chacun avec son reflet de vernis ; le mur
+   autour est un enduit de pierre ; une lueur de lanterne en cuivre.
+   Matières : céramique vernissée (reflets), enduit (relief), cuivre.
    ===================================================================== */
 
 :root {
   --fond: #0D1726;
   --fond-2: #13203A;
   --texte: #F1EADF;
-  --texte-doux: #B9B5AE;       /* texte secondaire (contraste AA vérifié par axe-core) */
-  --accent: #D29A5A;
-  --sur-accent: #0D1726;      /* texte posé sur l'accent */
-
-  /* Les 4 couleurs des halos de lumière du hero */
+  --texte-doux: #BDB8B0;
+  --accent: #D9A260;
+  --sur-accent: #0D1726;
   --lumiere-1: #E3A157;
   --lumiere-2: #2A9D96;
   --lumiere-3: #9C2F3B;
   --lumiere-4: #F5D9A8;
-
-  --police-titre: "Marcellus", "Georgia", serif;
+  --police-titre: "Marcellus", "Trajan Pro", serif;
   --police-texte: "Figtree", "Helvetica Neue", sans-serif;
   --poids-titre: 400;
   --italique: normal;
+}
+
+/* ---------- Hero ---------- */
+.hero-turc { background: var(--fond); }
+.hero-turc .tex.enduit { opacity: 0.22; }   /* enduit en relief, très discret */
+.hero-turc .hero-nom { font-size: clamp(3.5rem, 17vw, 8rem); letter-spacing: 0.08em; text-transform: uppercase; line-height: 1; }
+
+/* L'arche : forme d'arc outrepassé, bordée de cuivre. */
+.arche {
+  position: relative;
+  justify-self: center;
+  width: min(78vw, 22rem);
+  aspect-ratio: 3 / 4;
+  padding: 0.6rem;
+  border-radius: 50% 50% 0.25rem 0.25rem / 38% 38% 0.25rem 0.25rem;
+  background: linear-gradient(135deg, #5E3415, #E0A060 25%, #8A4E22 50%, #E0A060 75%, #5E3415);
+}
+.mosaique {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  height: 100%;
+  overflow: hidden;
+  border-radius: 50% 50% 0 0 / 36% 36% 0 0;
+  background: #E9E1D2;          /* le joint de ciment entre les carreaux */
+  gap: 2px;
+}
+/* Un carreau émaillé : sa couleur (--ton), un reflet de vernis en haut à gauche, un bord plus sombre. */
+.zellige {
+  aspect-ratio: 1;
+  background:
+    radial-gradient(circle at 28% 24%, rgba(255, 255, 255, 0.55), transparent 32%),
+    radial-gradient(circle at 70% 80%, rgba(0, 0, 0, 0.22), transparent 55%),
+    var(--ton);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+}
+.zellige:nth-child(7n+3) { background: radial-gradient(circle at 28% 24%, rgba(255, 255, 255, 0.5), transparent 32%), #F1EADF; }
+.zellige:nth-child(11n+5) { background: radial-gradient(circle at 28% 24%, rgba(255, 255, 255, 0.45), transparent 32%), #B0462F; }
+/* La lueur chaude de la lanterne, en bas de l'arche */
+.arche-lueur { position: absolute; left: 10%; right: 10%; bottom: -10%; height: 40%; border-radius: 50%; background: radial-gradient(ellipse, rgba(227, 161, 87, 0.45), transparent 70%); }
+/* Les carreaux apparaissent un à un, comme une pose de mosaïque, puis le vernis brille. */
+.anims-actives .zellige { opacity: 0; animation: pose-zellige 500ms ease-out forwards; animation-delay: calc(200ms + var(--n) * 28ms); }
+@keyframes pose-zellige { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: none; } }
+.anims-actives .arche-lueur { animation: lanterne 4s ease-in-out infinite alternate; }
+@keyframes lanterne { from { opacity: 0.6; } to { opacity: 1; } }
+
+/* ---------- La carte : liserés de cuivre, ornement d'étoile ---------- */
+.section-carte { background: var(--fond-2); }
+.carte-titre::before, .carte-titre::after { height: 2px; background: linear-gradient(90deg, transparent, var(--accent)); }
+.carte-titre::after { background: linear-gradient(90deg, var(--accent), transparent); }
+.carte-plat { border-bottom-style: dashed; }
+
+/* ---------- Le lieu : galerie en arcs outrepassés ---------- */
+.cadre { border-radius: 50% 50% 0.25rem 0.25rem / 32% 32% 0.25rem 0.25rem; border: 3px solid var(--accent); }
+
+@media (min-width: 1000px) {
+  .hero-turc { grid-template-columns: 1fr 24rem; gap: 5rem; }
+  .arche { order: 2; width: 100%; }
+}
+
+/* Mobile : le texte et le bouton d'appel d'abord, l'arche ensuite (plus petite). */
+@media (max-width: 999px) {
+  .arche { order: 2; width: min(60vw, 18rem); }
 }

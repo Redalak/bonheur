@@ -1,26 +1,68 @@
 /* =====================================================================
-   MAISON KAZE : VARIANTE SIGNATURE (haut de gamme, plus réaliste)
-   Ambiance : Lanternes de papier dans la nuit, encre et indigo.
-   Tout le système (ambiance photographique, typographie, animations) est dans
-   commun/signature.css ; ici, seulement les couleurs et les polices.
+   MAISON KAZE : VARIANTE SIGNATURE « SUMI-E »
+   Sur un papier washi fibreux, un ensō (le cercle zen) tracé d'un seul
+   coup de pinceau à l'encre ; un sceau rouge (hanko). Beaucoup de vide,
+   composition asymétrique, écriture verticale.
+   Matières : washi (fibres), encre (bords irréguliers par déplacement), sceau.
    ===================================================================== */
 
 :root {
-  --fond: #111316;
-  --fond-2: #181B20;
-  --texte: #ECE6DA;
-  --texte-doux: #B3AC9F;       /* texte secondaire (contraste AA vérifié par axe-core) */
-  --accent: #D9774A;
-  --sur-accent: #111316;      /* texte posé sur l'accent */
-
-  /* Les 4 couleurs des halos de lumière du hero */
-  --lumiere-1: #E88B3A;
-  --lumiere-2: #2E4A7A;
+  --fond: #F2EDE3;
+  --fond-2: #E9E2D4;
+  --texte: #1B1A18;
+  --texte-doux: #4F4A42;
+  --accent: #A8381F;
+  --sur-accent: #FFFFFF;
+  --lumiere-1: #E8C9A0;
+  --lumiere-2: #9DB0C8;
   --lumiere-3: #F4E2C4;
-  --lumiere-4: #B5472E;
-
-  --police-titre: "Shippori Mincho", "Georgia", serif;
-  --police-texte: "Zen Kaku Gothic New", "Helvetica Neue", sans-serif;
+  --lumiere-4: #D98C6A;
+  --encre: #1B1A18;
+  --police-titre: "Shippori Mincho", "Hiragino Mincho ProN", serif;
+  --police-texte: "Zen Kaku Gothic New", "Hiragino Sans", sans-serif;
   --poids-titre: 600;
   --italique: normal;
+}
+
+/* ---------- Hero : washi, ensō, sceau ---------- */
+.hero-asiatique { background: var(--fond); }
+.hero-asiatique .hero-contenu { max-width: 32rem; }
+.hero-asiatique .hero-nom { font-size: clamp(3.25rem, 14vw, 7rem); line-height: 1.02; letter-spacing: 0.02em; }
+
+/* L'ensō : grand cercle d'encre, tracé au chargement, bords irréguliers (filtre). */
+.enso { position: absolute; z-index: -1; right: -18%; top: 4%; width: min(110vw, 34rem); height: auto; }
+.enso-trait { fill: none; stroke: var(--encre); stroke-width: 26; stroke-linecap: round; opacity: 0.9; }
+.anims-actives .enso-trait { stroke-dasharray: 1; stroke-dashoffset: 1; animation: pinceau 2400ms cubic-bezier(0.55, 0.1, 0.25, 1) forwards 200ms; }
+@keyframes pinceau { to { stroke-dashoffset: 0; } }
+
+/* Le sceau rouge, légèrement irrégulier comme un vrai tampon. */
+.hanko { position: absolute; right: 8%; bottom: 14%; width: 4.5rem; transform: rotate(-4deg); }
+.hanko svg { width: 100%; height: auto; }
+.hanko rect { fill: var(--accent); }
+.hanko text { fill: var(--fond); font-family: var(--police-titre), serif; font-size: 52px; font-weight: 800; }
+.anims-actives .hanko { animation: tampon-sceau 600ms cubic-bezier(0.3, 1.4, 0.5, 1) both 2500ms; }
+@keyframes tampon-sceau { from { opacity: 0; transform: scale(1.5) rotate(-4deg); } to { opacity: 1; transform: rotate(-4deg); } }
+
+/* Le texte du hero passe devant l'ensō sur un léger voile de papier */
+.hero-asiatique .hero-contenu { position: relative; padding: 1rem 0; background: color-mix(in srgb, var(--fond) 82%, transparent); }
+
+/* ---------- La carte : un menu vertical, comme un makimono ---------- */
+.section-carte .carte-titre { color: var(--texte); }
+.section-carte .carte-titre::before, .section-carte .carte-titre::after { background: var(--accent); }
+.carte-prix { color: var(--texte); }
+.carte-nom::before { content: ""; display: inline-block; width: 0.45rem; height: 0.45rem; margin-right: 0.6rem; background: var(--accent); vertical-align: middle; }
+
+/* ---------- Le lieu : cadres hauts et étroits, comme des kakemono ---------- */
+.galerie { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.cadre { aspect-ratio: 1 / 2.2; border-top: 0.75rem solid #5A4632; border-bottom: 0.75rem solid #5A4632; }
+.cadre .lumiere { mix-blend-mode: multiply; }
+
+@media (min-width: 1000px) {
+  .enso { right: 4%; top: 50%; width: 36rem; transform: translateY(-50%); }
+  .hanko { right: 12%; bottom: 12%; }
+}
+
+/* Mobile : le sceau en haut à droite, loin des boutons. */
+@media (max-width: 999px) {
+  .hanko { top: 1.25rem; bottom: auto; right: 1.25rem; width: 3.5rem; }
 }

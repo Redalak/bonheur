@@ -33,34 +33,34 @@ Pour les commerces, la « carte » devient selon le cas « Nos produits », « T
 ## Collection Signature : une variante haut de gamme de chaque modèle
 
 Chaque modèle existe en **deux versions** : l'illustrée (animations ludiques, dessins SVG) et la **Signature**,
-plus réaliste et plus « fancy », dans l'esprit des sites de restaurants étoilés :
+plus réaliste et plus « fancy ». Chaque Signature a **sa propre composition et sa propre matière**,
+tirées du métier, rendues de façon réaliste en CSS et en filtres SVG (bruit, relief, éclairage, encre) :
 
-- **Ambiance photographique plein écran** : des halos de lumière flous qui dérivent lentement (bougies,
-  lampes hors mise au point), un grain de film et un vignettage. Aucune photo volée.
-- **Typographie de luxe** : sérifs fines (Italiana, Cormorant Garamond, Bodoni, Cinzel, Gilda Display…),
-  petites capitales espacées, filets d'un pixel, beaucoup d'espace.
-- **Animations lentes** : le titre sort du flou lettre par lettre, la lumière « respire ».
-- **Le lieu** : trois cadres « photo » d'ambiance, prêts à recevoir les vraies photos (`<img src alt>`).
+| Signature | Identité | Matières réalistes | Police de titre |
+|---|---|---|---|
+| Bar · L'Heure Bleue | Speakeasy : une porte art déco en laiton, entrouverte sur les lumières du bar ; carte numérotée | Laiton métallique, verre fumé | Italiana |
+| Italien · Trattoria Fiore | La carte du jour sur papier, posée sur une nappe en lin, cachet de cire | Lin tissé, papier à bord déchiré, cire | Cormorant Garamond |
+| Brasserie · Brasserie Lumière | Le texte écrit dans un miroir ancien au cadre doré ; l'ardoise du jour à la craie | Dorure, glace piquée et reflet, ardoise | Bodoni Moda |
+| Asiatique · Maison Kaze | Un ensō tracé au pinceau sur washi, sceau rouge ; photos en kakemono | Encre aux bords irréguliers, papier fibreux | Shippori Mincho |
+| Turc · Kervan | Une arche outrepassée remplie de zelliges émaillés, lueur de lanterne | Céramique vernissée, enduit, cuivre | Marcellus |
+| Africain · Teranga | Un pan de kente tissé qui se déroule, frange qui ondule, lumière du couchant | Tissage, fils | Cormorant Garamond |
+| Boulangerie · Maison Farine | Planche de bois farinée, rayons du matin, farine en suspension | Veinage du bois, farine, rayons | Cormorant Garamond |
+| Café · Grain Noir | L'étiquette d'un sac de café sur kraft : torréfaction, tampon bleu, auréole de tasse ; photos Polaroid | Kraft, encre de tampon | Newsreader |
+| Fleuriste · Pétale | Planche d'herbier : fleur gravée au trait fin, étiquette de spécimen, rubans adhésifs | Gravure botanique, papier, ruban | Playfair Display |
+| Barbier · Le Coupe-Chou | Plaque de laiton gravée vissée sur du cuir surpiqué, damier en perspective | Cuir en relief, laiton, coutures | Cinzel |
+| Glacier · Givre | Store rayé de gelateria qui ondule, vitrine de bacs de glace | Toile ombrée, crème glacée, verre | Gilda Display |
+| Fromagerie · La Meule | Cave d'affinage : mur de pierre à la bougie, étagère de meules, étiquette à la craie | Pierre, bois d'épicéa, croûte | DM Serif Display |
+
+Les animations sont lentes et feutrées : le titre sort du flou lettre par lettre, puis chaque variante a son
+geste (la porte s'éclaire, la carte se pose, le pinceau trace l'ensō, les zelliges se posent, le kente se déroule,
+la farine flotte, le tampon frappe, la fleur se grave, la plaque se visse, le store ondule, les meules se posent…).
+
 - **Mêmes données** : la Signature lit le même `config.js` que la version illustrée. Une seule saisie.
-
-Adresse : `<modele>/signature/index.html`. La barre démo permet de passer de l'une à l'autre
-(« Signature » / « Illustrée »). Couleurs et polices de chaque variante : `<modele>/signature/style.css` ;
-système commun : `commun/signature.css`.
-
-| Variante Signature | Ambiance | Police de titre |
-|---|---|---|
-| Bar · L'Heure Bleue | Bougies ambrées, reflets émeraude | Italiana |
-| Italien · Trattoria Fiore | Lumière dorée de fin d'après-midi (claire) | Cormorant Garamond |
-| Brasserie · Brasserie Lumière | Laiton et velours rouge dans les miroirs | Bodoni Moda |
-| Asiatique · Maison Kaze | Lanternes de papier, encre et indigo | Shippori Mincho |
-| Turc · Kervan | Lampes de cuivre, éclats turquoise | Marcellus |
-| Africain · Teranga | Coucher de soleil : safran, braise, indigo | Cormorant Garamond |
-| Boulangerie · Maison Farine | Lumière du matin, farine et blé (claire) | Cormorant Garamond |
-| Café · Grain Noir | Crema, acier bleuté, lampe d'atelier | Newsreader |
-| Fleuriste · Pétale | Lumière d'atelier, pétales hors mise au point (claire) | Playfair Display |
-| Barbier · Le Coupe-Chou | Clair-obscur : lampe chaude, cuir, acier | Cinzel |
-| Glacier · Givre | Pastels en flou doux (claire) | Gilda Display |
-| Fromagerie · La Meule | Cave d'affinage à la bougie | DM Serif Display |
+- **Photos** : les trois cadres de « Le lieu » attendent les vraies photos du client (`<img src alt>`).
+- Adresse : `<modele>/signature/index.html` ; la barre démo bascule entre « Signature » et « Illustrée ».
+- Identité de chaque variante : `<modele>/signature/style.css` ; base commune : `commun/signature.css`.
+- Les matières sont des **calques SVG opaques** (teinte mélangée dans le filtre, pas de mode de fusion CSS) :
+  les outils d'accessibilité lisent correctement les contrastes.
 
 ## Noms et coordonnées : tous fictifs
 

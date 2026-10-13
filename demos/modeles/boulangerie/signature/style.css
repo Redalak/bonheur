@@ -1,29 +1,78 @@
 /* =====================================================================
-   MAISON FARINE : VARIANTE SIGNATURE (haut de gamme, plus réaliste)
-   Ambiance : Lumière du matin à travers la vitrine, farine et blé.
-   Tout le système (ambiance photographique, typographie, animations) est dans
-   commun/signature.css ; ici, seulement les couleurs et les polices.
+   MAISON FARINE : VARIANTE SIGNATURE « LE FOURNIL AU MATIN »
+   Une planche de bois sombre, veinée et farinée ; les rayons du soleil
+   du matin entrent par la vitrine et font briller la farine en suspension.
+   Matières : bois (veines par bruit étiré), farine (grain clair), rayons.
    ===================================================================== */
 
 :root {
-  --fond: #F6EFE4;
-  --fond-2: #EDE2D0;
-  --texte: #2B1E14;
-  --texte-doux: #5C4A3A;       /* texte secondaire (contraste AA vérifié par axe-core) */
-  --accent: #8A4F1C;
-  --sur-accent: #FFFFFF;      /* texte posé sur l'accent */
-
-  /* Les 4 couleurs des halos de lumière du hero */
+  --fond: #2A1A0F;
+  --fond-2: #F6EFE4;
+  --texte: #F8EFE0;
+  --texte-doux: #D9C8B0;
+  --accent: #E8C77A;
+  --sur-accent: #2A1A0F;
   --lumiere-1: #F8D9A0;
   --lumiere-2: #E8C77A;
   --lumiere-3: #FFFFFF;
   --lumiere-4: #D9A066;
-
-  --police-titre: "Cormorant Garamond", "Georgia", serif;
+  --police-titre: "Cormorant Garamond", "Garamond", serif;
   --police-texte: "Cabin", "Helvetica Neue", sans-serif;
   --poids-titre: 500;
   --italique: italic;
 }
 
-/* Variante claire : les halos « teintent » le fond comme une lumière chaude (mode multiplier). */
-.ambiance .lumiere { mix-blend-mode: multiply; opacity: 0.75; }
+/* ---------- Hero : la planche, les rayons, la farine ---------- */
+.hero-boulangerie { background: #3A2414; }
+.planche { position: absolute; inset: 0; z-index: -2; background: #4A2E18; }
+.planche .tex-bois { opacity: 0.9; }
+/* Un voile de farine, plus dense en bas à droite (là où l'on pétrit) */
+.farine-voile { position: absolute; inset: 0; background: radial-gradient(ellipse at 85% 95%, rgba(255, 248, 235, 0.35), transparent 55%), radial-gradient(ellipse at 10% 100%, rgba(255, 248, 235, 0.18), transparent 45%); }
+
+/* Les rayons du matin, venant de la vitrine en haut à droite */
+.rayons { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.rayons span {
+  position: absolute;
+  top: -30%;
+  right: 10%;
+  width: 14%;
+  height: 170%;
+  background: linear-gradient(180deg, rgba(255, 236, 190, 0.35), rgba(255, 236, 190, 0) 80%);
+  transform-origin: top center;
+  transform: rotate(28deg);
+}
+.rayons span:nth-child(2) { right: 26%; width: 8%; opacity: 0.7; }
+.rayons span:nth-child(3) { right: 38%; width: 18%; opacity: 0.45; }
+.anims-actives .rayons span { animation: rayon 9s ease-in-out infinite alternate; }
+.anims-actives .rayons span:nth-child(2) { animation-duration: 12s; }
+.anims-actives .rayons span:nth-child(3) { animation-duration: 15s; }
+@keyframes rayon { from { opacity: 0.35; } to { opacity: 0.9; } }
+
+/* La farine en suspension, qui ne brille que dans les rayons */
+.poussiere { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.farine-sig { position: absolute; left: var(--x); top: var(--y); width: 3px; height: 3px; border-radius: 50%; background: rgba(255, 248, 230, 0.85); filter: blur(0.4px); }
+.farine-sig:nth-child(3n) { width: 2px; height: 2px; }
+.anims-actives .farine-sig { animation: flotte 14s ease-in-out infinite alternate; animation-delay: calc(var(--n) * -0.9s); }
+@keyframes flotte { 0% { transform: translate(0, 0); opacity: 0.2; } 50% { opacity: 0.95; } 100% { transform: translate(3rem, -2.5rem); opacity: 0.3; } }
+
+.hero-boulangerie .hero-contenu { max-width: 38rem; }
+.hero-boulangerie .hero-nom { font-size: clamp(3.75rem, 18vw, 9rem); line-height: 0.88; color: #FFF6E6; }
+/* La farine sur les lettres : un léger voile blanc sur le haut du titre */
+.hero-boulangerie .hero-nom { text-shadow: 0 -1px 0 rgba(255, 255, 255, 0.35); }
+
+/* ---------- Sections claires : papier de boulangerie ---------- */
+.argument { background: #E8C77A; color: #2A1A0F; --texte: #2A1A0F; --texte-doux: #4A3420; --accent: #2A1A0F; --sur-accent: #F8EFE0; --focus: #2A1A0F; }
+.section-carte, .lieu, .pratique { background: var(--fond-2); color: #2B1E14; --texte: #2B1E14; --texte-doux: #5C4A3A; --accent: #8A4F1C; --sur-accent: #FFFFFF; --focus: #2B1E14; }
+.section-carte .carte { padding: 2rem 1.5rem; border: 1px solid rgba(138, 79, 28, 0.35); outline: 1px solid rgba(138, 79, 28, 0.2); outline-offset: 6px; }
+/* Les produits comme sur une étiquette de vitrine */
+.carte-points { display: block; flex: 1 1 1rem; min-width: 1rem; margin: 0 0.5rem 0.4em; border-bottom: 1px dotted rgba(138, 79, 28, 0.45); }
+.carte-plat { align-items: flex-end; }
+.pied { background: #2A1A0F; color: #D9C8B0; --texte: #F8EFE0; }
+
+/* ---------- Le lieu : photos en noir et sépia, comme des tirages anciens ---------- */
+.cadre { filter: sepia(0.5); border-radius: 2px; box-shadow: 0 10px 22px -14px rgba(42, 26, 15, 0.6); }
+.cadre .lumiere { mix-blend-mode: multiply; }
+
+@media (min-width: 768px) {
+  .section-carte .carte { padding: 3rem; }
+}

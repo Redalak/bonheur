@@ -1,26 +1,91 @@
 /* =====================================================================
-   BRASSERIE LUMIÈRE : VARIANTE SIGNATURE (haut de gamme, plus réaliste)
-   Ambiance : Reflets de laiton et de velours rouge dans les miroirs, le soir.
-   Tout le système (ambiance photographique, typographie, animations) est dans
-   commun/signature.css ; ici, seulement les couleurs et les polices.
+   BRASSERIE LUMIÈRE : VARIANTE SIGNATURE « LE MIROIR »
+   Le texte est écrit dans un grand miroir ancien : cadre doré mouluré,
+   glace piquée par le temps, reflet qui passe ; le nom en dorure à la
+   feuille. À côté, l'ardoise du jour, à la craie.
+   Matières : dorure (dégradés métalliques), glace (reflets), ardoise (grain).
    ===================================================================== */
 
 :root {
   --fond: #14110E;
   --fond-2: #1D1915;
   --texte: #F1E9DA;
-  --texte-doux: #BEB3A1;       /* texte secondaire (contraste AA vérifié par axe-core) */
+  --texte-doux: #C2B7A5;
   --accent: #C9A45C;
-  --sur-accent: #14110E;      /* texte posé sur l'accent */
-
-  /* Les 4 couleurs des halos de lumière du hero */
+  --sur-accent: #14110E;
   --lumiere-1: #D6A85A;
   --lumiere-2: #7A1E1E;
   --lumiere-3: #F3E3C2;
   --lumiere-4: #B07A3A;
-
-  --police-titre: "Bodoni Moda", "Georgia", serif;
+  --or-clair: #F4DFA8;
+  --or-fonce: #6E4F1E;
+  --police-titre: "Bodoni Moda", "Didot", serif;
   --police-texte: "Libre Franklin", "Helvetica Neue", sans-serif;
   --poids-titre: 600;
   --italique: italic;
+}
+
+/* ---------- Hero ---------- */
+.hero-brasserie { background: radial-gradient(ellipse at 30% 20%, #2A2018, var(--fond) 70%); }
+
+/* Le cadre doré mouluré : plusieurs bandes de dorure et une gorge sombre. */
+.miroir-ancien {
+  position: relative;
+  padding: 1.1rem;
+  border-radius: 4px;
+  background: linear-gradient(135deg, var(--or-fonce), var(--or-clair) 18%, #A57E3A 36%, var(--or-clair) 52%, #8A6428 70%, var(--or-clair) 86%, var(--or-fonce));
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.8);
+}
+.miroir-ancien::before { content: ""; position: absolute; inset: 0.55rem; border: 2px solid rgba(50, 32, 8, 0.6); pointer-events: none; }
+
+/* La glace : sombre, légèrement bleutée, avec des piqûres et un reflet. */
+.glace { position: absolute; inset: 1.1rem; overflow: hidden; background: radial-gradient(ellipse at 40% 30%, #2E3230, #161917 75%); }
+.piqure { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(210, 190, 150, 0.22), transparent 70%); }
+.p1 { width: 30%; aspect-ratio: 1; left: -6%; top: -8%; }
+.p2 { width: 18%; aspect-ratio: 1; right: 8%; bottom: 6%; }
+.p3 { width: 10%; aspect-ratio: 1; right: 30%; top: 12%; }
+.reflet { position: absolute; top: -20%; bottom: -20%; left: 0; width: 22%; background: rgba(255, 255, 255, 0.07); transform: translateX(-200%) skewX(-18deg); }
+.anims-actives .reflet { animation: reflet-passe 2600ms ease-in-out 1800ms forwards; }
+@keyframes reflet-passe { to { transform: translateX(600%) skewX(-18deg); } }
+
+.miroir-ancien .hero-contenu { position: relative; padding: 2.5rem 1.25rem 2rem; text-align: center; }
+.miroir-ancien .boutons { justify-content: center; }
+.miroir-ancien .hero-texte { margin-left: auto; margin-right: auto; }
+
+/* Le nom en dorure à la feuille : or clair, arête sombre en dessous (gravure), léger halo. */
+.dorure {
+  font-size: clamp(3rem, 13vw, 6.5rem);
+  line-height: 0.95;
+  color: var(--or-clair);
+  text-shadow: 0 1px 0 #6E4F1E, 0 2px 0 rgba(0, 0, 0, 0.5), 0 0 22px rgba(201, 164, 92, 0.35);
+}
+
+/* L'ardoise du jour : cadre bois, grain de craie. */
+.ardoise-sig {
+  position: relative;
+  overflow: hidden;
+  padding: 1.5rem 1.5rem 1.75rem;
+  background: #232826;
+  border: 0.75rem solid #5A3D22;
+  box-shadow: inset 0 0 0 2px #3E2A16;
+}
+.ardoise-titre { position: relative; font-family: var(--police-titre); font-style: italic; font-weight: 400; font-size: 1.75rem; }
+.ardoise-liste { position: relative; margin-top: 0.75rem; list-style: none; padding: 0; }
+.ardoise-ligne { display: flex; justify-content: space-between; gap: 1rem; padding: 0.55rem 0; border-bottom: 1px dashed rgba(241, 233, 218, 0.3); font-family: var(--police-titre); font-style: italic; font-size: 1.25rem; }
+.ardoise-prix { font-style: normal; white-space: nowrap; }
+.anims-actives .ardoise-ligne { clip-path: inset(0 100% 0 0); animation: craie-sig 900ms ease-out forwards; animation-delay: calc(1800ms + var(--n, 0) * 400ms); }
+@keyframes craie-sig { to { clip-path: inset(0 0 0 0); } }
+
+/* ---------- La carte : le menu imprimé de la brasserie, en colonnes ---------- */
+.section-carte { background: #F1E9DA; color: #1A1612; --texte: #1A1612; --texte-doux: #4E453B; --accent: #7A1E1E; --focus: #1A1612; }
+.section-carte .titre-section { letter-spacing: 0.04em; }
+.carte-points { display: block; flex: 1 1 1rem; min-width: 1rem; margin: 0 0.5rem 0.4em; border-bottom: 1px dotted rgba(26, 22, 18, 0.45); }
+.carte-plat { align-items: flex-end; }
+
+/* ---------- Le lieu : petits miroirs ronds dorés ---------- */
+.cadre { aspect-ratio: 1; border-radius: 50%; border: 0.5rem solid #A57E3A; box-shadow: 0 0 0 2px #6E4F1E; }
+
+@media (min-width: 1000px) {
+  .hero-brasserie { grid-template-columns: 1fr 21rem; gap: 3rem; }
+  .miroir-ancien .hero-contenu { padding: 3.5rem 3rem 2.5rem; }
 }

@@ -1,26 +1,100 @@
 /* =====================================================================
-   L'HEURE BLEUE : VARIANTE SIGNATURE (haut de gamme, plus réaliste)
-   Ambiance : Bar de nuit : bougies ambrées et reflets émeraude sur le laiton.
-   Tout le système (ambiance photographique, typographie, animations) est dans
-   commun/signature.css ; ici, seulement les couleurs et les polices.
+   L'HEURE BLEUE : VARIANTE SIGNATURE « SPEAKEASY »
+   Une porte art déco en laiton, entrouverte sur le bar : à travers le verre
+   fumé, les lumières ambrées et émeraude. Texte aligné à gauche, carte
+   numérotée comme une carte de cocktails de palace.
+   Matières : laiton métallique (dégradés), verre fumé (grain), velours.
    ===================================================================== */
 
 :root {
   --fond: #0B0F0E;
-  --fond-2: #121A18;
+  --fond-2: #111917;
   --texte: #EDE6D6;
-  --texte-doux: #B9B2A3;       /* texte secondaire (contraste AA vérifié par axe-core) */
+  --texte-doux: #B9B2A3;
   --accent: #C9A96B;
-  --sur-accent: #0B0F0E;      /* texte posé sur l'accent */
-
-  /* Les 4 couleurs des halos de lumière du hero */
+  --sur-accent: #0B0F0E;
   --lumiere-1: #E0A04F;
   --lumiere-2: #1F6B57;
   --lumiere-3: #C9705A;
   --lumiere-4: #F3D9A4;
-
-  --police-titre: "Italiana", "Georgia", serif;
-  --police-texte: "Jost", "Helvetica Neue", sans-serif;
+  --laiton-clair: #F2D79B;
+  --laiton-fonce: #7A5A26;
+  --police-titre: "Italiana", "Didot", serif;
+  --police-texte: "Jost", "Futura", sans-serif;
   --poids-titre: 400;
   --italique: normal;
+}
+
+/* ---------- Hero : texte à gauche, la porte à droite ---------- */
+.hero-bar { background: var(--fond); }
+.hero-bar .hero-contenu { max-width: 34rem; }
+.hero-bar .hero-nom { font-size: clamp(3.5rem, 16vw, 8rem); line-height: 0.92; }
+
+/* La porte : un arc en laiton (dégradés métalliques) qui encadre du verre fumé. */
+.porte {
+  position: relative;
+  justify-self: center;
+  width: min(72vw, 22rem);
+  aspect-ratio: 3 / 5;
+  padding: 0.9rem;
+  border-radius: 11rem 11rem 0.5rem 0.5rem;
+  background: linear-gradient(135deg, var(--laiton-fonce), var(--laiton-clair) 22%, #A9823F 45%, var(--laiton-clair) 62%, var(--laiton-fonce) 100%);
+}
+/* Le filet intérieur du cadre, gravé */
+.porte::before {
+  content: "";
+  position: absolute;
+  inset: 0.45rem;
+  border-radius: 10.6rem 10.6rem 0.3rem 0.3rem;
+  border: 1px solid rgba(60, 40, 10, 0.55);
+  pointer-events: none;
+}
+.porte-verre {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 10rem 10rem 0.2rem 0.2rem;
+  background: #0A1210;
+}
+.porte-verre .lumiere:nth-child(1) { --couleur: var(--lumiere-1); width: 120%; height: auto; aspect-ratio: 1; left: -30%; top: 40%; opacity: 0.7; }
+.porte-verre .lumiere:nth-child(2) { --couleur: var(--lumiere-2); width: 90%; height: auto; aspect-ratio: 1; right: -30%; top: 5%; opacity: 0.7; }
+.porte-verre .lumiere:nth-child(3) { --couleur: var(--lumiere-4); width: 22%; height: auto; aspect-ratio: 1; left: 30%; top: 30%; opacity: 0.9; }
+.porte-verre .lumiere:nth-child(4) { --couleur: var(--lumiere-3); width: 16%; height: auto; aspect-ratio: 1; right: 22%; bottom: 18%; opacity: 0.9; }
+/* Un reflet vertical sur le verre */
+.porte-verre::after { content: ""; position: absolute; top: 0; bottom: 0; left: 18%; width: 10%; background: rgba(255, 255, 255, 0.05); transform: skewX(-8deg); }
+/* L'éventail art déco en haut de la porte */
+.porte-eventail {
+  position: absolute;
+  left: 50%;
+  top: 0.9rem;
+  width: 62%;
+  aspect-ratio: 2 / 1;
+  transform: translateX(-50%);
+  border-radius: 999px 999px 0 0;
+  background: repeating-conic-gradient(from 270deg at 50% 100%, rgba(242, 215, 155, 0.55) 0deg 1.5deg, transparent 1.5deg 12deg);
+  -webkit-mask: radial-gradient(circle at 50% 100%, transparent 30%, #000 31%);
+          mask: radial-gradient(circle at 50% 100%, transparent 30%, #000 31%);
+}
+/* Les lumières derrière le verre vacillent comme des bougies */
+.anims-actives .porte-verre .lumiere { animation: bougie 5s ease-in-out infinite alternate; }
+.anims-actives .porte-verre .lumiere:nth-child(2) { animation-duration: 7s; }
+.anims-actives .porte-verre .lumiere:nth-child(3) { animation-duration: 3.2s; }
+.anims-actives .porte-verre .lumiere:nth-child(4) { animation-duration: 4.1s; }
+@keyframes bougie { 0% { opacity: 0.55; transform: scale(1); } 40% { opacity: 0.85; } 100% { opacity: 0.65; transform: scale(1.06); } }
+.anims-actives .porte { animation: porte-ouvre 1600ms cubic-bezier(0.2, 0.7, 0.2, 1) both 200ms; }
+@keyframes porte-ouvre { from { opacity: 0; transform: translateY(24px) scale(0.97); } to { opacity: 1; transform: none; } }
+
+/* ---------- La carte : carte de cocktails numérotée ---------- */
+.section-carte { background: var(--fond-2); }
+.section-carte .carte { counter-reset: cocktail; }
+.carte-plat { counter-increment: cocktail; display: grid; grid-template-columns: 3rem 1fr auto; align-items: baseline; }
+.carte-plat::before { content: counter(cocktail, decimal-leading-zero); font-family: var(--police-titre); font-size: 1.375rem; color: var(--accent); }
+.carte-points { display: none; }
+
+/* ---------- Le lieu : galerie en arcs, comme la porte ---------- */
+.cadre { border-radius: 8rem 8rem 0.25rem 0.25rem; border: 1px solid var(--accent); }
+
+@media (min-width: 1000px) {
+  .hero-bar { grid-template-columns: 1fr 24rem; gap: 5rem; }
+  .porte { width: 100%; }
 }

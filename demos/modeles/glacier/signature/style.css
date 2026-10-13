@@ -1,29 +1,94 @@
 /* =====================================================================
-   GIVRE : VARIANTE SIGNATURE (haut de gamme, plus réaliste)
-   Ambiance : Pastels en flou doux : pistache, fraise, vanille, menthe.
-   Tout le système (ambiance photographique, typographie, animations) est dans
-   commun/signature.css ; ici, seulement les couleurs et les polices.
+   GIVRE : VARIANTE SIGNATURE « GELATERIA »
+   En haut, le store rayé d'une gelateria italienne, en toile, avec ses
+   festons, qui ondule doucement ; en bas, la vitrine : six bacs de glace
+   à la crème lissée à la spatule, sous la vitre. Élégant, pas enfantin.
+   Matières : toile rayée (ombres), crème glacée (reflets), verre.
    ===================================================================== */
 
 :root {
-  --fond: #FBF5EE;
-  --fond-2: #F4EADF;
+  --fond: #FBF6EF;
+  --fond-2: #F3EADF;
   --texte: #3A2A24;
-  --texte-doux: #6A5850;       /* texte secondaire (contraste AA vérifié par axe-core) */
+  --texte-doux: #66544C;
   --accent: #9E3B5F;
-  --sur-accent: #FFFFFF;      /* texte posé sur l'accent */
-
-  /* Les 4 couleurs des halos de lumière du hero */
+  --sur-accent: #FFFFFF;
   --lumiere-1: #CFE6C4;
   --lumiere-2: #F4C3CC;
   --lumiere-3: #FBE6B5;
   --lumiere-4: #C9E4EE;
-
-  --police-titre: "Gilda Display", "Georgia", serif;
+  --rayure: #E9A9B6;
+  --police-titre: "Gilda Display", "Didot", serif;
   --police-texte: "Nunito", "Helvetica Neue", sans-serif;
   --poids-titre: 400;
   --italique: normal;
 }
 
-/* Variante claire : les halos « teintent » le fond comme une lumière chaude (mode multiplier). */
-.ambiance .lumiere { mix-blend-mode: multiply; opacity: 0.75; }
+/* ---------- Hero ---------- */
+.hero-glacier { background: var(--fond); padding-top: 8rem; padding-bottom: 10rem; text-align: center; place-items: center; }
+.hero-glacier .hero-contenu { max-width: 36rem; }
+.hero-glacier .boutons { justify-content: center; }
+.hero-glacier .hero-texte { margin-left: auto; margin-right: auto; }
+.hero-glacier .hero-nom { font-size: clamp(4.25rem, 22vw, 10rem); line-height: 0.9; letter-spacing: 0.02em; }
+
+/* Le store : rayures de toile, ombre de pli, festons arrondis en bas */
+.store-sig {
+  position: absolute;
+  left: -2%;
+  right: -2%;
+  top: 0;
+  height: 5.5rem;
+  transform-origin: top center;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.12), transparent 30%, transparent 70%, rgba(0, 0, 0, 0.18)),
+    repeating-linear-gradient(90deg, var(--rayure) 0 2.5rem, #FFF8F0 2.5rem 5rem);
+}
+.festons {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1.25rem;
+  height: 1.25rem;
+  background: radial-gradient(circle at 1.25rem 0, var(--rayure) 1.24rem, transparent 1.26rem) 0 0 / 5rem 1.25rem,
+              radial-gradient(circle at 1.25rem 0, #FFF8F0 1.24rem, transparent 1.26rem) 2.5rem 0 / 5rem 1.25rem;
+  background-repeat: repeat-x;
+  filter: drop-shadow(0 3px 2px rgba(0, 0, 0, 0.12));
+}
+.anims-actives .store-sig { animation: store-vent 6s ease-in-out infinite alternate; }
+@keyframes store-vent { from { transform: skewX(0) scaleY(1); } to { transform: skewX(-1.2deg) scaleY(1.03); } }
+
+/* La vitrine : six bacs inox, crème lissée, sous une vitre */
+.vitrine-sig {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.5rem;
+  width: min(100%, 44rem);
+  padding: 1rem 0.75rem 1.5rem;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #E4E8EA, #B9C0C4);
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+.bac { position: relative; height: 3.5rem; border-radius: 0.25rem; background: linear-gradient(180deg, #DDE2E5, #9AA3A8); padding: 0.25rem; }
+.creme { position: absolute; inset: 0.25rem; border-radius: 40% 60% 30% 70% / 60% 40% 70% 30%; background: radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.7), transparent 30%), var(--parfum); }
+.b0 { --parfum: #F3E3B0; } .b1 { --parfum: #BFD9A6; } .b2 { --parfum: #E9A9B6; }
+.b3 { --parfum: #7A4A35; } .b4 { --parfum: #F2C38A; } .b5 { --parfum: #B9DCE6; }
+/* La vitre : un reflet oblique */
+.vitre { position: absolute; inset: 0; background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.35) 48%, transparent 56%); pointer-events: none; }
+.anims-actives .bac { animation: bac 700ms cubic-bezier(0.3, 1.3, 0.5, 1) both; animation-delay: calc(400ms + var(--i, 0) * 80ms); }
+.bac:nth-child(2) { --i: 1; } .bac:nth-child(3) { --i: 2; } .bac:nth-child(4) { --i: 3; } .bac:nth-child(5) { --i: 4; } .bac:nth-child(6) { --i: 5; }
+@keyframes bac { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+/* ---------- La carte : élégante, avec des pastilles de parfum ---------- */
+.carte-plat { border-bottom: 1px solid rgba(58, 42, 36, 0.12); }
+.carte-categorie:nth-child(2) .carte-nom::before { content: ""; display: inline-block; width: 0.8rem; height: 0.8rem; margin-right: 0.6rem; border-radius: 50%; background: var(--rayure); vertical-align: middle; }
+
+/* ---------- Le lieu : cadres arrondis pastel ---------- */
+.cadre { border-radius: 1.5rem; }
+.cadre .lumiere { mix-blend-mode: multiply; }
+
+@media (min-width: 768px) {
+  .bac { height: 4.5rem; }
+}

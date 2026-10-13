@@ -45,14 +45,13 @@
 
   <main id="contenu">
 
-    <!-- ============ 2. HERO : l'ambiance photographique (variante Signature) ============ -->
-    <section class="hero hero-signature" aria-labelledby="hero-titre">
-      <!-- Halos de lumière hors mise au point + grain de film + vignettage (décoratif).
-           Pour une vraie photo : la mettre en fond de .ambiance (background-image) et garder le grain. -->
-      <div class="ambiance" aria-hidden="true"><span class="lumiere"></span><span class="lumiere"></span><span class="lumiere"></span><span class="lumiere"></span><span class="lumiere"></span><span class="lumiere"></span><svg class="grain" aria-hidden="true" focusable="false"><filter id="grain-filtre"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#grain-filtre)"/></svg><span class="vignette"></span></div>
+    <!-- ============ 2. HERO : composition et matière propres à cette variante Signature ============ -->
+    <section class="hero hero-sig hero-turc" aria-labelledby="hero-titre">
+      <svg class="tex enduit tex-pierre" aria-hidden="true" focusable="false" style="mix-blend-mode:normal"><filter id="tex-pierre-6" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="5" seed="6" result="n"/><feDiffuseLighting in="n" surfaceScale="4" lighting-color="#ffffff" result="l"><feDistantLight azimuth="235" elevation="55"/></feDiffuseLighting><feFlood flood-color="#B7AFA3" result="teinte"/><feBlend in="l" in2="teinte" mode="multiply"/></filter><rect width="100%" height="100%" filter="url(#tex-pierre-6)"/></svg>
+      <!-- La fenêtre en arc : une mosaïque de carreaux émaillés, chacun avec son reflet (décoratif). -->
+      <div class="arche" aria-hidden="true"><div class="mosaique"><span class="zellige" style="--ton:#1D4E9E;--n:0"></span><span class="zellige" style="--ton:#24489A;--n:1"></span><span class="zellige" style="--ton:#0F6E78;--n:2"></span><span class="zellige" style="--ton:#1E5BA0;--n:3"></span><span class="zellige" style="--ton:#127A82;--n:4"></span><span class="zellige" style="--ton:#1A6FA8;--n:5"></span><span class="zellige" style="--ton:#1A6FA8;--n:6"></span><span class="zellige" style="--ton:#1D4E9E;--n:7"></span><span class="zellige" style="--ton:#24489A;--n:8"></span><span class="zellige" style="--ton:#0F6E78;--n:9"></span><span class="zellige" style="--ton:#1E5BA0;--n:10"></span><span class="zellige" style="--ton:#127A82;--n:11"></span><span class="zellige" style="--ton:#127A82;--n:12"></span><span class="zellige" style="--ton:#1A6FA8;--n:13"></span><span class="zellige" style="--ton:#1D4E9E;--n:14"></span><span class="zellige" style="--ton:#24489A;--n:15"></span><span class="zellige" style="--ton:#0F6E78;--n:16"></span><span class="zellige" style="--ton:#1E5BA0;--n:17"></span><span class="zellige" style="--ton:#1E5BA0;--n:18"></span><span class="zellige" style="--ton:#127A82;--n:19"></span><span class="zellige" style="--ton:#1A6FA8;--n:20"></span><span class="zellige" style="--ton:#1D4E9E;--n:21"></span><span class="zellige" style="--ton:#24489A;--n:22"></span><span class="zellige" style="--ton:#0F6E78;--n:23"></span><span class="zellige" style="--ton:#0F6E78;--n:24"></span><span class="zellige" style="--ton:#1E5BA0;--n:25"></span><span class="zellige" style="--ton:#127A82;--n:26"></span><span class="zellige" style="--ton:#1A6FA8;--n:27"></span><span class="zellige" style="--ton:#1D4E9E;--n:28"></span><span class="zellige" style="--ton:#24489A;--n:29"></span><span class="zellige" style="--ton:#24489A;--n:30"></span><span class="zellige" style="--ton:#0F6E78;--n:31"></span><span class="zellige" style="--ton:#1E5BA0;--n:32"></span><span class="zellige" style="--ton:#127A82;--n:33"></span><span class="zellige" style="--ton:#1A6FA8;--n:34"></span><span class="zellige" style="--ton:#1D4E9E;--n:35"></span><span class="zellige" style="--ton:#1D4E9E;--n:36"></span><span class="zellige" style="--ton:#24489A;--n:37"></span><span class="zellige" style="--ton:#0F6E78;--n:38"></span><span class="zellige" style="--ton:#1E5BA0;--n:39"></span><span class="zellige" style="--ton:#127A82;--n:40"></span><span class="zellige" style="--ton:#1A6FA8;--n:41"></span><span class="zellige" style="--ton:#1A6FA8;--n:42"></span><span class="zellige" style="--ton:#1D4E9E;--n:43"></span><span class="zellige" style="--ton:#24489A;--n:44"></span><span class="zellige" style="--ton:#0F6E78;--n:45"></span><span class="zellige" style="--ton:#1E5BA0;--n:46"></span><span class="zellige" style="--ton:#127A82;--n:47"></span></div><span class="arche-lueur"></span></div>
       <div class="hero-contenu">
         <p class="surtitre" data-texte="sigType">Grill turc · Paris</p>
-        <span class="filet-or" aria-hidden="true"></span>
         <h1 id="hero-titre" class="hero-nom" data-lettres>Kervan</h1>
         <p class="hero-sous-titre" data-texte="heroSousTitre">Grillades à la braise et mezzés turcs.</p>
         <p class="hero-texte" data-texte="heroTexte">Kebabs au charbon, pide sortis du four et baklava, tous les jours.</p>
@@ -69,7 +68,6 @@
         </div>
         <button type="button" class="bouton-anims" data-bascule-anims aria-pressed="false">Couper les animations</button>
       </div>
-      <a class="decouvrir" href="#carte" data-texte="decouvrir">Découvrir la carte</a>
     </section>
 
     <!-- ============ 3. ARGUMENT CLÉ : faire appeler ============ -->

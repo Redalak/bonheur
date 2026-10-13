@@ -45,15 +45,17 @@
 
   <main id="contenu">
 
-    <!-- ============ 2. HERO : l'ambiance photographique (variante Signature) ============ -->
-    <section class="hero hero-signature" aria-labelledby="hero-titre">
-      <!-- Halos de lumière hors mise au point + grain de film + vignettage (décoratif).
-           Pour une vraie photo : la mettre en fond de .ambiance (background-image) et garder le grain. -->
-      <div class="ambiance" aria-hidden="true"><span class="lumiere"></span><span class="lumiere"></span><span class="lumiere"></span><span class="lumiere"></span><span class="lumiere"></span><span class="lumiere"></span><svg class="grain" aria-hidden="true" focusable="false"><filter id="grain-filtre"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#grain-filtre)"/></svg><span class="vignette"></span></div>
-      <div class="hero-contenu">
-        <p class="surtitre" data-texte="sigType">Café et torréfacteur · Paris</p>
-        <span class="filet-or" aria-hidden="true"></span>
+    <!-- ============ 2. HERO : composition et matière propres à cette variante Signature ============ -->
+    <section class="hero hero-sig hero-cafe" aria-labelledby="hero-titre">
+      <svg class="tex tex-kraft" aria-hidden="true" focusable="false" style="mix-blend-mode:normal"><filter id="tex-kraft-10" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.45" numOctaves="4" seed="10" stitchTiles="stitch"/><feColorMatrix type="matrix" values="0 0 0 0 0.353  0 0 0 0 0.231  0 0 0 0 0.118  0.77 0 0 0 -0.16"/></filter><rect width="100%" height="100%" filter="url(#tex-kraft-10)"/></svg>
+      <span class="aureole" aria-hidden="true"></span>
+      <!-- L'étiquette du sac de café : origine, torréfaction, tampon bleu (texte utile au centre). -->
+      <div class="etiquette">
+        <svg class="tex tex-papier" aria-hidden="true" focusable="false" style="mix-blend-mode:normal"><filter id="tex-papier-11" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.035 0.6" numOctaves="4" seed="11" stitchTiles="stitch"/><feColorMatrix type="matrix" values="0 0 0 0 0.478  0 0 0 0 0.416  0 0 0 0 0.314  0.29 0 0 0 -0.06"/></filter><rect width="100%" height="100%" filter="url(#tex-papier-11)"/></svg>
+        <div class="hero-contenu">
+          <p class="surtitre" data-texte="sigType">Café et torréfacteur · Paris</p>
         <h1 id="hero-titre" class="hero-nom" data-lettres>Grain Noir</h1>
+          <p class="torrefaction" aria-hidden="true"><span>Torréfaction</span><span class="points"><i></i><i></i><i></i><i class="vide"></i><i class="vide"></i></span></p>
         <p class="hero-sous-titre" data-texte="heroSousTitre">Le café, du grain à la tasse.</p>
         <p class="hero-texte" data-texte="heroTexte">Espressos, filtres et cappuccinos, avec des grains torréfiés dans l&#x27;arrière-boutique.</p>
         <p class="badge" data-badge aria-live="polite"><span class="badge-point" aria-hidden="true"></span><span data-badge-texte>Voir les horaires ci-dessous</span></p>
@@ -68,8 +70,9 @@
           </a>
         </div>
         <button type="button" class="bouton-anims" data-bascule-anims aria-pressed="false">Couper les animations</button>
+        </div>
+        <span class="tampon-bleu" aria-hidden="true"><svg viewBox="0 0 120 120" focusable="false"><defs><filter id="encre-tampon" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" seed="7" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="5" xChannelSelector="R" yChannelSelector="G"/></filter></defs><g filter="url(#encre-tampon)"><circle cx="60" cy="60" r="52"/><circle cx="60" cy="60" r="42"/><text x="60" y="56" text-anchor="middle">TORRÉFIÉ</text><text x="60" y="76" text-anchor="middle">À PARIS</text></g></svg></span>
       </div>
-      <a class="decouvrir" href="#carte" data-texte="decouvrir">Découvrir la carte</a>
     </section>
 
     <!-- ============ 3. ARGUMENT CLÉ : faire appeler ============ -->

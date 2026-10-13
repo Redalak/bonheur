@@ -1,29 +1,85 @@
 /* =====================================================================
-   PÉTALE : VARIANTE SIGNATURE (haut de gamme, plus réaliste)
-   Ambiance : Lumière douce d'atelier, pétales et feuillages hors mise au point.
-   Tout le système (ambiance photographique, typographie, animations) est dans
-   commun/signature.css ; ici, seulement les couleurs et les polices.
+   PÉTALE : VARIANTE SIGNATURE « L'HERBIER »
+   Une planche d'herbier sur papier ancien : la fleur est gravée au trait
+   fin, avec ses hachures, comme une illustration botanique ; une étiquette
+   de spécimen, tenue par deux morceaux de ruban adhésif.
+   Matières : papier vergé (fibres), gravure à l'encre, ruban translucide.
    ===================================================================== */
 
 :root {
-  --fond: #F7F2EE;
-  --fond-2: #EFE6E0;
+  --fond: #F4EEE6;
+  --fond-2: #ECE3D8;
   --texte: #26302B;
-  --texte-doux: #55605A;       /* texte secondaire (contraste AA vérifié par axe-core) */
+  --texte-doux: #4E5852;
   --accent: #8E3A52;
-  --sur-accent: #FFFFFF;      /* texte posé sur l'accent */
-
-  /* Les 4 couleurs des halos de lumière du hero */
+  --sur-accent: #FFFFFF;
   --lumiere-1: #F2C1C8;
   --lumiere-2: #B8CDB4;
   --lumiere-3: #F5D0B0;
   --lumiere-4: #FFFFFF;
-
-  --police-titre: "Playfair Display", "Georgia", serif;
+  --encre-verte: #2F4A3C;
+  --police-titre: "Playfair Display", "Didot", serif;
   --police-texte: "Inter", "Helvetica Neue", sans-serif;
   --poids-titre: 700;
   --italique: italic;
 }
 
-/* Variante claire : les halos « teintent » le fond comme une lumière chaude (mode multiplier). */
-.ambiance .lumiere { mix-blend-mode: multiply; opacity: 0.75; }
+/* ---------- Hero : la planche d'herbier ---------- */
+.hero-fleuriste { background: var(--fond); }
+.hero-fleuriste .hero-nom { font-style: italic; font-weight: 600; font-size: clamp(4rem, 20vw, 9rem); line-height: 0.9; }
+
+.herbier {
+  position: relative;
+  justify-self: center;
+  width: min(74vw, 19rem);
+  margin: 0;
+  padding: 1.5rem 1rem 1rem;
+  background: #FBF8F2;
+  border: 1px solid rgba(38, 48, 43, 0.15);
+  box-shadow: 0 16px 30px -22px rgba(38, 48, 43, 0.5);
+}
+.gravure { display: block; width: 100%; height: auto; }
+/* Les traits gravés : fins, à l'encre verte, qui se tracent au chargement */
+.trait-fin { fill: none; stroke: var(--encre-verte); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.tige-sig { stroke-width: 2.2; }
+.hachure { stroke: var(--encre-verte); stroke-width: 0.7; opacity: 0.55; }
+.corolle-sig .trait-fin { stroke: #6E2A3E; }
+.anims-actives .trait-fin { stroke-dasharray: 1; stroke-dashoffset: 1; animation: grave 2200ms ease-in-out forwards; }
+.anims-actives .corolle-sig .trait-fin { animation-delay: 1000ms; }
+.anims-actives .hachures { opacity: 0; animation: apparait 900ms ease forwards 2600ms; }
+@keyframes grave { to { stroke-dashoffset: 0; } }
+@keyframes apparait { to { opacity: 1; } }
+
+/* L'étiquette de spécimen et ses rubans adhésifs translucides */
+.specimen {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0.5rem 0.5rem 0 auto;
+  width: 78%;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid rgba(38, 48, 43, 0.4);
+  background: #FFFDF8;
+  font-size: 0.875rem;
+}
+.specimen em { font-family: var(--police-titre); font-size: 1rem; }
+.ruban { position: absolute; top: -0.6rem; width: 3rem; height: 1.2rem; background: rgba(240, 232, 205, 0.75); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.06); }
+.ruban.r1 { left: -1rem; transform: rotate(-24deg); }
+.ruban.r2 { right: -1rem; transform: rotate(18deg); }
+
+/* ---------- La carte : comme une fiche de catalogue de pépiniériste ---------- */
+.section-carte .carte-titre { color: var(--encre-verte); font-family: var(--police-titre); font-style: italic; text-transform: none; letter-spacing: 0; font-size: 1.5rem; }
+.carte-sous-titre { color: var(--accent); }
+.carte-plat { border-bottom: 1px solid rgba(38, 48, 43, 0.15); }
+
+/* ---------- Le lieu : photos épinglées sur papier, rubans adhésifs ---------- */
+.cadre { border: 0.5rem solid #FFFDF8; box-shadow: 0 10px 20px -14px rgba(38, 48, 43, 0.5); }
+/* Le ruban adhésif, posé en haut de chaque photo */
+.cadre::before { content: ""; position: absolute; z-index: 1; top: 0; left: 35%; width: 3rem; height: 1.1rem; background: rgba(240, 232, 205, 0.85); transform: rotate(-6deg); }
+.cadre .lumiere { mix-blend-mode: multiply; }
+
+@media (min-width: 1000px) {
+  .hero-fleuriste { grid-template-columns: 1fr 21rem; gap: 4rem; }
+  .herbier { width: 100%; transform: rotate(1.5deg); }
+}
