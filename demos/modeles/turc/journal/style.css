@@ -1,0 +1,24 @@
+/* =====================================================================
+   KERVAN : DIRECTION « JOURNAL »
+   Esprit : une de quotidien : manchette, colonnes, lettrine, rubrique « Au menu ».
+   La mise en page et les animations sont dans commun/journal.css ;
+   ici, les couleurs et les polices propres à ce commerce.
+   Contrastes calculés : texte 14.5:1, accent en texte 5.5:1.
+   ===================================================================== */
+
+:root {
+  --fond: #F7F3EC;
+  --encre: #14213A;
+  --doux: #464F61;          /* texte secondaire */
+  --c1: #0F6E6B;              /* couleur 1 (aplats) */
+  --c1-texte: #0F6E6B;       /* couleur 1 assez foncée pour du texte sur le fond */
+  --sur-c1: #FFFFFF;      /* texte posé sur la couleur 1 */
+  --c2: #B87333;              /* couleur 2 (aplats) */
+  --sur-c2: #111111;      /* texte posé sur la couleur 2 */
+  --police-titre: "DM Serif Display", "Helvetica Neue", sans-serif;
+  --police-texte: "Figtree", "Helvetica Neue", sans-serif;
+  --poids-titre: 400;
+  --largeur-titre: 100%;
+  --taille-nom: min(18.7vw, 133px);   /* le mot le plus long du nom tient dans l'écran */
+  --echelle-titre: 1.00;   /* réduit les grands titres si la police est très large */
+}

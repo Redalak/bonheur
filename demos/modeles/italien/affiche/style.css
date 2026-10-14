@@ -1,0 +1,24 @@
+/* =====================================================================
+   TRATTORIA FIORE : DIRECTION « AFFICHE »
+   Esprit : graphisme suisse : trame visible, nom géant, aplat de couleur, prix énorme.
+   La mise en page et les animations sont dans commun/affiche.css ;
+   ici, les couleurs et les polices propres à ce commerce.
+   Contrastes calculés : texte 18.4:1, accent en texte 5.0:1.
+   ===================================================================== */
+
+:root {
+  --fond: #FFFFFF;
+  --encre: #141414;
+  --doux: #484848;          /* texte secondaire */
+  --c1: #D52B1E;              /* couleur 1 (aplats) */
+  --c1-texte: #D52B1E;       /* couleur 1 assez foncée pour du texte sur le fond */
+  --sur-c1: #FFFFFF;      /* texte posé sur la couleur 1 */
+  --c2: #1F7A3A;              /* couleur 2 (aplats) */
+  --sur-c2: #FFFFFF;      /* texte posé sur la couleur 2 */
+  --police-titre: "Archivo", "Helvetica Neue", sans-serif;
+  --police-texte: "Work Sans", "Helvetica Neue", sans-serif;
+  --poids-titre: 850;
+  --largeur-titre: 125%;
+  --taille-nom: min(10.8vw, 77px);   /* le mot le plus long du nom tient dans l'écran */
+  --echelle-titre: 0.93;   /* réduit les grands titres si la police est très large */
+}

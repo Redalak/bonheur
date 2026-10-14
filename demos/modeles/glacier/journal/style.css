@@ -1,0 +1,24 @@
+/* =====================================================================
+   GIVRE : DIRECTION « JOURNAL »
+   Esprit : une de quotidien : manchette, colonnes, lettrine, rubrique « Au menu ».
+   La mise en page et les animations sont dans commun/journal.css ;
+   ici, les couleurs et les polices propres à ce commerce.
+   Contrastes calculés : texte 12.7:1, accent en texte 6.0:1.
+   ===================================================================== */
+
+:root {
+  --fond: #FBF6EF;
+  --encre: #3A2A24;
+  --doux: #645751;          /* texte secondaire */
+  --c1: #9E3B5F;              /* couleur 1 (aplats) */
+  --c1-texte: #9E3B5F;       /* couleur 1 assez foncée pour du texte sur le fond */
+  --sur-c1: #FFFFFF;      /* texte posé sur la couleur 1 */
+  --c2: #3E8A7A;              /* couleur 2 (aplats) */
+  --sur-c2: #111111;      /* texte posé sur la couleur 2 */
+  --police-titre: "Gilda Display", "Helvetica Neue", sans-serif;
+  --police-texte: "Nunito", "Helvetica Neue", sans-serif;
+  --poids-titre: 400;
+  --largeur-titre: 100%;
+  --taille-nom: min(22.4vw, 160px);   /* le mot le plus long du nom tient dans l'écran */
+  --echelle-titre: 1.00;   /* réduit les grands titres si la police est très large */
+}

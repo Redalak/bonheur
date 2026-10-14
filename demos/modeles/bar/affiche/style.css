@@ -1,0 +1,24 @@
+/* =====================================================================
+   L'HEURE BLEUE : DIRECTION « AFFICHE »
+   Esprit : graphisme suisse : trame visible, nom géant, aplat de couleur, prix énorme.
+   La mise en page et les animations sont dans commun/affiche.css ;
+   ici, les couleurs et les polices propres à ce commerce.
+   Contrastes calculés : texte 16.0:1, accent en texte 6.4:1.
+   ===================================================================== */
+
+:root {
+  --fond: #F1ECE2;
+  --encre: #111111;
+  --doux: #42413F;          /* texte secondaire */
+  --c1: #1F5E4F;              /* couleur 1 (aplats) */
+  --c1-texte: #1F5E4F;       /* couleur 1 assez foncée pour du texte sur le fond */
+  --sur-c1: #FFFFFF;      /* texte posé sur la couleur 1 */
+  --c2: #C9A96B;              /* couleur 2 (aplats) */
+  --sur-c2: #111111;      /* texte posé sur la couleur 2 */
+  --police-titre: "Big Shoulders Display", "Helvetica Neue", sans-serif;
+  --police-texte: "IBM Plex Mono", "Helvetica Neue", sans-serif;
+  --poids-titre: 900;
+  --largeur-titre: 100%;
+  --taille-nom: min(24.0vw, 171px);   /* le mot le plus long du nom tient dans l'écran */
+  --echelle-titre: 1.00;   /* réduit les grands titres si la police est très large */
+}

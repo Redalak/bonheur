@@ -1,0 +1,24 @@
+/* =====================================================================
+   TERANGA : DIRECTION « JOURNAL »
+   Esprit : une de quotidien : manchette, colonnes, lettrine, rubrique « Au menu ».
+   La mise en page et les animations sont dans commun/journal.css ;
+   ici, les couleurs et les polices propres à ce commerce.
+   Contrastes calculés : texte 16.1:1, accent en texte 5.6:1.
+   ===================================================================== */
+
+:root {
+  --fond: #F6F0E6;
+  --encre: #1A1410;
+  --doux: #4A443F;          /* texte secondaire */
+  --c1: #A63E25;              /* couleur 1 (aplats) */
+  --c1-texte: #A63E25;       /* couleur 1 assez foncée pour du texte sur le fond */
+  --sur-c1: #FFFFFF;      /* texte posé sur la couleur 1 */
+  --c2: #22306B;              /* couleur 2 (aplats) */
+  --sur-c2: #FFFFFF;      /* texte posé sur la couleur 2 */
+  --police-titre: "Playfair Display", "Helvetica Neue", sans-serif;
+  --police-texte: "DM Sans", "Helvetica Neue", sans-serif;
+  --poids-titre: 700;
+  --largeur-titre: 100%;
+  --taille-nom: min(16.0vw, 114px);   /* le mot le plus long du nom tient dans l'écran */
+  --echelle-titre: 1.00;   /* réduit les grands titres si la police est très large */
+}

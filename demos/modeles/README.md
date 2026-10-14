@@ -1,6 +1,6 @@
 # Modèles de sites : 12 commerces
 
-Douze modèles de sites vitrines prêts à montrer en démarchage (6 restaurants, 6 commerces de proximité), chacun avec sa propre direction artistique.
+Douze modèles de sites vitrines prêts à montrer en démarchage (6 restaurants, 6 commerces de proximité), chacun avec sa propre direction artistique, et **cinq versions** par modèle (60 pages) : Illustrée, Signature, Affiche, Journal et Rétro.
 Même base technique que la démo Au Bonheur : HTML, CSS et JavaScript simples, hors ligne,
 mobile d'abord, FR/EN, accessibles.
 
@@ -29,6 +29,22 @@ Palettes et paires de polices issues du skill UI/UX Pro Max quand il avait une c
 | Fromagerie | La Meule | Comté, croûte, lait, bleu d'Auvergne (choix maison) | La meule se pose, une part se détache, les trous apparaissent | DM Serif Display + Work Sans (choix maison) |
 
 Pour les commerces, la « carte » devient selon le cas « Nos produits », « Tarifs », « Bouquets », « Parfums » ou « Fromages » (`navCarte`, `carteTitre` dans `config.js`). Un produit peut ne pas avoir de prix propre (`prix: null`, par exemple un parfum de glace compris dans la formule).
+
+## Trois directions de plus : Affiche, Journal, Rétro
+
+Chaque modèle se décline aussi en trois directions graphiques très différentes, avec **sa propre palette et ses propres polices**
+selon le commerce. Elles lisent le même `config.js` : on remplit une fois, les cinq versions suivent.
+
+| Direction | Esprit | Ce qui la distingue | Animation |
+|---|---|---|---|
+| **Affiche** | Graphisme suisse, affiche d'exposition | Trame de colonnes, nom géant en capitales, grand aplat de couleur avec texte vertical et prix « Dès … », sommaire numéroté 01, 02… | La trame se dessine, les lettres montent d'un coup sec, l'aplat s'ouvre |
+| **Journal** | Une de quotidien, magazine | Manchette « Le journal de… » avec la date du jour, une en trois colonnes (article avec lettrine, photo de une, rubrique « Au menu »), citation en exergue | Les doubles filets se tirent, les colonnes arrivent l'une après l'autre |
+| **Rétro** | Étiquette des années 70 | Soleil à rayures, nom courbé en arc, pastille, boutons « autocollants » à ombre pleine, vagues entre les sections | Le soleil tourne lentement, l'étiquette se pose avec un rebond |
+
+- Adresses : `<modele>/affiche/`, `<modele>/journal/`, `<modele>/retro/`. La barre démo en bas permet de passer d'une version à l'autre.
+- Mise en page commune : `commun/affiche.css`, `commun/journal.css`, `commun/retro.css`. Couleurs et polices de chaque commerce : `<modele>/<direction>/style.css`.
+- La taille du nom en Affiche est calculée selon la police et le mot le plus long, pour qu'il ne déborde jamais.
+- « Au menu » (Journal) et le prix « Dès … » (Affiche) sont tirés automatiquement de la carte.
 
 ## Collection Signature : une variante haut de gamme de chaque modèle
 
@@ -111,12 +127,12 @@ modeles/
 - Chaque modèle a **une animation signature** dans son hero, plus des apparitions douces au défilement.
 - Animations faites uniquement avec `transform` et `opacity`, sans librairie.
 - **« Couper les animations »**, un bouton dans chaque hero, affiche tout dans son état final. C'est automatique si l'appareil demande moins d'animations. Sans JavaScript, tout reste visible.
-- Contrastes vérifiés par **axe-core** (WCAG 2 AA) : 0 violation sur les 12 modèles et les 12 variantes Signature.
+- Contrastes vérifiés par **axe-core** (WCAG 2 AA) : 0 violation sur les 60 pages.
 - Cibles tactiles de 44 px minimum, aucun scroll horizontal à 375 et 1440 px, polices auto-hébergées.
 
 ## Vérifié avec Playwright (Chromium, toutes requêtes réseau bloquées)
 
-- [x] 12 modèles + 12 variantes Signature : aucune erreur console, aucun scroll horizontal (320, 375 et 1440 px).
+- [x] 60 pages (12 modèles × 5 versions) : aucune erreur console, aucun scroll horizontal (320, 375 et 1440 px).
 - [x] axe-core WCAG 2 A/AA : 0 violation.
 - [x] Badge ouvert/fermé : cas simulés (avant, pendant, entre deux services, après minuit, jour fermé).
 - [x] FR/EN : tous les textes, la carte et les horaires basculent, ainsi que l'attribut `lang`.

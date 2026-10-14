@@ -1,0 +1,24 @@
+/* =====================================================================
+   PÉTALE : DIRECTION « AFFICHE »
+   Esprit : graphisme suisse : trame visible, nom géant, aplat de couleur, prix énorme.
+   La mise en page et les animations sont dans commun/affiche.css ;
+   ici, les couleurs et les polices propres à ce commerce.
+   Contrastes calculés : texte 14.0:1, accent en texte 5.5:1.
+   ===================================================================== */
+
+:root {
+  --fond: #FBF7F2;
+  --encre: #1C2A22;
+  --doux: #4D5750;          /* texte secondaire */
+  --c1: #C2185B;              /* couleur 1 (aplats) */
+  --c1-texte: #C2185B;       /* couleur 1 assez foncée pour du texte sur le fond */
+  --sur-c1: #FFFFFF;      /* texte posé sur la couleur 1 */
+  --c2: #2F7A4A;              /* couleur 2 (aplats) */
+  --sur-c2: #FFFFFF;      /* texte posé sur la couleur 2 */
+  --police-titre: "Syne", "Helvetica Neue", sans-serif;
+  --police-texte: "Inter", "Helvetica Neue", sans-serif;
+  --poids-titre: 800;
+  --largeur-titre: 100%;
+  --taille-nom: min(11.5vw, 82px);   /* le mot le plus long du nom tient dans l'écran */
+  --echelle-titre: 0.66;   /* réduit les grands titres si la police est très large */
+}

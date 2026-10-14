@@ -1,0 +1,24 @@
+/* =====================================================================
+   TERANGA : DIRECTION « RÉTRO »
+   Esprit : étiquette des années 70 : soleil à rayures, nom en arc, autocollants, vagues.
+   La mise en page et les animations sont dans commun/retro.css ;
+   ici, les couleurs et les polices propres à ce commerce.
+   Contrastes calculés : texte 13.7:1, accent en texte 4.7:1.
+   ===================================================================== */
+
+:root {
+  --fond: #FBE4C2;
+  --encre: #2A1810;
+  --doux: #584537;          /* texte secondaire */
+  --c1: #C04D1D;              /* couleur 1 (aplats) */
+  --c1-texte: #AD451A;       /* couleur 1 assez foncée pour du texte sur le fond */
+  --sur-c1: #FFFFFF;      /* texte posé sur la couleur 1 */
+  --c2: #1F6B4A;              /* couleur 2 (aplats) */
+  --sur-c2: #FFFFFF;      /* texte posé sur la couleur 2 */
+  --police-titre: "Young Serif", "Helvetica Neue", sans-serif;
+  --police-texte: "DM Sans", "Helvetica Neue", sans-serif;
+  --poids-titre: 400;
+  --largeur-titre: 100%;
+  --taille-nom: min(16.0vw, 114px);   /* le mot le plus long du nom tient dans l'écran */
+  --echelle-titre: 1.00;   /* réduit les grands titres si la police est très large */
+}

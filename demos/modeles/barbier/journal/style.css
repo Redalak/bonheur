@@ -1,0 +1,24 @@
+/* =====================================================================
+   LE COUPE-CHOU : DIRECTION « JOURNAL »
+   Esprit : une de quotidien : manchette, colonnes, lettrine, rubrique « Au menu ».
+   La mise en page et les animations sont dans commun/journal.css ;
+   ici, les couleurs et les polices propres à ce commerce.
+   Contrastes calculés : texte 15.8:1, accent en texte 12.4:1.
+   ===================================================================== */
+
+:root {
+  --fond: #F2EDE3;
+  --encre: #141414;
+  --doux: #454442;          /* texte secondaire */
+  --c1: #1B2A41;              /* couleur 1 (aplats) */
+  --c1-texte: #1B2A41;       /* couleur 1 assez foncée pour du texte sur le fond */
+  --sur-c1: #FFFFFF;      /* texte posé sur la couleur 1 */
+  --c2: #A61E1E;              /* couleur 2 (aplats) */
+  --sur-c2: #FFFFFF;      /* texte posé sur la couleur 2 */
+  --police-titre: "Abril Fatface", "Helvetica Neue", sans-serif;
+  --police-texte: "Libre Franklin", "Helvetica Neue", sans-serif;
+  --poids-titre: 400;
+  --largeur-titre: 100%;
+  --taille-nom: min(11.2vw, 80px);   /* le mot le plus long du nom tient dans l'écran */
+  --echelle-titre: 1.00;   /* réduit les grands titres si la police est très large */
+}

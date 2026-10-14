@@ -1,0 +1,24 @@
+/* =====================================================================
+   MAISON FARINE : DIRECTION « RÉTRO »
+   Esprit : étiquette des années 70 : soleil à rayures, nom en arc, autocollants, vagues.
+   La mise en page et les animations sont dans commun/retro.css ;
+   ici, les couleurs et les polices propres à ce commerce.
+   Contrastes calculés : texte 12.4:1, accent en texte 4.8:1.
+   ===================================================================== */
+
+:root {
+  --fond: #FDE9C8;
+  --encre: #3B2210;
+  --doux: #664E38;          /* texte secondaire */
+  --c1: #C8641E;              /* couleur 1 (aplats) */
+  --c1-texte: #A05018;       /* couleur 1 assez foncée pour du texte sur le fond */
+  --sur-c1: #111111;      /* texte posé sur la couleur 1 */
+  --c2: #8A4F1C;              /* couleur 2 (aplats) */
+  --sur-c2: #FFFFFF;      /* texte posé sur la couleur 2 */
+  --police-titre: "Fraunces", "Helvetica Neue", sans-serif;
+  --police-texte: "Cabin", "Helvetica Neue", sans-serif;
+  --poids-titre: 900;
+  --largeur-titre: 100%;
+  --taille-nom: min(18.7vw, 133px);   /* le mot le plus long du nom tient dans l'écran */
+  --echelle-titre: 1.00;   /* réduit les grands titres si la police est très large */
+}

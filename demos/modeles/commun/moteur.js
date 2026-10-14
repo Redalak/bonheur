@@ -65,7 +65,12 @@ const TEXTES_COMMUNS = {
     remettreAnims: "Remettre les animations",
     demoNav: "Choisir un modèle",
     demoTexte: "Proposition de",
-    decouvrir: "Découvrir la carte"
+    decouvrir: "Découvrir la carte",
+    prixDesEtiquette: "Dès",
+    journalTitre: "Le journal de",
+    journalEdition: "Édition du",
+    journalMenu: "Au menu",
+    journalUne: "À la une"
   },
   en: {
     evitement: "Skip to content",
@@ -106,7 +111,12 @@ const TEXTES_COMMUNS = {
     remettreAnims: "Turn animations on",
     demoNav: "Choose a template",
     demoTexte: "Proposal by",
-    decouvrir: "See the menu"
+    decouvrir: "See the menu",
+    prixDesEtiquette: "From",
+    journalTitre: "The journal of",
+    journalEdition: "Edition of",
+    journalMenu: "On the menu",
+    journalUne: "Front page"
   }
 };
 
@@ -347,6 +357,41 @@ function resumeHoraires(langue) {
   }).join(" · ");
 }
 
+// Petits extraits de la carte utilisés par certaines directions (Affiche, Journal) :
+//   [data-sommaire] : la liste des catégories ; [data-prix-min] : le prix le plus bas ;
+//   [data-extrait]  : le premier plat de chaque catégorie, avec son prix ;
+//   [data-date-jour]: la date du jour (heure de Paris), en toutes lettres.
+function afficherExtraits(langue) {
+  const visibles = function (categorie) {
+    return categorie.plats.filter(function (plat) { return !plat.alcool || CONFIG.afficherAlcool; });
+  };
+  document.querySelectorAll("[data-sommaire]").forEach(function (liste) {
+    liste.textContent = "";
+    CONFIG.carte.forEach(function (categorie) { liste.appendChild(creer("li", null, categorie[langue])); });
+  });
+  const prix = [];
+  CONFIG.carte.forEach(function (categorie) {
+    visibles(categorie).forEach(function (plat) { if (typeof plat.prix === "number" && plat.prix > 0) prix.push(plat.prix); });
+  });
+  document.querySelectorAll("[data-prix-min]").forEach(function (el) {
+    if (prix.length) el.textContent = formaterPrix(Math.min.apply(null, prix), langue);
+  });
+  document.querySelectorAll("[data-extrait]").forEach(function (liste) {
+    liste.textContent = "";
+    CONFIG.carte.forEach(function (categorie) {
+      const plat = visibles(categorie).filter(function (p) { return typeof p.prix === "number"; })[0];
+      if (!plat) return;
+      const ligne = creer("li");
+      ligne.appendChild(creer("span", "extrait-nom", plat[langue]));
+      ligne.appendChild(creer("span", "extrait-prix", formaterPrix(plat.prix, langue)));
+      liste.appendChild(ligne);
+    });
+  });
+  document.querySelectorAll("[data-date-jour]").forEach(function (el) {
+    el.textContent = new Intl.DateTimeFormat(langue === "en" ? "en-GB" : "fr-FR", { timeZone: "Europe/Paris", weekday: "long", day: "numeric", month: "long", year: "numeric" }).format(new Date());
+  });
+}
+
 function afficherInfos(langue) {
   const liste = document.querySelector("[data-infos]");
   if (!liste) return;
@@ -381,6 +426,7 @@ function appliquerLangue(langue) {
   afficherCarte(langue);
   afficherHoraires(langue);
   afficherInfos(langue);
+  afficherExtraits(langue);
   mettreAJourBadge();
   mettreAJourBoutonAnims();
   document.querySelectorAll("[data-lettres]").forEach(decouperEnLettres);

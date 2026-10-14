@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Modèle de démonstration (direction Affiche) : ne pas indexer. -->
+  <meta name="robots" content="noindex, nofollow">
+  <title data-texte="titrePage">Maison Farine : boulangerie-pâtisserie, Paris 15e</title>
+  <meta name="description" data-texte-meta="descriptionPage" content="Pains au levain, viennoiseries et pâtisseries. Commandez vos gâteaux par téléphone.">
+  <meta property="og:title" data-texte-meta="titrePage" content="Maison Farine : boulangerie-pâtisserie, Paris 15e">
+  <meta property="og:description" data-texte-meta="descriptionPage" content="Pains au levain, viennoiseries et pâtisseries. Commandez vos gâteaux par téléphone.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="theme-color" content="#FEF3C7">
+  <link rel="stylesheet" href="../../commun/commun.css">
+  <link rel="stylesheet" href="../../commun/affiche.css">
+  <link rel="stylesheet" href="style.css">
+  <!-- config.js (les données de ce restaurant) AVANT le moteur commun. -->
+  <script src="../config.js" defer></script>
+  <script src="../../commun/moteur.js" defer></script>
+</head>
+<body class="affiche modele-boulangerie-affiche">
+  <a class="lien-evitement" href="#contenu" data-texte="evitement">Aller au contenu</a>
+
+  <!-- ============ 1. HEADER ============ -->
+  <header class="entete">
+    <div class="entete-ligne">
+      <a class="entete-nom" href="#contenu">Maison Farine</a>
+      <div class="entete-actions">
+        <button type="button" class="bouton-langue" data-bascule-langue aria-label="EN, switch to English" data-texte-aria="ariaLangue"><span data-texte="boutonLangue">EN</span></button>
+        <a class="bouton-appel" href="tel:+33199000707" data-lien-tel aria-label="Appeler Maison Farine au 01 99 00 07 07" data-texte-aria="ariaAppeler">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg>
+          <span data-texte="appeler">Appeler</span>
+        </a>
+      </div>
+    </div>
+    <nav class="entete-nav" aria-label="Navigation principale" data-texte-aria="navLabel">
+      <ul>
+        <li><a href="#carte" data-texte="navCarte">Nos produits</a></li>
+        <li><a href="#horaires" data-texte="navHoraires">Horaires</a></li>
+        <li><a href="#acces" data-texte="navAcces">Accès</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="contenu">
+
+    <!-- ============ 2. HERO : direction Affiche ============ -->
+    <section class="hero hero-affiche" aria-labelledby="hero-titre">
+      <div class="grille-lignes" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+      <div class="hero-contenu">
+        <p class="affiche-index" data-texte="sigType">Boulangerie-pâtisserie · Paris</p>
+        <h1 id="hero-titre" class="hero-nom" data-lettres>Maison Farine</h1>
+        <p class="hero-sous-titre" data-texte="heroSousTitre">Le pain du quartier, dès 7h.</p>
+        <p class="hero-texte" data-texte="heroTexte">Pains au levain, croissants du matin et pâtisseries du week-end.</p>
+        <p class="badge" data-badge aria-live="polite"><span class="badge-point" aria-hidden="true"></span><span data-badge-texte>Voir les horaires ci-dessous</span></p>
+        <div class="boutons">
+          <a class="bouton bouton-principal" href="tel:+33199000707" data-lien-tel aria-label="Appeler Maison Farine au 01 99 00 07 07" data-texte-aria="ariaAppeler">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg>
+            <span data-texte="appeler">Appeler</span>
+          </a>
+          <a class="bouton bouton-contour" href="#" target="_blank" rel="noopener noreferrer" data-lien-itineraire aria-label="Itinéraire vers Maison Farine, ouvre Google Maps dans un nouvel onglet" data-texte-aria="ariaItineraire">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21.5s-6.5-6.2-6.5-11.5a6.5 6.5 0 0 1 13 0c0 5.3-6.5 11.5-6.5 11.5z"/><circle cx="12" cy="10" r="2.3"/></svg>
+            <span data-texte="itineraire">Itinéraire</span>
+          </a>
+        </div>
+        <button type="button" class="bouton-anims" data-bascule-anims aria-pressed="false">Couper les animations</button>
+      </div>
+      <!-- Le grand aplat : le type écrit à la verticale et le prix le plus bas de la carte (calculé par le moteur). -->
+      <div class="affiche-bloc" aria-hidden="true">
+        <span class="affiche-vertical" data-texte="sigType">Boulangerie-pâtisserie · Paris</span>
+        <span class="affiche-prix"><small data-texte="prixDesEtiquette">Dès</small><b data-prix-min></b></span>
+      </div>
+      <!-- Le sommaire : les catégories de la carte (remplies par le moteur depuis CONFIG.carte). -->
+      <ol class="affiche-sommaire" aria-hidden="true" data-sommaire><li>Pains</li><li>Viennoiseries</li><li>Pâtisseries</li><li>Gâteaux sur commande</li></ol>
+    </section>
+
+    <!-- ============ 3. ARGUMENT CLÉ : faire appeler ============ -->
+    <section class="argument" data-revele aria-labelledby="argument-titre">
+      <h2 id="argument-titre" data-texte="argTitre">Un gâteau pour dimanche ? Commandez-le avant vendredi.</h2>
+      <p class="argument-texte" data-texte="argTexte">Appelez pour réserver vos gâteaux d&#x27;anniversaire, vos pièces montées ou votre pain pour une grande tablée.</p>
+      <div class="argument-boutons">
+        <a class="bouton bouton-principal" href="tel:+33199000707" data-lien-tel><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg><span data-texte="argBouton1">Commander un gâteau</span></a>
+        <a class="bouton bouton-contour" href="tel:+33199000707" data-lien-tel><span data-texte="argBouton2">Réserver du pain</span></a>
+      </div>
+      <p class="argument-numero"><a href="tel:+33199000707" data-lien-tel>01 99 00 07 07</a></p>
+    </section>
+
+    <!-- ============ 4. LA CARTE (construite par moteur.js depuis CONFIG.carte ; copie de secours ci-dessous) ============ -->
+    <section id="carte" class="section section-carte" data-revele aria-labelledby="carte-titre">
+      <div class="section-entete">
+        <h2 id="carte-titre" class="titre-section" data-texte="carteTitre">Nos produits</h2>
+        <p class="mention-exemple" data-mention-prix-exemple data-texte="prixExemple">Prix d'exemple</p>
+      </div>
+      <div class="carte" data-carte><div class="carte-categorie"><h3 class="carte-titre"><span class="carte-nom-categorie">Pains</span></h3><ul class="carte-liste"><li class="carte-plat"><span class="carte-nom">Baguette tradition</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">1,30 €</span></li><li class="carte-plat"><span class="carte-nom">Pain au levain (500 g)</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">4,50 €</span></li><li class="carte-plat"><span class="carte-nom">Pain aux céréales</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">3,80 €</span></li></ul></div><div class="carte-categorie"><h3 class="carte-titre"><span class="carte-nom-categorie">Viennoiseries</span></h3><ul class="carte-liste"><li class="carte-plat"><span class="carte-nom">Croissant</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">1,40 €</span></li><li class="carte-plat"><span class="carte-nom">Pain au chocolat</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">1,60 €</span></li><li class="carte-plat"><span class="carte-nom">Brioche</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">2,20 €</span></li></ul></div><div class="carte-categorie"><h3 class="carte-titre"><span class="carte-nom-categorie">Pâtisseries</span></h3><ul class="carte-liste"><li class="carte-plat"><span class="carte-nom">Éclair au chocolat</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">4,50 €</span></li><li class="carte-plat"><span class="carte-nom">Tarte aux fruits</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">4,80 €</span></li><li class="carte-plat"><span class="carte-nom">Paris-brest</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">5,20 €</span></li></ul></div><div class="carte-categorie"><h3 class="carte-titre"><span class="carte-nom-categorie">Gâteaux sur commande</span><span class="carte-sous-titre">48 h à l&#x27;avance</span></h3><ul class="carte-liste"><li class="carte-plat"><span class="carte-nom">Gâteau 6 parts</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">28,00 €</span></li><li class="carte-plat"><span class="carte-nom">Gâteau 10 parts</span><span class="carte-points" aria-hidden="true"></span><span class="carte-prix">42,00 €</span></li></ul></div></div>
+      <p class="carte-note" data-texte="carteNote">Prix en euros TTC. Informations sur les allergènes disponibles sur demande.</p>
+      <p class="carte-alcool" data-mention-alcool hidden data-texte="mentionAlcool">L'abus d'alcool est dangereux pour la santé, à consommer avec modération.</p>
+    </section>
+
+    <!-- ============ 5. LE LIEU ============ -->
+    <section class="section lieu" data-revele aria-labelledby="lieu-titre">
+      <h2 id="lieu-titre" class="titre-section" data-texte="lieuTitre">Le lieu</h2>
+      <p class="lieu-texte" data-texte="lieuTexte">Un fournil ouvert sur la boutique, l&#x27;odeur du pain chaud et des baguettes qui sortent toute la journée.</p>
+    </section>
+
+    <div class="pratique">
+      <!-- ============ 6. HORAIRES ============ -->
+      <section id="horaires" class="section horaires" data-revele aria-labelledby="horaires-titre">
+        <h2 id="horaires-titre" class="titre-section" data-texte="horairesTitre">Horaires</h2>
+        <table class="horaires-table">
+          <caption class="visuellement-cache" data-texte="horairesLegende">Horaires d'ouverture, jour par jour</caption>
+          <tbody data-horaires><tr><th class="horaires-jour" scope="row">Lundi</th><td class="horaires-services">Fermé</td></tr><tr><th class="horaires-jour" scope="row">Mardi</th><td class="horaires-services"><span class="horaires-service">07h00–20h00</span></td></tr><tr><th class="horaires-jour" scope="row">Mercredi</th><td class="horaires-services"><span class="horaires-service">07h00–20h00</span></td></tr><tr><th class="horaires-jour" scope="row">Jeudi</th><td class="horaires-services"><span class="horaires-service">07h00–20h00</span></td></tr><tr><th class="horaires-jour" scope="row">Vendredi</th><td class="horaires-services"><span class="horaires-service">07h00–20h00</span></td></tr><tr><th class="horaires-jour" scope="row">Samedi</th><td class="horaires-services"><span class="horaires-service">07h00–20h00</span></td></tr><tr><th class="horaires-jour" scope="row">Dimanche</th><td class="horaires-services"><span class="horaires-service">07h30–13h30</span></td></tr></tbody>
+        </table>
+      </section>
+
+      <!-- ============ 7. INFOS PRATIQUES ET ACCÈS ============ -->
+      <section class="section infos" data-revele aria-labelledby="infos-titre">
+        <h2 id="infos-titre" class="titre-section" data-texte="infosTitre">Infos pratiques</h2>
+        <ul class="infos-liste" data-infos><li>Commandes de gâteaux par téléphone</li><li>Ouvert le dimanche matin</li><li>Cartes bancaires acceptées</li></ul>
+      </section>
+
+      <section id="acces" class="section acces" data-revele aria-labelledby="acces-titre">
+        <h2 id="acces-titre" class="titre-section" data-texte="accesTitre">Accès</h2>
+        <address class="acces-adresse" data-texte="accesTexte">5 rue de l&#x27;Exemple, 75015 Paris. Métro Exemple (ligne 8).</address>
+        <div class="boutons">
+          <a class="bouton bouton-principal" href="https://www.google.com/maps/search/?api=1&amp;query=Maison+Farine+5+rue+de+l%27Exemple+75015+Paris" target="_blank" rel="noopener noreferrer" data-lien-itineraire aria-label="Itinéraire vers Maison Farine, ouvre Google Maps dans un nouvel onglet" data-texte-aria="ariaItineraire"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21.5s-6.5-6.2-6.5-11.5a6.5 6.5 0 0 1 13 0c0 5.3-6.5 11.5-6.5 11.5z"/><circle cx="12" cy="10" r="2.3"/></svg><span data-texte="itineraire">Itinéraire</span></a>
+          <a class="bouton bouton-contour" href="tel:+33199000707" data-lien-tel>01 99 00 07 07</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ============ 8. FOOTER ============ -->
+  <footer class="pied">
+    <p class="pied-nom">Maison Farine</p>
+    <address class="pied-adresse">5 rue de l&#x27;Exemple, 75015 Paris<br><a href="tel:+33199000707" data-lien-tel>01 99 00 07 07</a></address>
+    <p class="pied-horaires" data-resume-horaires></p>
+    <p class="pied-copyright" data-texte="copyright">© Maison Farine</p>
+  </footer>
+
+  <!-- ============ BARRE DÉMO : les 5 versions de « Maison Farine » (à retirer pour la mise en ligne) ============ -->
+  <nav class="barre-demo" aria-label="Choisir une version" data-texte-aria="demoNav">
+    <ul class="barre-demo-liens">
+      <li><a href="../index.html">Illustrée</a></li>
+      <li><a href="../signature/index.html">Signature</a></li>
+      <li><a href="../affiche/index.html" aria-current="page">Affiche</a></li>
+      <li><a href="../journal/index.html">Journal</a></li>
+      <li><a href="../retro/index.html">Rétro</a></li>
+      <li><a href="../../index.html">Tous</a></li>
+    </ul>
+    <p class="barre-demo-texte"><span data-texte="demoTexte">Proposition de</span> <span class="barre-demo-nom">Reda Lakhledj,</span> <a class="barre-demo-tel" href="tel:+33763456080">07 63 45 60 80</a></p>
+  </nav>
+</body>
+</html>

@@ -1,0 +1,122 @@
+/* =====================================================================
+   DIRECTION « JOURNAL » (une de quotidien, magazine)
+   Manchette « Le journal de… » entre doubles filets, avec la date du
+   jour ; une en trois colonnes séparées par des filets : l'article
+   (avec lettrine), la photo de une, la rubrique « Au menu ».
+   Carte en colonnes de journal, citation en exergue pour « Le lieu ».
+   Variables propres à chaque page dans son style.css (voir affiche.css).
+   ===================================================================== */
+
+body { background: var(--fond); color: var(--encre); font-family: var(--police-texte); --focus: var(--encre); }
+
+.entete { background: var(--fond); border-bottom: 1px solid var(--encre); }
+.entete-nom { font-family: var(--police-titre); font-weight: var(--poids-titre); font-size: 1.375rem; }
+.bouton-langue { border: 1px solid var(--encre); }
+.bouton-appel { background: var(--c1); color: var(--sur-c1); }
+.entete-nav a { font-size: 0.9375rem; font-variant: small-caps; letter-spacing: 0.06em; }
+
+.bouton { border: 1.5px solid var(--encre); border-radius: 0; font-weight: 600; }
+.bouton-principal { background: var(--c1); border-color: var(--c1); color: var(--sur-c1); }
+.bouton-contour { background: transparent; color: var(--encre); }
+
+/* ---------- La manchette ---------- */
+.hero-journal { padding-top: 1.5rem; padding-bottom: 3rem; }
+.manchette { text-align: center; padding-bottom: 1rem; border-bottom: 4px double var(--encre); }
+.manchette-haut, .manchette-bas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem 1rem;
+  padding: 0.4rem 0;
+  border-top: 1px solid var(--encre);
+  border-bottom: 1px solid var(--encre);
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.manchette-haut { border-top: 0; }
+.manchette-pre { margin-top: 1rem; font-family: var(--police-titre); font-style: italic; font-size: 1.25rem; }
+.hero-journal .hero-nom {
+  margin: 0.25rem 0 0.75rem;
+  font-family: var(--police-titre);
+  font-weight: var(--poids-titre);
+  font-size: clamp(3rem, 15vw, 8.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+/* Les doubles filets se tirent de gauche à droite au chargement */
+.anims-actives .manchette { animation: filets 1200ms cubic-bezier(0.6, 0, 0.2, 1) both; }
+@keyframes filets { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+
+/* ---------- La une : trois colonnes ---------- */
+.une { display: grid; gap: 1.5rem; margin-top: 1.5rem; }
+.une-rubrique { font-size: 0.875rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c1-texte); border-bottom: 2px solid var(--c1-texte); padding-bottom: 0.3rem; margin-bottom: 0.75rem; }
+.une-principal .hero-sous-titre { margin-top: 0; font-family: var(--police-titre); font-weight: var(--poids-titre); font-size: clamp(1.75rem, 6.5vw, 2.75rem); line-height: 1.05; }
+/* La lettrine du chapeau */
+.une-principal .hero-texte { max-width: none; color: var(--encre); font-size: 1.0625rem; line-height: 1.6; }
+.une-principal .hero-texte::first-letter { float: left; margin: 0.08em 0.12em 0 0; font-family: var(--police-titre); font-weight: var(--poids-titre); font-size: 3.6em; line-height: 0.8; color: var(--c1-texte); }
+.une-principal .badge { font-weight: 600; }
+
+/* La photo de une (ambiance floue en attendant la vraie photo) */
+.une-photo { position: relative; margin: 0; min-height: 15rem; overflow: hidden; background: var(--c2); }
+.une-photo .lumiere { position: absolute; border-radius: 50%; aspect-ratio: 1; height: auto; background: radial-gradient(circle, var(--couleur), transparent 68%); opacity: 0.8; }
+.une-photo .lumiere:nth-child(1) { --couleur: var(--c1); width: 120%; left: -40%; top: -30%; }
+.une-photo .lumiere:nth-child(2) { --couleur: var(--fond); width: 60%; right: -10%; bottom: -10%; opacity: 0.5; }
+.une-photo .lumiere:nth-child(3) { --couleur: var(--encre); width: 70%; right: -30%; top: -20%; opacity: 0.35; }
+.une-photo figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 0.5rem 0.75rem; background: var(--fond); font-size: 0.875rem; font-style: italic; border-top: 1px solid var(--encre); }
+
+/* La rubrique « Au menu » : extrait de la carte */
+.une-menu ul { list-style: none; padding: 0; margin: 0; }
+.une-menu li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.55rem 0; border-bottom: 1px dotted color-mix(in srgb, var(--encre) 45%, transparent); }
+.extrait-nom { font-family: var(--police-titre); font-size: 1.125rem; }
+.extrait-prix { font-weight: 700; white-space: nowrap; }
+.une-menu .lien-carte { display: inline-flex; align-items: center; min-height: 2.75rem; margin-top: 0.5rem; font-weight: 700; color: var(--c1-texte); }
+
+/* Les colonnes apparaissent l'une après l'autre */
+.anims-actives .une > * { opacity: 0; animation: colonne-journal 900ms ease forwards; }
+.anims-actives .une > :nth-child(1) { animation-delay: 700ms; }
+.anims-actives .une > :nth-child(2) { animation-delay: 900ms; }
+.anims-actives .une > :nth-child(3) { animation-delay: 1100ms; }
+@keyframes colonne-journal { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Argument : un encadré « Bon à savoir » ---------- */
+.argument { margin: 0 var(--marge); padding: 2rem 1.5rem; border: 2px solid var(--encre); outline: 1px solid var(--encre); outline-offset: 4px; }
+.argument h2 { font-family: var(--police-titre); font-weight: var(--poids-titre); font-size: clamp(2rem, 7.5vw, 3.5rem); line-height: 1.05; }
+.argument-numero a { font-family: var(--police-titre); font-weight: var(--poids-titre); font-size: clamp(1.5rem, 6vw, 2.25rem); color: var(--c1-texte); }
+
+/* ---------- Titres et carte en colonnes ---------- */
+.titre-section { font-family: var(--police-titre); font-weight: var(--poids-titre); font-size: clamp(2.25rem, 8vw, 3.5rem); line-height: 1; padding-bottom: 0.4rem; border-bottom: 4px double var(--encre); }
+.section-entete { align-items: flex-end; }
+.mention-exemple { font-style: italic; }
+.carte-titre { font-family: var(--police-texte); font-size: 0.9375rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c1-texte); border-bottom: 1px solid var(--encre); padding-bottom: 0.3rem; }
+.carte-nom { font-family: var(--police-titre); font-size: 1.1875rem; }
+.carte-points { display: block; flex: 1 1 1rem; min-width: 1rem; margin: 0 0.5rem 0.4em; border-bottom: 1px dotted color-mix(in srgb, var(--encre) 45%, transparent); }
+.carte-plat { align-items: flex-end; }
+.carte-prix { font-weight: 700; }
+@media (min-width: 768px) {
+  .section-carte .carte { column-rule: 1px solid var(--encre); }
+}
+
+/* ---------- Le lieu : citation en exergue ---------- */
+.lieu { text-align: center; }
+.lieu .titre-section { border: 0; font-size: 1rem; font-family: var(--police-texte); letter-spacing: 0.12em; text-transform: uppercase; }
+.lieu-texte { margin: 1rem auto 0; max-width: 24ch; font-family: var(--police-titre); font-style: italic; font-size: clamp(1.75rem, 6.5vw, 3rem); line-height: 1.2; }
+.lieu-texte::before { content: "« "; color: var(--c1-texte); }
+.lieu-texte::after { content: " »"; color: var(--c1-texte); }
+
+/* ---------- Pratique et pied ---------- */
+.pratique { border-top: 4px double var(--encre); }
+.horaires-table th, .horaires-table td { border-bottom: 1px solid color-mix(in srgb, var(--encre) 30%, transparent); }
+.horaires-table .est-aujourdhui th, .horaires-table .est-aujourdhui td { color: var(--c1-texte); }
+.infos-liste li::before { width: 0.4rem; height: 0.4rem; border-radius: 50%; background: var(--encre); }
+.pied { border-top: 4px double var(--encre); text-align: center; justify-items: center; }
+.pied-nom { font-family: var(--police-titre); font-weight: var(--poids-titre); font-size: 2.5rem; }
+
+/* ---------- Ordinateur : la une en trois colonnes avec filets ---------- */
+@media (min-width: 1000px) {
+  .une { grid-template-columns: 1.1fr 1.3fr 0.9fr; gap: 0; }
+  .une > * { padding: 0 1.75rem; border-left: 1px solid var(--encre); }
+  .une > :first-child { padding-left: 0; border-left: 0; }
+  .une > :last-child { padding-right: 0; }
+  .une-photo { min-height: 26rem; margin: 0 1.75rem; padding: 0; }
+}

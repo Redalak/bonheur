@@ -1,0 +1,118 @@
+/* =====================================================================
+   DIRECTION « RÉTRO » (étiquette des années 70)
+   Un soleil à rayures qui tourne lentement, le nom courbé en arc, une
+   pastille, des boutons « autocollants » avec ombre pleine décalée,
+   des vagues entre les sections, des arrondis généreux.
+   Variables propres à chaque page dans son style.css (voir affiche.css).
+   ===================================================================== */
+
+body { background: var(--fond); color: var(--encre); font-family: var(--police-texte); --focus: var(--encre); }
+
+.entete { background: var(--fond); border-bottom: 3px solid var(--encre); }
+.entete-nom { font-family: var(--police-titre); font-weight: var(--poids-titre); font-size: 1.5rem; }
+.bouton-langue { border: 2.5px solid var(--encre); border-radius: 999px; font-weight: 700; }
+.bouton-appel { background: var(--c1); color: var(--sur-c1); border: 2.5px solid var(--encre); border-radius: 999px; box-shadow: 3px 3px 0 var(--encre); }
+
+/* ---------- Boutons « autocollants » : contour épais et ombre pleine décalée ---------- */
+.bouton { border: 3px solid var(--encre); border-radius: 999px; font-weight: 800; box-shadow: 4px 4px 0 var(--encre); transition: transform 150ms ease, box-shadow 150ms ease; }
+.bouton:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--encre); }
+.bouton:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--encre); }
+.bouton-principal { background: var(--c1); color: var(--sur-c1); }
+.bouton-contour { background: var(--fond); color: var(--encre); }
+
+/* ---------- Hero : le soleil, l'arc, la pastille ---------- */
+.hero-retro { display: grid; place-items: center; text-align: center; padding-top: 2rem; padding-bottom: 6rem; isolation: isolate; }
+
+/* Le soleil à rayures, qui tourne très lentement derrière */
+.soleil-retro {
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 38%;
+  width: max(48rem, 140vw);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: repeating-conic-gradient(var(--c2) 0 7.5deg, var(--fond) 7.5deg 15deg);
+  opacity: 0.28;
+  -webkit-mask: radial-gradient(circle, #000 25%, transparent 70%);
+          mask: radial-gradient(circle, #000 25%, transparent 70%);
+}
+.anims-actives .soleil-retro { animation: soleil-tourne-retro 120s linear infinite; }
+@keyframes soleil-tourne-retro { to { rotate: 360deg; } }
+
+/* Le cartouche central, comme une étiquette */
+.hero-retro .hero-contenu {
+  max-width: 40rem;
+  padding: 1.5rem 1.25rem 1.75rem;
+  background: var(--fond);
+  border: 3px solid var(--encre);
+  border-radius: 2rem;
+  box-shadow: 8px 8px 0 var(--encre);
+}
+.arc { width: min(100%, 34rem); margin: 0 auto -0.5rem; }
+.arc svg { width: 100%; height: auto; overflow: visible; }
+.arc text { fill: var(--c1-texte); font-family: var(--police-titre); font-weight: var(--poids-titre); }
+.pastille {
+  display: inline-block;
+  padding: 0.35rem 1rem;
+  background: var(--c2);
+  color: var(--sur-c2);
+  border: 2.5px solid var(--encre);
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.9375rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transform: rotate(-3deg);
+}
+.hero-retro .hero-sous-titre { font-family: var(--police-titre); font-weight: var(--poids-titre); font-size: clamp(1.5rem, 6vw, 2.25rem); line-height: 1.1; }
+.hero-retro .hero-texte { margin-left: auto; margin-right: auto; color: var(--doux); }
+.hero-retro .boutons { justify-content: center; }
+.hero-retro .badge { font-weight: 700; }
+
+/* L'étiquette se pose avec un petit rebond, l'arc se dessine lettre par lettre */
+.anims-actives .hero-retro .hero-contenu { animation: etiquette-pose 900ms cubic-bezier(0.3, 1.5, 0.5, 1) both 150ms; }
+@keyframes etiquette-pose { from { opacity: 0; transform: scale(0.85) rotate(-4deg); } to { opacity: 1; transform: none; } }
+.anims-actives .arc text { stroke-dasharray: 600; stroke-dashoffset: 600; stroke: var(--encre); stroke-width: 1; animation: arc-trace 1600ms ease forwards 600ms; }
+@keyframes arc-trace { to { stroke-dashoffset: 0; stroke-width: 0; } }
+.anims-actives .pastille { animation: pastille 700ms cubic-bezier(0.3, 1.6, 0.5, 1) both 1400ms; }
+@keyframes pastille { from { opacity: 0; transform: scale(0) rotate(-20deg); } to { opacity: 1; transform: rotate(-3deg); } }
+
+/* La vague en bas du hero (et en haut des sections colorées) */
+.vague { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: 3rem; color: var(--c1); }
+
+/* ---------- Argument : bloc couleur 1, coins très arrondis ---------- */
+.argument { background: var(--c1); color: var(--sur-c1); --focus: var(--sur-c1); text-align: center; }
+.argument h2 { margin: 0 auto; font-family: var(--police-titre); font-weight: var(--poids-titre); font-size: clamp(2.25rem, 9vw, 4.25rem); line-height: 1; }
+.argument-texte { margin-left: auto; margin-right: auto; }
+.argument-boutons { justify-content: center; }
+.argument .bouton-principal { background: var(--fond); color: var(--encre); }
+.argument .bouton-contour { background: var(--c2); color: var(--sur-c2); }
+.argument-numero a { font-family: var(--police-titre); font-weight: var(--poids-titre); font-size: clamp(1.75rem, 7vw, 2.75rem); }
+
+/* ---------- Titres et carte : onglets ronds ---------- */
+.titre-section { font-family: var(--police-titre); font-weight: var(--poids-titre); font-size: clamp(2.25rem, 9vw, 3.75rem); line-height: 1; }
+.mention-exemple { padding: 0.15rem 0.75rem; border: 2px solid var(--encre); border-radius: 999px; background: var(--c2); color: var(--sur-c2); font-weight: 700; }
+.carte-categorie { padding: 1.25rem; border: 3px solid var(--encre); border-radius: 1.5rem; background: var(--fond); box-shadow: 6px 6px 0 var(--encre); }
+.carte-titre .carte-nom-categorie { display: inline-block; padding: 0.2rem 0.9rem; border: 2.5px solid var(--encre); border-radius: 999px; background: var(--c1); color: var(--sur-c1); font-family: var(--police-titre); font-weight: var(--poids-titre); font-size: 1.375rem; }
+.carte-plat { border-bottom: 2px dashed color-mix(in srgb, var(--encre) 35%, transparent); }
+.carte-plat:last-child { border-bottom: 0; }
+.carte-prix { font-family: var(--police-titre); font-weight: var(--poids-titre); font-size: 1.25rem; }
+
+/* ---------- Le lieu : bloc couleur 2 ---------- */
+.lieu { background: var(--c2); color: var(--sur-c2); --focus: var(--sur-c2); text-align: center; }
+.lieu-texte { margin-left: auto; margin-right: auto; font-family: var(--police-titre); font-weight: var(--poids-titre); font-size: clamp(1.75rem, 6.5vw, 3rem); line-height: 1.12; }
+
+/* ---------- Pratique et pied ---------- */
+.horaires-table th, .horaires-table td { border-bottom: 2px dashed color-mix(in srgb, var(--encre) 30%, transparent); }
+.horaires-table .est-aujourdhui th, .horaires-table .est-aujourdhui td { background: var(--c2); color: var(--sur-c2); }
+.horaires-table .est-aujourdhui th { border-radius: 999px 0 0 999px; }
+.horaires-table .est-aujourdhui td { border-radius: 0 999px 999px 0; }
+.infos-liste li::before { width: 0.8rem; height: 0.8rem; border-radius: 50%; background: var(--c1); border: 2px solid var(--encre); }
+.pied { background: var(--encre); color: var(--fond); text-align: center; justify-items: center; --focus: var(--fond); }
+.pied-nom { font-family: var(--police-titre); font-weight: var(--poids-titre); font-size: 2.5rem; color: var(--fond); }
+
+@media (min-width: 1000px) {
+  .hero-retro .hero-contenu { padding: 2rem 3rem 2.25rem; }
+}

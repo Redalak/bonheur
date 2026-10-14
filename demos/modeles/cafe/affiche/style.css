@@ -1,0 +1,24 @@
+/* =====================================================================
+   GRAIN NOIR : DIRECTION « AFFICHE »
+   Esprit : graphisme suisse : trame visible, nom géant, aplat de couleur, prix énorme.
+   La mise en page et les animations sont dans commun/affiche.css ;
+   ici, les couleurs et les polices propres à ce commerce.
+   Contrastes calculés : texte 15.1:1, accent en texte 7.4:1.
+   ===================================================================== */
+
+:root {
+  --fond: #EDE6DA;
+  --encre: #17110D;
+  --doux: #46403A;          /* texte secondaire */
+  --c1: #23419A;              /* couleur 1 (aplats) */
+  --c1-texte: #23419A;       /* couleur 1 assez foncée pour du texte sur le fond */
+  --sur-c1: #FFFFFF;      /* texte posé sur la couleur 1 */
+  --c2: #C8925A;              /* couleur 2 (aplats) */
+  --sur-c2: #111111;      /* texte posé sur la couleur 2 */
+  --police-titre: "Archivo", "Helvetica Neue", sans-serif;
+  --police-texte: "IBM Plex Mono", "Helvetica Neue", sans-serif;
+  --poids-titre: 900;
+  --largeur-titre: 112%;
+  --taille-nom: min(21.2vw, 152px);   /* le mot le plus long du nom tient dans l'écran */
+  --echelle-titre: 1.00;   /* réduit les grands titres si la police est très large */
+}

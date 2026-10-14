@@ -1,0 +1,24 @@
+/* =====================================================================
+   MAISON FARINE : DIRECTION « JOURNAL »
+   Esprit : une de quotidien : manchette, colonnes, lettrine, rubrique « Au menu ».
+   La mise en page et les animations sont dans commun/journal.css ;
+   ici, les couleurs et les polices propres à ce commerce.
+   Contrastes calculés : texte 15.5:1, accent en texte 5.9:1.
+   ===================================================================== */
+
+:root {
+  --fond: #F8F2E6;
+  --encre: #24180F;
+  --doux: #53483E;          /* texte secondaire */
+  --c1: #8A4F1C;              /* couleur 1 (aplats) */
+  --c1-texte: #8A4F1C;       /* couleur 1 assez foncée pour du texte sur le fond */
+  --sur-c1: #FFFFFF;      /* texte posé sur la couleur 1 */
+  --c2: #5E6B3A;              /* couleur 2 (aplats) */
+  --sur-c2: #FFFFFF;      /* texte posé sur la couleur 2 */
+  --police-titre: "Newsreader", "Helvetica Neue", sans-serif;
+  --police-texte: "Cabin", "Helvetica Neue", sans-serif;
+  --poids-titre: 600;
+  --largeur-titre: 100%;
+  --taille-nom: min(18.7vw, 133px);   /* le mot le plus long du nom tient dans l'écran */
+  --echelle-titre: 1.00;   /* réduit les grands titres si la police est très large */
+}

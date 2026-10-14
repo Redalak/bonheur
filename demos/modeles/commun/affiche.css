@@ -1,0 +1,117 @@
+/* =====================================================================
+   DIRECTION « AFFICHE » (graphisme suisse, affiche d'exposition)
+   Trame de colonnes visible, nom géant en grotesque, grand aplat de
+   couleur, texte vertical, prix énorme, sommaire numéroté.
+   Chaque page définit ses variables dans son style.css :
+     --fond, --encre, --doux, --c1, --c1-texte, --sur-c1, --c2, --sur-c2,
+     --police-titre, --police-texte, --poids-titre, --largeur-titre
+   ===================================================================== */
+
+body { background: var(--fond); color: var(--encre); font-family: var(--police-texte); --focus: var(--encre); }
+
+/* ---------- Header ---------- */
+.entete { background: var(--fond); border-bottom: 3px solid var(--encre); }
+.entete-nom { font-family: var(--police-titre); font-weight: var(--poids-titre); font-stretch: var(--largeur-titre, 100%); font-size: max(1rem, calc(1.375rem * var(--echelle-titre, 1))); text-transform: uppercase; letter-spacing: -0.01em; min-width: 0; overflow-wrap: anywhere; }
+.bouton-langue { border: 2px solid var(--encre); font-weight: 700; }
+.bouton-appel { background: var(--encre); color: var(--fond); }
+.entete-nav a { font-weight: 700; text-transform: uppercase; font-size: 0.875rem; letter-spacing: 0.06em; }
+
+/* ---------- Boutons : rectangles pleins, sans arrondi ---------- */
+.bouton { border: 3px solid var(--encre); border-radius: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+.bouton-principal { background: var(--encre); color: var(--fond); }
+.bouton-contour { background: transparent; color: var(--encre); }
+
+/* ---------- Hero ---------- */
+.hero-affiche { display: grid; gap: 1.5rem; padding-top: 1.5rem; padding-bottom: 3rem; isolation: isolate; }
+
+/* La trame de colonnes, en filets fins, qui se dessine au chargement */
+.grille-lignes { position: absolute; inset: 0; z-index: -1; display: grid; grid-template-columns: repeat(4, 1fr); padding: 0 var(--marge); pointer-events: none; }
+.grille-lignes span { border-left: 1px solid color-mix(in srgb, var(--encre) 16%, transparent); transform-origin: top; }
+.grille-lignes span:last-child { border-right: 1px solid color-mix(in srgb, var(--encre) 16%, transparent); }
+.anims-actives .grille-lignes span { transform: scaleY(0); animation: trame 1200ms cubic-bezier(0.7, 0, 0.2, 1) forwards; }
+.anims-actives .grille-lignes span:nth-child(2) { animation-delay: 80ms; }
+.anims-actives .grille-lignes span:nth-child(3) { animation-delay: 160ms; }
+.anims-actives .grille-lignes span:nth-child(4) { animation-delay: 240ms; }
+@keyframes trame { to { transform: scaleY(1); } }
+
+.affiche-index { font-family: var(--police-texte); font-weight: 700; font-size: 1rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c1-texte); }
+.hero-affiche .hero-nom {
+  margin-top: 0.5rem;
+  font-family: var(--police-titre);
+  font-weight: var(--poids-titre);
+  font-stretch: var(--largeur-titre, 100%);
+  font-size: clamp(1.75rem, var(--taille-nom, 17vw), 11rem);   /* --taille-nom : calculée par page selon la police et le nom */
+  line-height: 0.82;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+/* Chaque lettre monte depuis sous la ligne, d'un coup sec */
+.hero-affiche .hero-nom .mot-entier { overflow: hidden; padding-bottom: 0.06em; }
+.anims-actives .hero-affiche [data-lettres] .lettre { opacity: 1; transform: translateY(105%); animation: affiche-lettre 700ms cubic-bezier(0.7, 0, 0.2, 1) forwards; animation-delay: calc(300ms + var(--n) * 35ms); }
+@keyframes affiche-lettre { to { transform: none; } }
+.hero-affiche .hero-sous-titre { font-family: var(--police-titre); font-weight: var(--poids-titre); font-stretch: var(--largeur-titre, 100%); font-size: clamp(1.25rem, calc(6vw * var(--echelle-titre, 1)), 2.5rem); line-height: 1; text-transform: uppercase; letter-spacing: -0.02em; }
+.hero-affiche .hero-texte { color: var(--doux); }
+.hero-affiche .badge { font-weight: 700; }
+
+/* Le grand aplat de couleur : texte vertical et prix énorme */
+.affiche-bloc {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: end;
+  gap: 1rem;
+  min-height: 11rem;
+  padding: 1.25rem;
+  background: var(--c1);
+  color: var(--sur-c1);
+}
+.affiche-vertical { writing-mode: vertical-rl; transform: rotate(180deg); font-weight: 700; font-size: 1rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.affiche-prix { display: grid; justify-items: end; text-align: right; }
+.affiche-prix small { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+.affiche-prix b { font-family: var(--police-titre); font-weight: var(--poids-titre); font-stretch: var(--largeur-titre, 100%); font-size: clamp(2rem, calc(var(--taille-nom, 15vw) * 0.72), 7rem);   /* proportionné au nom : jamais plus large que l'aplat */ line-height: 0.85; letter-spacing: -0.04em; }
+.anims-actives .affiche-bloc { clip-path: inset(0 100% 0 0); animation: aplat 900ms cubic-bezier(0.7, 0, 0.2, 1) forwards 500ms; }
+@keyframes aplat { to { clip-path: inset(0 0 0 0); } }
+
+/* Le sommaire : les catégories numérotées 01, 02… (l'ordre de la carte) */
+.affiche-sommaire { counter-reset: s; list-style: none; padding: 0; margin: 0; display: grid; border-top: 3px solid var(--encre); }
+.affiche-sommaire li { counter-increment: s; display: flex; gap: 1rem; align-items: baseline; padding: 0.6rem 0; border-bottom: 1px solid var(--encre); font-family: var(--police-titre); font-weight: var(--poids-titre); font-stretch: var(--largeur-titre, 100%); font-size: calc(1.5rem * var(--echelle-titre, 1)); text-transform: uppercase; overflow-wrap: anywhere; }
+.affiche-sommaire li::before { content: counter(s, decimal-leading-zero); font-family: var(--police-texte); font-size: 1rem; color: var(--c1-texte); }
+
+/* ---------- Argument : aplat de la seconde couleur ---------- */
+.argument { background: var(--c2); color: var(--sur-c2); --focus: var(--sur-c2); }
+.argument .bouton-principal { background: var(--sur-c2); border-color: var(--sur-c2); color: var(--c2); }
+.argument .bouton-contour { border-color: var(--sur-c2); color: var(--sur-c2); }
+.argument h2 { font-family: var(--police-titre); font-weight: var(--poids-titre); font-stretch: var(--largeur-titre, 100%); font-size: clamp(calc(2rem * var(--echelle-titre, 1)), calc(11vw * var(--echelle-titre, 1)), 6rem); line-height: 0.88; letter-spacing: -0.03em; text-transform: uppercase; max-width: 14ch; }
+.argument-numero a { font-family: var(--police-titre); font-weight: var(--poids-titre); font-size: clamp(2rem, 9vw, 4rem); letter-spacing: -0.02em; }
+
+/* ---------- Titres de section : numérotés ---------- */
+main { counter-reset: section; }
+.titre-section { counter-increment: section; font-family: var(--police-titre); font-weight: var(--poids-titre); font-stretch: var(--largeur-titre, 100%); font-size: clamp(calc(2rem * var(--echelle-titre, 1)), calc(11vw * var(--echelle-titre, 1)), 5.5rem); line-height: 0.9; letter-spacing: -0.03em; text-transform: uppercase; }
+.titre-section::before { content: counter(section, decimal-leading-zero) " "; display: block; font-family: var(--police-texte); font-size: 1rem; letter-spacing: 0.1em; color: var(--c1-texte); }
+.mention-exemple { padding: 0.1rem 0.6rem; background: var(--encre); color: var(--fond); font-weight: 700; }
+
+/* ---------- Carte : tableau typographique ---------- */
+.carte-titre { padding-top: 0.6rem; border-top: 3px solid var(--encre); font-family: var(--police-titre); font-weight: var(--poids-titre); font-stretch: var(--largeur-titre, 100%); font-size: calc(1.75rem * var(--echelle-titre, 1)); text-transform: uppercase; overflow-wrap: anywhere; }
+.carte-plat { border-bottom: 1px solid var(--encre); }
+.carte-prix { font-weight: 700; }
+
+/* ---------- Le lieu ---------- */
+.lieu { background: var(--encre); color: var(--fond); --focus: var(--fond); }
+.lieu .titre-section::before { color: var(--fond); }
+.lieu-texte { font-family: var(--police-titre); font-weight: var(--poids-titre); font-stretch: var(--largeur-titre, 100%); font-size: clamp(1.5rem, calc(8vw * var(--echelle-titre, 1)), 4rem); line-height: 0.95; text-transform: uppercase; letter-spacing: -0.02em; max-width: 18ch; }
+
+/* ---------- Pratique ---------- */
+.horaires-table th, .horaires-table td { border-bottom: 1px solid var(--encre); }
+.horaires-table .est-aujourdhui th, .horaires-table .est-aujourdhui td { background: var(--c1); color: var(--sur-c1); }
+.infos-liste li::before { background: var(--c1); }
+
+/* ---------- Pied ---------- */
+.pied { background: var(--fond); border-top: 3px solid var(--encre); }
+.pied-nom { font-family: var(--police-titre); font-weight: var(--poids-titre); font-stretch: var(--largeur-titre, 100%); font-size: clamp(calc(2rem * var(--echelle-titre, 1)), calc(12vw * var(--echelle-titre, 1)), 6rem); line-height: 0.85; text-transform: uppercase; letter-spacing: -0.03em; }
+
+/* ---------- Ordinateur : nom à gauche, aplat et sommaire à droite ---------- */
+@media (min-width: 1000px) {
+  .hero-affiche { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); grid-template-rows: auto 1fr; column-gap: 3rem; padding-top: 2.5rem; }
+  .hero-affiche .hero-contenu { grid-row: span 2; }
+  .affiche-bloc { min-height: 16rem; }
+}
